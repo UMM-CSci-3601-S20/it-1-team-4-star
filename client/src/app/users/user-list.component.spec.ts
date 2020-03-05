@@ -66,20 +66,20 @@ describe('User list', () => {
     expect(userList.serverFilteredUsers.length).toBe(3);
   });
 
-  it('contains a user named \'Chris\'', () => {
-    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Chris')).toBe(true);
+  it('contains a user named \'Rachel Johnson\'', () => {
+    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Rachel Johnson')).toBe(true);
   });
 
-  it('contain a user named \'Jamie\'', () => {
-    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Jamie')).toBe(true);
+  it('contain a user named \'Nic McPhee\'', () => {
+    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Nic McPhee')).toBe(true);
   });
 
-  it('doesn\'t contain a user named \'Santa\'', () => {
-    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Santa')).toBe(false);
+  it('doesn\'t contain a user named \'John Cena\'', () => {
+    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'John Cena')).toBe(false);
   });
 
-  it('has two users that are 37 years old', () => {
-    expect(userList.serverFilteredUsers.filter((user: User) => user.age === 37).length).toBe(2);
+  it('has two users that are in the same building', () => {
+    expect(userList.serverFilteredUsers.filter((user: User) => user.building === 'science').length).toBe(2);
   });
 });
 
