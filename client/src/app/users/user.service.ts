@@ -29,8 +29,8 @@ export class UserService {
     });
   }
 
-  getUserById(id: string): Observable<User> {
-    return this.httpClient.get<User>(this.userUrl + '/' + id);
+  getUserById(userId: string): Observable<User> {
+    return this.httpClient.get<User>(this.userUrl + '/' + userId);
   }
 
   //FILTERING EMAIL AND OFFICE NUMBER WITH ANGULAR

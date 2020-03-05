@@ -8,7 +8,7 @@ describe('User service: ', () => {
   // A small collection of test users
   const testUsers: User[] = [
     {
-      _id: 'rachel_id',
+      userId: 'rachel_id',
       name: 'Rachel Johnson',
       email: 'rmjohns@morris.umn.edu',
       building: 'science',
@@ -16,14 +16,14 @@ describe('User service: ', () => {
 
     },
     {
-      _id: 'nic_id',
+      userId: 'nic_id',
       name: 'Nic',
       email: 'mcphee@morris.umn.edu',
       building: 'science',
       officeNumber: '456'
     },
     {
-      _id: 'joe_id',
+      userId: 'joe_id',
       name: 'Joe',
       email: 'jbeaver@morris.umn.edu',
       building: 'imholte',
@@ -139,7 +139,7 @@ describe('User service: ', () => {
 
   it('getUserById() calls api/users/id', () => {
     const targetUser: User = testUsers[1];
-    const targetId: string = targetUser._id;
+    const targetId: string = targetUser.userId;
     userService.getUserById(targetId).subscribe(
       user => expect(user).toBe(targetUser)
     );
