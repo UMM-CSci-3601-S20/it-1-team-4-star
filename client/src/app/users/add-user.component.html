@@ -23,15 +23,28 @@ is potentially helpful and contributed to the shaping of this example -->
 
           <mat-form-field>
             <mat-label>Building</mat-label>
-            <input matInput #input id="buildingField" type="number" placeholder="Building"
-                  formControlName="building" required>
-            <mat-error *ngFor="let validation of add_user_validation_messages.age">
+            <input matInput id="buildingField" placeholder="Building" formControlBuilding="building"
+                  required>
+            <mat-error *ngFor="let validation of add_user_validation_messages.building">
               <mat-error class="error-message" id="building-error"
                         *ngIf="addUserForm.get('building').hasError(validation.type) && (addUserForm.get('building').dirty || addUserForm.get('building').touched)">
                 {{validation.message}}
               </mat-error>
             </mat-error>
           </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Office Number</mat-label>
+            <input matInput id="officeNumberField" placeholder="OfficeNumber" formControlOfficeNumber="officeNumber"
+                  required>
+            <mat-error *ngFor="let validation of add_user_validation_messages.officeNumber">
+              <mat-error class="error-message" id="officeNumber-error"
+                        *ngIf="addUserForm.get('officeNumber').hasError(validation.type) && (addUserForm.get('officeNumber').dirty || addUserForm.get('officeNumber').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
 
           <mat-form-field >
             <mat-label>Email</mat-label>
@@ -40,18 +53,6 @@ is potentially helpful and contributed to the shaping of this example -->
             <mat-error *ngFor="let validation of add_user_validation_messages.email">
               <mat-error class="error-message" id='email-error'
                         *ngIf="addUserForm.get('email').hasError(validation.type) && (addUserForm.get('email').dirty || addUserForm.get('email').touched)">
-                {{validation.message}}
-              </mat-error>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field >
-            <mat-label>Office Number</mat-label>
-            <input matInput #input id="officeNumberField" placeholder="Office Number"
-                  formControlName="officeNumber" required>
-            <mat-error *ngFor="let validation of add_user_validation_messages.officeNumber">
-              <mat-error class="error-message" id='officeNumber-error'
-                        *ngIf="addUserForm.get('officeNumber').hasError(validation.type) && (addUserForm.get('officeNumber').dirty || addUserForm.get('officeNumber').touched)">
                 {{validation.message}}
               </mat-error>
             </mat-error>
