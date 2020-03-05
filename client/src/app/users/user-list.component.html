@@ -72,7 +72,7 @@
         <mat-card-content>
           <mat-nav-list class="user-nav-list">
             <h3 mat-subheader>Users</h3>
-            <a mat-list-item *ngFor="let user of this.filteredUsers" [routerLink]="['/users', user.userId]" class="user-list-item">
+            <a mat-list-item *ngFor="let user of this.filteredUsers" [routerLink]="['/users', user._id]" class="user-list-item">
               <h3 matLine class="user-list-name"> {{user.name}} </h3>
               <p matLine class="user-list-role"> {{user.building}} </p>
             </a>

@@ -23,7 +23,6 @@ describe('UserCardComponent', () => {
     fixture = TestBed.createComponent(UserCardComponent);
     component = fixture.componentInstance;
     component.user = {
-      userId: 'rachel_id',
       name: 'Rachel Johnson',
       email: 'rmjohns@morris.umn.edu',
       building: 'science',
