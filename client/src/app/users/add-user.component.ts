@@ -45,6 +45,13 @@ export class AddUserComponent implements OnInit {
     role: [
       { type: 'required', message: 'Role is required' },
       { type: 'pattern', message: 'Role must be Admin, Editor, or Viewer' },
+    ],
+
+    officeNumber: [
+      {type: 'required', message: 'Office number is required'},
+      {type: 'minlength', message: 'Office number must be at least 2 characters long'},
+      {type: 'pattern', message: 'Office number must contain only numbers'},
+      {type: 'existingName', message: 'Office number has already been taken'}
     ]
   };
 

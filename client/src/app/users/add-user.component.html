@@ -22,22 +22,15 @@ is potentially helpful and contributed to the shaping of this example -->
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Age</mat-label>
-            <input matInput #input id="ageField" type="number" placeholder="Age"
-                  formControlName="age" required>
+            <mat-label>Building</mat-label>
+            <input matInput #input id="buildingField" type="number" placeholder="Building"
+                  formControlName="building" required>
             <mat-error *ngFor="let validation of add_user_validation_messages.age">
-              <mat-error class="error-message" id="age-error"
-                        *ngIf="addUserForm.get('age').hasError(validation.type) && (addUserForm.get('age').dirty || addUserForm.get('age').touched)">
+              <mat-error class="error-message" id="building-error"
+                        *ngIf="addUserForm.get('building').hasError(validation.type) && (addUserForm.get('building').dirty || addUserForm.get('building').touched)">
                 {{validation.message}}
               </mat-error>
             </mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Company</mat-label>
-            <input matInput #input id="companyField" placeholder="Company"
-                  formControlName="company">
-            <mat-hint>Not required in Angular for demonstration, still required by server</mat-hint>
           </mat-form-field>
 
           <mat-form-field >
@@ -52,16 +45,15 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>Role</mat-label>
-            <mat-select id="roleField" required formControlName="role">
-              <mat-option value="admin">Admin</mat-option>
-              <mat-option value="editor">Editor</mat-option>
-              <mat-option value="viewer">Viewer</mat-option>
-            </mat-select>
-            <mat-error *ngIf="addUserForm.get('role').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addUserForm.get('role').hasError('pattern') && !addUserForm.get('role').hasError('required')">
-              Your selection is invalid
+          <mat-form-field >
+            <mat-label>Office Number</mat-label>
+            <input matInput #input id="officeNumberField" placeholder="Office Number"
+                  formControlName="officeNumber" required>
+            <mat-error *ngFor="let validation of add_user_validation_messages.officeNumber">
+              <mat-error class="error-message" id='officeNumber-error'
+                        *ngIf="addUserForm.get('officeNumber').hasError(validation.type) && (addUserForm.get('officeNumber').dirty || addUserForm.get('officeNumber').touched)">
+                {{validation.message}}
+              </mat-error>
             </mat-error>
           </mat-form-field>
 
