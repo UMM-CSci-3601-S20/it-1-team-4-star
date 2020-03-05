@@ -2,7 +2,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { User, UserRole } from './user';
+import { User } from './user';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -12,17 +12,16 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getUsers(filters?: { role?: UserRole, age?: number, company?: string }): Observable<User[]> {
+  //FILTERING NAME AND BUILDING WITH SERVER
+
+  getUsers(filters?: { name?: string, building?: string }): Observable<User[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.role) {
-        httpParams = httpParams.set('role', filters.role);
+      if (filters.name) {
+        httpParams = httpParams.set('name', filters.name);
       }
-      if (filters.age) {
-        httpParams = httpParams.set('age', filters.age.toString());
-      }
-      if (filters.company) {
-        httpParams = httpParams.set('company', filters.company);
+      if (filters.building) {
+        httpParams = httpParams.set('building', filters.building);
       }
     }
     return this.httpClient.get<User[]>(this.userUrl, {
@@ -34,25 +33,27 @@ export class UserService {
     return this.httpClient.get<User>(this.userUrl + '/' + id);
   }
 
-  filterUsers(users: User[], filters: { name?: string, company?: string }): User[] {
+  //FILTERING EMAIL AND OFFICE NUMBER WITH ANGULAR
+
+  filterUsers(users: User[], filters: { email?: string, officeNumber?: string }): User[] {
 
     let filteredUsers = users;
 
-    // Filter by name
-    if (filters.name) {
-      filters.name = filters.name.toLowerCase();
+    // Filter by office number
+    if (filters.officeNumber) {
+      filters.officeNumber = filters.officeNumber.toLowerCase();
 
       filteredUsers = filteredUsers.filter(user => {
-        return user.name.toLowerCase().indexOf(filters.name) !== -1;
+        return user.name.toLowerCase().indexOf(filters.officeNumber) !== -1;
       });
     }
 
-    // Filter by company
-    if (filters.company) {
-      filters.company = filters.company.toLowerCase();
+    // Filter by email
+    if (filters.email) {
+      filters.email = filters.email.toLowerCase();
 
       filteredUsers = filteredUsers.filter(user => {
-        return user.company.toLowerCase().indexOf(filters.company) !== -1;
+        return user.email.toLowerCase().indexOf(filters.email) !== -1;
       });
     }
 

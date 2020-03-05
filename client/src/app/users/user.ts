@@ -1,11 +1,9 @@
 export interface User {
   _id: string;
   name: string;
-  age: number;
-  company: string;
   email: string;
-  avatar?: string;
-  role: UserRole;
+  //avatar?: string;
+  building: string;
+  officeNumber: string;
 }
 
-export type UserRole = 'admin' | 'editor' | 'viewer';
