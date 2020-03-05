@@ -125,52 +125,32 @@ describe('AddUserComponent', () => {
     });
   });
 
-  describe('The age field', () => {
-    let ageControl: AbstractControl;
+  describe('The building field', () => {
+    let buildingControl: AbstractControl;
 
     beforeEach(() => {
-      ageControl = addUserComponent.addUserForm.controls[`age`];
+      buildingControl = addUserComponent.addUserForm.controls[`building`];
     });
 
-    it('should not allow empty names', () => {
-      ageControl.setValue('');
-      expect(ageControl.valid).toBeFalsy();
+    it('should not allow empty building field', () => {
+      buildingControl.setValue('');
+      expect(buildingControl.valid).toBeFalsy();
     });
 
-    it('should be fine with "27"', () => {
-      ageControl.setValue('27');
-      expect(ageControl.valid).toBeTruthy();
-    });
-
-    it('should fail on ages that are too low', () => {
-      ageControl.setValue('14');
-      expect(ageControl.valid).toBeFalsy();
-      expect(ageControl.hasError('min')).toBeTruthy();
+    it('should be fine with "science"', () => {
+      buildingControl.setValue('science');
+      expect(buildingControl.valid).toBeTruthy();
     });
 
     // In the real world, you'd want to be pretty careful about
     // setting upper limits on things like ages.
-    it('should fail on ages that are too high', () => {
-      ageControl.setValue(201);
-      expect(ageControl.valid).toBeFalsy();
+    it('should fail when there are too many building characters', () => {
+      buildingControl.setValue(201);
+      expect(buildingControl.valid).toBeFalsy();
       // I have no idea why I have to use a lower case 'l' here
       // when it's an upper case 'L' in `Validators.maxLength(2)`.
       // But I apparently do.
-      expect(ageControl.hasError('max')).toBeTruthy();
-    });
-
-    it('should not allow an age to contain non-digits', () => {
-      ageControl.setValue('123x567');
-      expect(ageControl.valid).toBeFalsy();
-      expect(ageControl.hasError('pattern')).toBeTruthy();
-    });
-  });
-
-  describe('The company field', () => {
-    it('should allow empty values', () => {
-      const companyControl = addUserForm.controls[`company`];
-      companyControl.setValue('');
-      expect(companyControl.valid).toBeTruthy();
+      expect(buildingControl.hasError('max')).toBeTruthy();
     });
   });
 
@@ -199,37 +179,27 @@ describe('AddUserComponent', () => {
     });
   });
 
-  describe('The role field', () => {
-    let roleControl: AbstractControl;
+  describe('The office number field', () => {
+    let officeNumberControl: AbstractControl;
 
     beforeEach(() => {
-      roleControl = addUserForm.controls[`role`];
+      officeNumberControl = addUserForm.controls[`office number`];
     });
 
     it('should not allow empty values', () => {
-      roleControl.setValue('');
-      expect(roleControl.valid).toBeFalsy();
-      expect(roleControl.hasError('required')).toBeTruthy();
+      officeNumberControl.setValue('');
+      expect(officeNumberControl.valid).toBeFalsy();
+      expect(officeNumberControl.hasError('required')).toBeTruthy();
     });
 
-    it('should allow "admin"', () => {
-      roleControl.setValue('admin');
-      expect(roleControl.valid).toBeTruthy();
+    it('should allow "123"', () => {
+      officeNumberControl.setValue('123');
+      expect(officeNumberControl.valid).toBeTruthy();
     });
 
-    it('should allow "editor"', () => {
-      roleControl.setValue('editor');
-      expect(roleControl.valid).toBeTruthy();
-    });
-
-    it('should allow "viewer"', () => {
-      roleControl.setValue('viewer');
-      expect(roleControl.valid).toBeTruthy();
-    });
-
-    it('should not allow "Supreme Overlord"', () => {
-      roleControl.setValue('Supreme Overlord');
-      expect(roleControl.valid).toBeFalsy();
+    it('should allow "456A"', () => {
+      officeNumberControl.setValue('viewer');
+      expect(officeNumberControl.valid).toBeTruthy();
     });
   });
 });
