@@ -15,10 +15,10 @@ export class UserListComponent implements OnInit, OnDestroy  {
   public serverFilteredUsers: User[];
   public filteredUsers: User[];
 
-  public userName: string;
-  public userEmail: string;
-  public userBuilding: string;
-  public userOfficeNumber: string;
+  public name: string;
+  public email: string;
+  public building: string;
+  public officeNumber: string;
 
   public viewType: 'card' | 'list' = 'card';
   getUsersSub: Subscription;
@@ -37,8 +37,8 @@ export class UserListComponent implements OnInit, OnDestroy  {
   getUsersFromServer(): void {
     this.unsub();
     this.getUsersSub = this.userService.getUsers({
-      name: this.userName,
-      building: this.userBuilding
+      name: this.name,
+      building: this.building
     }).subscribe(returnedUsers => {
       this.serverFilteredUsers = returnedUsers;
       this.updateFilter();
@@ -49,7 +49,7 @@ export class UserListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredUsers = this.userService.filterUsers(
-      this.serverFilteredUsers, { email: this.userEmail, officeNumber: this.userOfficeNumber });
+      this.serverFilteredUsers, { email: this.email, officeNumber: this.officeNumber });
   }
 
   /**

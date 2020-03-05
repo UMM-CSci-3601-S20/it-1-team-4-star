@@ -11,16 +11,16 @@
           <!-- Examples of filtering in Angular -->
 
           <mat-form-field class="input-field">
-            <mat-label>Name</mat-label>
-            <input matInput id="user-name-input" placeholder="Filter by name"
-            [(ngModel)]="userName" (input)="updateFilter()">
+            <mat-label>Email</mat-label>
+            <input matInput id="user-email-input" placeholder="Filter by email"
+            [(ngModel)]="email" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
-            <mat-label>Company</mat-label>
-            <input matInput id="user-company-input" placeholder="Filter by company"
-            [(ngModel)]="userCompany" (input)="updateFilter()">
+            <mat-label>Office Number</mat-label>
+            <input matInput id="user-officeNumber-input" placeholder="Filter by office number"
+            [(ngModel)]="officeNumber" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
         </div>
@@ -29,21 +29,17 @@
           <!-- Examples of filtering on the server -->
 
           <mat-form-field class="input-field">
-            <mat-label>Age</mat-label>
-            <input matInput id="user-age-input" type="number" placeholder="Filter by age"
-            min="0" max="200" [(ngModel)]="userAge" (input)="getUsersFromServer()">
+            <mat-label>Name</mat-label>
+            <input matInput id="user-name-input" type="number" placeholder="Filter by name"
+            [(ngModel)]="name" (input)="getUsersFromServer()">
             <mat-hint>Filtered on Server</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
-            <mat-label>Role</mat-label>
-            <mat-select (selectionChange)="getUsersFromServer()" [(ngModel)]="userRole" id="user-role-select">
-              <mat-option>--</mat-option>
-              <mat-option value="admin">Admin</mat-option>
-              <mat-option value="editor">Editor</mat-option>
-              <mat-option value="viewer">Viewer</mat-option>
-            </mat-select>
-            <mat-hint>Filtered on server</mat-hint>
+            <mat-label>Building</mat-label>
+            <input matInput id="user-building-input" type="number" placeholder="Filter by building"
+            [(ngModel)]="building" (input)="getUsersFromServer()">
+            <mat-hint>Filtered on Server</mat-hint>
           </mat-form-field>
         </div>
 
@@ -76,10 +72,9 @@
         <mat-card-content>
           <mat-nav-list class="user-nav-list">
             <h3 mat-subheader>Users</h3>
-            <a mat-list-item *ngFor="let user of this.filteredUsers" [routerLink]="['/users', user._id]" class="user-list-item">
-              <img matListAvatar [src]="user.avatar" *ngIf="this.user.avatar">
+            <a mat-list-item *ngFor="let user of this.filteredUsers" [routerLink]="['/users', user.userId]" class="user-list-item">
               <h3 matLine class="user-list-name"> {{user.name}} </h3>
-              <p matLine class="user-list-role"> {{user.role}} </p>
+              <p matLine class="user-list-role"> {{user.building}} </p>
             </a>
           </mat-nav-list>
         </mat-card-content>
