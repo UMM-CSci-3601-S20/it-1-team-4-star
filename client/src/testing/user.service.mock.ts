@@ -11,21 +11,21 @@ import { UserService } from '../app/users/user.service';
 export class MockUserService extends UserService {
   static testUsers: User[] = [
     {
-      userId: 'exampleID_1',
+      _id: 'exampleID_1',
       name: 'Professor A',
       email: 'a@this.school',
       building: 'Science',
       officeNumber: '27',
     },
     {
-      userId: 'exampleID_2',
+      _id: 'exampleID_2',
       name: 'Professor B',
       email: 'b@this.school',
       building: 'Humanities',
       officeNumber: '120',
     },
     {
-      userId: 'exampleID_3',
+      _id: 'exampleID_3',
       name: 'Professor C',
       email: 'c@this.school',
       building: 'Fine Arts',
@@ -46,7 +46,7 @@ export class MockUserService extends UserService {
     // If the specified ID is for the first test user,
     // return that user, otherwise return `null` so
     // we can test illegal user requests.
-    if (id === MockUserService.testUsers[0].userId) {
+    if (id === MockUserService.testUsers[0]._id) {
       return of(MockUserService.testUsers[0]);
     } else {
       return of(null);
