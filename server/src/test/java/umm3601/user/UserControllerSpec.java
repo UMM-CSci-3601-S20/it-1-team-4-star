@@ -313,4 +313,88 @@ public class UserControllerSpec {
     assertEquals("Rachel's Office", addedUser.getString("building"));
     assertEquals("4321", addedUser.getString("officeNumber"));
   }
+
+  @Test
+  public void AddInvalidEmailUser() throws IOException {
+    String testNewUser = "{\n" +
+    "                    name: \"Rachel\",\n" +
+    "                    email: \"This is an invalid email\",\n" +
+    "                    building: \"Rachel's Office\",\n"+
+    "                    officeNumber: \"4321\",\n"+
+    "                }";
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/new");
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.addNewUser(ctx);
+    });
+  }
+
+    @Test
+  public void AddInvalidNameUser() throws IOException {
+    // testNewUser is created without a name
+    String testNewUser = "{\n" +
+    "                    email: \"This is an invalid email\",\n" +
+    "                    building: \"Rachel's Office\",\n"+
+    "                    officeNumber: \"4321\",\n"+
+    "                }";
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/new");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.addNewUser(ctx);
+    });
+  }
+
+  @Test
+  public void AddInvalidBuildingUser() throws IOException {
+    // testNewUser is created without a building
+    String testNewUser = "{\n" +
+    "                    name: \"Rachel\",\n" +
+    "                    email: \"This is an invalid email\",\n" +
+    "                    officeNumber: \"4321\",\n"+
+    "                }";
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/new");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.addNewUser(ctx);
+    });
+  }
+
+  @Test
+  public void AddInvalidOfficeNumberUser() throws IOException {
+    // testNewUser is created without a officeNumber
+    String testNewUser = "{\n" +
+    "                    name: \"Rachel\",\n" +
+    "                    email: \"This is an invalid email\",\n" +
+    "                    building: \"Rachel's Office\",\n"+
+    "                }";
+    mockReq.setBodyContent(testNewUser);
+    mockReq.setMethod("POST");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/new");
+
+    assertThrows(BadRequestResponse.class, () -> {
+      userController.addNewUser(ctx);
+    });
+  }
+
+  @Test
+  public void DeleteUser() throws IOException {
+
+    String testID = samsId.toHexString();
+
+    // User exists before deletion
+    assertEquals(1, db.getCollection("users").countDocuments(eq("_id", new ObjectId(testID))));
+
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/:id", ImmutableMap.of("id", testID));
+    userController.deleteUser(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+
+    // User is no longer in the database
+    assertEquals(0, db.getCollection("users").countDocuments(eq("_id", new ObjectId(testID))));
+  }
 }
