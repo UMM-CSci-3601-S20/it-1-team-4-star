@@ -9,10 +9,8 @@ public class User {
   public String _id;
 
   public String name;
-  public int age;
-  public String company;
   public String email;
-  public String avatar;
-  public String role;
+  public String building;
+  public String officeNumber;
 
 }
