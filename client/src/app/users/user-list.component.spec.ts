@@ -16,6 +16,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MockUserService } from '../../testing/user.service.mock';
 import { User } from './user';
+
 import { UserCardComponent } from './user-card.component';
 import { UserListComponent } from './user-list.component';
 import { UserService } from './user.service';
@@ -62,6 +63,8 @@ describe('User list', () => {
     });
   }));
 
+  //these test from the mock user service
+
   it('contains all the users', () => {
     expect(userList.serverFilteredUsers.length).toBe(3);
   });
@@ -79,7 +82,7 @@ describe('User list', () => {
   });
 
   it('has two users that are in the same building', () => {
-    expect(userList.serverFilteredUsers.filter((user: User) => user.building === 'science').length).toBe(2);
+    expect(userList.serverFilteredUsers.filter((user: User) => user.building === 'Science').length).toBe(2);
   });
 });
 
