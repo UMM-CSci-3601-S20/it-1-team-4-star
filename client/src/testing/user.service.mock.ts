@@ -12,14 +12,14 @@ export class MockUserService extends UserService {
   static testUsers: User[] = [
     {
       _id: 'exampleID_1',
-      name: 'Professor A',
+      name: 'Rachel Johnson',
       email: 'a@this.school',
       building: 'Science',
       officeNumber: '27',
     },
     {
       _id: 'exampleID_2',
-      name: 'Professor B',
+      name: 'Nic McPhee',
       email: 'b@this.school',
       building: 'Humanities',
       officeNumber: '120',
@@ -28,7 +28,7 @@ export class MockUserService extends UserService {
       _id: 'exampleID_3',
       name: 'Professor C',
       email: 'c@this.school',
-      building: 'Fine Arts',
+      building: 'Science',
       officeNumber: '45',
     }
   ];

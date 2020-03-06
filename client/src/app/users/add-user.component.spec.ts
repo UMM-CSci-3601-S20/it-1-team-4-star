@@ -135,6 +135,7 @@ describe('AddUserComponent', () => {
     it('should not allow empty building field', () => {
       buildingControl.setValue('');
       expect(buildingControl.valid).toBeFalsy();
+      expect(buildingControl.hasError('required')).toBeTruthy();
     });
 
     it('should be fine with "science"', () => {
@@ -144,13 +145,12 @@ describe('AddUserComponent', () => {
 
     // In the real world, you'd want to be pretty careful about
     // setting upper limits on things like ages.
-    it('should fail when there are too many building characters', () => {
-      buildingControl.setValue(201);
+    it('should fail on really long building names', () => {
+      buildingControl.setValue('moo'.repeat(100));
       expect(buildingControl.valid).toBeFalsy();
-      // I have no idea why I have to use a lower case 'l' here
+      // Annoyingly, Angular uses lowercase 'l' here
       // when it's an upper case 'L' in `Validators.maxLength(2)`.
-      // But I apparently do.
-      expect(buildingControl.hasError('max')).toBeTruthy();
+      expect(buildingControl.hasError('maxlength')).toBeTruthy();
     });
   });
 
@@ -183,7 +183,7 @@ describe('AddUserComponent', () => {
     let officeNumberControl: AbstractControl;
 
     beforeEach(() => {
-      officeNumberControl = addUserForm.controls[`office number`];
+      officeNumberControl = addUserForm.controls[`officeNumber`];
     });
 
     it('should not allow empty values', () => {
@@ -197,8 +197,8 @@ describe('AddUserComponent', () => {
       expect(officeNumberControl.valid).toBeTruthy();
     });
 
-    it('should allow "456A"', () => {
-      officeNumberControl.setValue('viewer');
+    it('should allow "456"', () => {
+      officeNumberControl.setValue('456');
       expect(officeNumberControl.valid).toBeTruthy();
     });
   });
