@@ -12,7 +12,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  //FILTERING NAME AND BUILDING WITH SERVER
+
 
   getUsers(filters?: { name?: string, building?: string }): Observable<User[]> {
     let httpParams: HttpParams = new HttpParams();
@@ -33,9 +33,9 @@ export class UserService {
     return this.httpClient.get<User>(this.userUrl + '/' + _id);
   }
 
-  //FILTERING EMAIL AND OFFICE NUMBER WITH ANGULAR
+  //FILTERING EVERYTHING WITH ANGULAR
 
-  filterUsers(users: User[], filters: { email?: string, officeNumber?: string }): User[] {
+  filterUsers(users: User[], filters: { name?: string, building?: string, email?: string, officeNumber?: string }): User[] {
 
     let filteredUsers = users;
 
@@ -44,7 +44,7 @@ export class UserService {
       filters.officeNumber = filters.officeNumber.toLowerCase();
 
       filteredUsers = filteredUsers.filter(user => {
-        return user.name.toLowerCase().indexOf(filters.officeNumber) !== -1;
+        return user.officeNumber.toLowerCase().indexOf(filters.officeNumber) !== -1;
       });
     }
 
@@ -54,6 +54,24 @@ export class UserService {
 
       filteredUsers = filteredUsers.filter(user => {
         return user.email.toLowerCase().indexOf(filters.email) !== -1;
+      });
+    }
+
+    // Filter by building
+    if (filters.building) {
+      filters.building = filters.building.toLowerCase();
+
+      filteredUsers = filteredUsers.filter(user => {
+        return user.building.toLowerCase().indexOf(filters.building) !== -1;
+      });
+    }
+
+    // Filter by name
+    if (filters.name) {
+      filters.name = filters.name.toLowerCase();
+
+      filteredUsers = filteredUsers.filter(user => {
+        return user.name.toLowerCase().indexOf(filters.name) !== -1;
       });
     }
 
