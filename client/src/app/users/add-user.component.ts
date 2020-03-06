@@ -32,19 +32,20 @@ export class AddUserComponent implements OnInit {
 
     email: [
       {type: 'email', message: 'Email must be formatted properly'},
-      {type: 'required', message: 'Email is required'}
+      {type: 'required', message: 'Email is required'},
+      {type: 'existingName', message: 'Email has already been taken'}
     ],
 
     building: [
-      {type: 'required', message: 'Office number is required'},
-      {type: 'minlength', message: 'Office number must be at least 2 characters long'},
-      {type: 'pattern', message: 'Office number must contain only numbers'}
+      {type: 'required', message: 'Building is required'},
+      {type: 'maxlength', message: 'Building cannot be more than 30 characters long'}
     ],
 
     officeNumber: [
       {type: 'required', message: 'Office number is required'},
-      {type: 'minlength', message: 'Office number must be at least 2 characters long'},
-      {type: 'pattern', message: 'Office number must contain only numbers'}
+      {type: 'maxlength', message: 'Office cannot be more than 30 characters long'},
+      {type: 'pattern', message: 'Office number must contain only numbers'},
+      {type: 'existingName', message: 'Office number has already been taken'}
     ]
   };
 
