@@ -26,20 +26,20 @@
         </div>
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
-          <!-- Examples of filtering on the server -->
+
 
           <mat-form-field class="input-field">
             <mat-label>Name</mat-label>
             <input matInput id="user-name-input" placeholder="Filter by name"
-            [(ngModel)]="name" (input)="getUsersFromServer()">
-            <mat-hint>Filtered on Server</mat-hint>
+            [(ngModel)]="name" (input)="updateFilter()">
+            <mat-hint>Filtered on Angular</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
             <mat-label>Building</mat-label>
             <input matInput id="user-building-input" placeholder="Filter by building"
-            [(ngModel)]="building" (input)="getUsersFromServer()">
-            <mat-hint>Filtered on Server</mat-hint>
+            [(ngModel)]="building" (input)="updateFilter()">
+            <mat-hint>Filtered on Angular</mat-hint>
           </mat-form-field>
         </div>
 
