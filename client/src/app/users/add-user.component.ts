@@ -103,7 +103,7 @@ export class AddUserComponent implements OnInit {
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(6),
-        Validators.pattern('^\\d+'),
+        Validators.pattern('^\\d+$'),
       ]))
 
     });
