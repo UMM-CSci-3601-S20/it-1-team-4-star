@@ -2,10 +2,9 @@ import {browser, by, element, Key, ElementFinder} from 'protractor';
 
 export interface TestUser {
   name: string;
-  age: string;
-  company?: string;
   email?: string;
-  role: 'admin' | 'editor' | 'viewer';
+  building: string;
+  officeNumber: string;
 }
 
 export class AddUserPage {
@@ -41,14 +40,10 @@ export class AddUserPage {
 
   async addUser(newUser: TestUser) {
     await this.typeInput('nameField', newUser.name);
-    await this.typeInput('ageField', newUser.age);
-    if (newUser.company) {
-      await this.typeInput('companyField', newUser.company);
-    }
-    if (newUser.email) {
-      await this.typeInput('emailField', newUser.email);
-    }
-    await this.selectMatSelectValue('roleField', newUser.role);
+    await this.typeInput('buildingField', newUser.building);
+    await this.typeInput('emailField', newUser.email);
+    await this.typeInput('officeNumberField',newUser.officeNumber);
     return this.clickAddUser();
   }
+
 }
