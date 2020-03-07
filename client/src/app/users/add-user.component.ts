@@ -74,7 +74,7 @@ export class AddUserComponent implements OnInit {
         // an upper limit like this because people can sometimes have
         // very long names. This demonstrates that it's possible, though,
         // to have maximum length limits.
-        Validators.maxLength(50),
+        Validators.maxLength(20),
         Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
         (fc) => {
           if (fc.value.toLowerCase() === 'abc123' || fc.value.toLowerCase() === '123abc') {

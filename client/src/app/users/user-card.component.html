@@ -5,7 +5,7 @@
     <mat-card-subtitle class="user-card-building">{{ this.user.building }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content *ngIf="!this.simple">
-    <p>Office Number: <span class="user-card-age">{{ this.user.officeNumber}}</span></p>
+    <p>Office Number: <span class="user-card-officeNumber">{{ this.user.officeNumber}}</span></p>
     <p>Email: <a href="mailto:{{this.user.email}}" class="user-card-email">{{this.user.email}}</a></p>
   </mat-card-content>
   <mat-card-actions>
