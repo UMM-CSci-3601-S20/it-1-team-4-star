@@ -11,24 +11,6 @@
           <!-- Examples of filtering in Angular -->
 
           <mat-form-field class="input-field">
-            <mat-label>Email</mat-label>
-            <input matInput id="user-email-input" placeholder="Filter by email"
-            [(ngModel)]="email" (input)="updateFilter()">
-            <mat-hint>Filtered in Angular</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field class="input-field">
-            <mat-label>Office Number</mat-label>
-            <input matInput id="user-officeNumber-input" placeholder="Filter by office number"
-            [(ngModel)]="officeNumber" (input)="updateFilter()">
-            <mat-hint>Filtered in Angular</mat-hint>
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-
-
-          <mat-form-field class="input-field">
             <mat-label>Name</mat-label>
             <input matInput id="user-name-input" placeholder="Filter by name"
             [(ngModel)]="name" (input)="updateFilter()">
@@ -41,6 +23,27 @@
             [(ngModel)]="building" (input)="updateFilter()">
             <mat-hint>Filtered on Angular</mat-hint>
           </mat-form-field>
+
+
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+
+          <mat-form-field class="input-field">
+            <mat-label>Email</mat-label>
+            <input matInput id="user-email-input" placeholder="Filter by email"
+            [(ngModel)]="email" (input)="updateFilter()">
+            <mat-hint>Filtered in Angular</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Office Number</mat-label>
+            <input matInput id="user-officeNumber-input" placeholder="Filter by office number"
+            [(ngModel)]="officeNumber" (input)="updateFilter()">
+            <mat-hint>Filtered in Angular</mat-hint>
+          </mat-form-field>
+
+
         </div>
 
         <br>
