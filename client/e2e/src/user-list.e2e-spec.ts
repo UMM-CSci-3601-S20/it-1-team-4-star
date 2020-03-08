@@ -32,8 +32,9 @@ describe('User list', () => {
     });
   });
 
-  it('Should type something partial in the building filter and check that it returned correct elements', async () => {
-    await page.typeInput('user-building-input', 'sci');
+
+  it('Should type something in the building filter and check that it returned correct elements and does not contain incorrect elements', async () => {
+    await page.typeInput('user-building-input', 'science');
 
     // Go through each of the cards that are being shown and get the buildings
     const buildings = await page.getUserCards().map(e => e.element(by.className('user-card-building')).getText());
@@ -46,7 +47,7 @@ describe('User list', () => {
   });
 
   it('Should type something in the email filter and check that it returned correct elements', async () => {
-    await page.typeInput('user-email-input', 'jb');
+    await page.typeInput('user-email-input', 'jbeaver@morris.umn.edu');
 
     // Go through each of the cards that are being shown and get the names
     const names = await page.getUserCards().map(e => e.element(by.className('user-card-name')).getText());
