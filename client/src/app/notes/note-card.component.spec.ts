@@ -17,7 +17,7 @@ console.log(json);
 let date: Date = new Date();
 console.log("Date = " + date); //Date = Tue Feb 05 2019 12:05:22 GMT+0530 (IST)
 
-//FUTURE DATE-NOT ENTIRELY SURE IF THIS WORKS
+//FUTURE DATE-NOT ENTIRELY SURE IF THIS WORKS. SETTING THE DATE TO BE THE CURRENT DAY PLUS A DAY
 var futureDate = new Date();
 futureDate.setDate(futureDate.getDate() + 1);
 

@@ -14,11 +14,13 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
-
-  public noteAddDate: Date;
-  public noteExpirationDate: Date;
+  public body: string;
+  public addDate: Date;
+  public expirationDate: Date;
   public creator: string;
-
+  public reusable: boolean;
+  public draft: boolean;
+  public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
   getNotesSub: Subscription;
 
@@ -36,7 +38,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   getNotesFromServer(): void {
     this.unsub();
     this.getNotesSub = this.noteService.getNotes({
-
+      creator: this.creator
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
       this.updateFilter();
@@ -47,7 +49,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, { creator: this.creator, noteAddDate: this.noteAddDate, noteExpirationDate: this.noteExpirationDate });
+      this.serverFilteredNotes, {body: this.body, addDate: this.addDate, expirationDate: this.expirationDate, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
   }
 
   /**
