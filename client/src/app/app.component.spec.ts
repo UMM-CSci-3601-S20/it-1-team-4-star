@@ -33,9 +33,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'CSCI 3601 DoorBoard'`, () => {
+  it(`should have as title 'DoorBoard - Your Office Door, Made Simple'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('CSCI 3601 DoorBoard');
+    expect(app.title).toEqual('DoorBoard - Your Office Door, Made Simple');
   });
 });
