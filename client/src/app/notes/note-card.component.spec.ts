@@ -45,6 +45,7 @@ describe('NoteCardComponent', () => {
       body: 'this is a sample note',
       expirationDate: futureDate,
       addDate: date,
+      draft: true,
       reusable: true,
       toDelete: false
     };
