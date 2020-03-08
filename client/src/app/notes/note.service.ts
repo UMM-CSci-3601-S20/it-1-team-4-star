@@ -2,7 +2,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Note, userID } from './note';
+import { Note } from './note';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class NoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getNotes(filters?: { creator?: userID }): Observable<Note[]> {
+  getNotes(filters?: { creator?: string }): Observable<Note[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.creator) {
@@ -29,7 +29,7 @@ export class NoteService {
   }
 
   filterNotes(notes: Note[], filters: { body?: string, addDate?: Date, expirationDate?: Date,
-    reusable?: boolean, draft?: boolean, toDelete: boolean }): Note[] {
+    reusable?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
 
     let filteredNotes = notes;
 
