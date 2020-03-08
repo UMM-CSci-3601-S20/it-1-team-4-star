@@ -1,14 +1,12 @@
 export interface Note {
   _id: string;
-  creator: UserID;
+  creator: userID;
   body: string;
-  expirationDate: DateTime;
-  addDate: DateTime;
+  addDate: Date;
+  expirationDate: Date;
   reusable: boolean;
   draft: boolean;
   toDelete: boolean;
 }
 
-//come back to this to fix the fields
-
-
+// come back to this to fix the fields
