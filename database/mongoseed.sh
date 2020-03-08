@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SEED_DB=${MONGO_DB:-team4star}
+SEED_DB=${MONGO_DB:-dev}
 echo Dropping DB $SEED_DB
 mongo $SEED_DB --eval "db.dropDatabase()"
 for file in $(dirname $BASH_SOURCE)/seed/*.json; do

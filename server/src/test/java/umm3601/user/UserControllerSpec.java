@@ -292,45 +292,6 @@ public class UserControllerSpec {
     assertEquals("4321", addedUser.getString("officeNumber"));
   }
 
-  // assertNotNull(addedUser);
-  // assertEquals("Rachel", addedUser.getString("name"));
-  // assertEquals("Rachel@this.this", addedUser.getString("email"));
-  // assertEquals("Rachel's Office", addedUser.getString("building"));
-  // assertEquals("4321", addedUser.getString("officeNumber"));
-
-  // @Test
-  // public void testAddUser() throws IOException {
-  //   String testNewUser = "{\n" +
-  //   "                    name: \"Rachel\",\n" +
-  //   "                    email: \"This is an invalid email\",\n" +
-  //   "                    building: \"Rachel's Office\",\n"+
-  //   "                    officeNumber: \"4321\",\n"+
-  //   "                }";
-  //   trying different format for the string
-  //   checked second string in a json validator
-
-  //   mockReq.setBodyContent(testNewUser); // can't deserialize testNewUser to User
-  //   mockReq.setMethod("POST");
-
-  //   Context ctx = ContextUtil.init(mockReq,mockRes,"api/users/new");
-
-  //   userController.addNewUser(ctx);
-
-  //   assertEquals(201, mockRes.getStatus());
-
-  //   String result = ctx.resultString();
-  //   String id = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
-  //   assertNotEquals("", id);//check id not empty
-  //   System.out.println(id);
-
-  //   assertEquals(1, db.getCollection("users").countDocuments(eq("_id", new ObjectId(id))));
-
-  //   Check that the user was added and has the correct id.
-  //   Document addedUser = db.getCollection("users").find(eq("_id", new ObjectId(id))).first();
-
-
-  // }
-
   @Test
   public void AddInvalidEmailUser() throws IOException {
     String testNewUser = "{\n" +
