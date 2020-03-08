@@ -95,14 +95,17 @@ public class UserController {
       filters.add(eq("building", ctx.queryParam("building")));
     }
     if (ctx.queryParamMap().containsKey("officeNumber")) {
-      filters.add(eq("officeNumber", ctx.queryParam("officeNumber")));
+      int targetNumber =  ctx.queryParam("officeNumber", Integer.class).get();
+      filters.add(eq("officeNumber", targetNumber));
     }
 
     String sortBy = ctx.queryParam("sortby", "name"); //Sort by sort query param, default is name
     String sortOrder = ctx.queryParam("sortorder", "asc");
 
+    System.out.println(filters);
+
     ctx.json(userCollection.find(filters.isEmpty() ? new Document() : and(filters))
-      .sort(sortOrder.equals("desc") ?  Sorts.descending(sortBy) : Sorts.ascending(sortBy))
+      .sort(sortOrder.equals("desc") ?  Sorts.descending(sortBy) : Sorts.ascending(sortBy))//sorting
       .into(new ArrayList<>()));
   }
 
