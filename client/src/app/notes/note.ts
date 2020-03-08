@@ -5,7 +5,6 @@ export interface Note {
   addDate: Date;
   expirationDate: Date;
   reusable: boolean;
-  draft: boolean;
   toDelete: boolean;
 }
 
