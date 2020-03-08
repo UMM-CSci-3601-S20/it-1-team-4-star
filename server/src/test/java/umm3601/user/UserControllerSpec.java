@@ -128,75 +128,59 @@ public class UserControllerSpec {
     mongoClient.close();
   }
 
-  // ***Start testing***
+
+
   @Test
-  public void GetUsersByName() {
+  public void GetUsersByName() throws IOException {
 
-    // Set the query string to test with
     mockReq.setQueryString("name=Chris");
-
-    // Create fake javalin context
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+    userController.getUsers(ctx);
 
-    userController.getUser(ctx);
-
-    // If successful we should get a 200 status
     assertEquals(200, mockRes.getStatus());
-
     String result = ctx.resultString();
-    User[] resultUsers = JavalinJson.fromJson(result, User[].class);
-
-    assertEquals(1, resultUsers.length);
-    for (User user : resultUsers){
+    for (User user : JavalinJson.fromJson(result, User[].class)) {
       assertEquals("Chris", user.name);
     }
   }
 
+
   @Test
-  public void GetUsersByBuilding() {
+  public void GetUsersByBuilding() throws IOException {
 
-    // Set the query string to test with
-    mockReq.setQueryString("name=Sci");
-
-    // Create fake javalin context
+    mockReq.setQueryString("building=Sci");
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+    userController.getUsers(ctx);
 
-    userController.getUser(ctx);
-
-    // If successful we should get a 200 status
     assertEquals(200, mockRes.getStatus());
-
     String result = ctx.resultString();
-    User[] resultUsers = JavalinJson.fromJson(result, User[].class);
-
-    assertEquals(2, resultUsers.length);
-    for (User user : resultUsers){
+    for (User user : JavalinJson.fromJson(result, User[].class)) {
       assertEquals("Sci", user.building);
     }
   }
 
+
+
   @Test
-  public void GetUsersByOfficeNumber() {
+  public void GetUsersByOfficeNumber() throws IOException {
 
     // Set the query string to test with
     mockReq.setQueryString("officeNumber=1111");
 
-    // Create fake javalin context
+    // Create our fake Javalin context
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
 
-    userController.getUser(ctx);
+    userController.getUsers(ctx);
 
-    // If successful we should get a 200 status
-    assertEquals(200, mockRes.getStatus());
+    assertEquals(200, mockRes.getStatus()); // The response status should be 200
 
     String result = ctx.resultString();
-    User[] resultUsers = JavalinJson.fromJson(result, User[].class);
 
-    assertEquals(2, resultUsers.length);
-    for (User user : resultUsers){
-      assertEquals("1111", user.officeNumber);
+    for (User user : JavalinJson.fromJson(result, User[].class)) {
+      assertEquals(1111, user.officeNumber); // Every user should be age 37
     }
   }
+
 
   @Test
   public void GetAllUsers() throws IOException {
@@ -213,7 +197,7 @@ public class UserControllerSpec {
   }
 
   @Test
-  public void GetUsersWithIllegalAge() {
+  public void GetUsersWithIllegalOfficeNumber() {
 
     mockReq.setQueryString("officeNumber=abc");
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
@@ -225,21 +209,19 @@ public class UserControllerSpec {
     });
   }
 
+
   @Test
   public void GetUsersByNameAndOfficeNumber() throws IOException {
 
-    mockReq.setQueryString("name=Chris&officeNumber=1111");
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
-    userController.getUsers(ctx);
+     mockReq.setQueryString("name=Chris&officeNumber=1111");
+     Context ctx = ContextUtil.init(mockReq, mockRes, "api/users");
+     userController.getUsers(ctx);
 
-    assertEquals(200, mockRes.getStatus());
-    String result = ctx.resultString();
-    User[] resultUsers = JavalinJson.fromJson(result, User[].class);
-
-    assertEquals(1, resultUsers.length); // There should be one user returned
-    for (User user : resultUsers) {
+     assertEquals(200, mockRes.getStatus());
+     String result = ctx.resultString();
+     for (User user : JavalinJson.fromJson(result, User[].class)) {
        assertEquals("Chris", user.name);
-       assertEquals(1111, user.officeNumber);
+       assertEquals("1111", user.officeNumber);
      }
   }
 
@@ -281,21 +263,14 @@ public class UserControllerSpec {
   }
 
   @Test
-  public void testAddUser() throws IOException {
-    // String testNewUser = "{\n" +
-    // "                    name: \"Rachel\",\n" +
-    // "                    email: \"Rachel@this.that\",\n" +
-    // "                    building: \"Rachel's Office\",\n"+
-    // "                    officeNumber: \"4321\",\n"+
-    // "                }";
-    // trying different format for the string
-    // checked second string in a json validator
-    String testNewUser = "{\n\t\"name\": \"Rachel\",\n\t\"building\":Rachel's building,\n\t\"officeNumber\": \"4321\",\n\t\"email\": \"Rachel@this.that\"\n}";
+  public void AddUser() throws IOException {
 
-    mockReq.setBodyContent(testNewUser); // can't deserialize testNewUser to User
+    String testNewUser = "{\n\t\"name\": \"Rachael\",\n\t\"building\": \"Rachael's Office\",\n\t\"email\": \"Rachael@this.this\",\n\t\"officeNumber\":\"4321\"\n}";
+
+    mockReq.setBodyContent(testNewUser);
     mockReq.setMethod("POST");
 
-    Context ctx = ContextUtil.init(mockReq,mockRes,"api/users/new");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/users/new");
 
     userController.addNewUser(ctx);
 
@@ -303,20 +278,58 @@ public class UserControllerSpec {
 
     String result = ctx.resultString();
     String id = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
-    assertNotEquals("", id);//check id not empty
+    assertNotEquals("", id);
     System.out.println(id);
 
     assertEquals(1, db.getCollection("users").countDocuments(eq("_id", new ObjectId(id))));
 
-    // Check that the user was added and has the correct id.
+    //verify user was added to the database and the correct ID
     Document addedUser = db.getCollection("users").find(eq("_id", new ObjectId(id))).first();
-
     assertNotNull(addedUser);
-    assertEquals("Rachel", addedUser.getString("name"));
-    assertEquals("Rachel@this.this", addedUser.getString("email"));
-    assertEquals("Rachel's Office", addedUser.getString("building"));
+    assertEquals("Rachael", addedUser.getString("name"));
+    assertEquals("Rachael's Office", addedUser.getString("building"));
+    assertEquals("Rachael@this.this", addedUser.getString("email"));
     assertEquals("4321", addedUser.getString("officeNumber"));
   }
+
+  // assertNotNull(addedUser);
+  // assertEquals("Rachel", addedUser.getString("name"));
+  // assertEquals("Rachel@this.this", addedUser.getString("email"));
+  // assertEquals("Rachel's Office", addedUser.getString("building"));
+  // assertEquals("4321", addedUser.getString("officeNumber"));
+
+  // @Test
+  // public void testAddUser() throws IOException {
+  //   String testNewUser = "{\n" +
+  //   "                    name: \"Rachel\",\n" +
+  //   "                    email: \"This is an invalid email\",\n" +
+  //   "                    building: \"Rachel's Office\",\n"+
+  //   "                    officeNumber: \"4321\",\n"+
+  //   "                }";
+  //   trying different format for the string
+  //   checked second string in a json validator
+
+  //   mockReq.setBodyContent(testNewUser); // can't deserialize testNewUser to User
+  //   mockReq.setMethod("POST");
+
+  //   Context ctx = ContextUtil.init(mockReq,mockRes,"api/users/new");
+
+  //   userController.addNewUser(ctx);
+
+  //   assertEquals(201, mockRes.getStatus());
+
+  //   String result = ctx.resultString();
+  //   String id = jsonMapper.readValue(result, ObjectNode.class).get("id").asText();
+  //   assertNotEquals("", id);//check id not empty
+  //   System.out.println(id);
+
+  //   assertEquals(1, db.getCollection("users").countDocuments(eq("_id", new ObjectId(id))));
+
+  //   Check that the user was added and has the correct id.
+  //   Document addedUser = db.getCollection("users").find(eq("_id", new ObjectId(id))).first();
+
+
+  // }
 
   @Test
   public void AddInvalidEmailUser() throws IOException {

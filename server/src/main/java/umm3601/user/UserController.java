@@ -87,13 +87,18 @@ public class UserController {
 
     List<Bson> filters = new ArrayList<Bson>(); // start with a blank document
 
-    if (ctx.queryParamMap().containsKey("email")) {
-      filters.add(regex("email", ctx.queryParam("email"), "i"));
+    if (ctx.queryParamMap().containsKey("name")) {
+      filters.add(eq("name", ctx.queryParam("name")));
     }
 
     if (ctx.queryParamMap().containsKey("building")) {
       filters.add(eq("building", ctx.queryParam("building")));
     }
+
+    if (ctx.queryParamMap().containsKey("email")) {
+      filters.add(regex("email", ctx.queryParam("email"), "i"));
+    }
+
     if (ctx.queryParamMap().containsKey("officeNumber")) {
       int targetNumber =  ctx.queryParam("officeNumber", Integer.class).get();
       filters.add(eq("officeNumber", targetNumber));
