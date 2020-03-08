@@ -1,10 +1,11 @@
 export interface Note {
   _id: string;
-  creator: userID;
+  creator: string;
   body: string;
   addDate: Date;
   expirationDate: Date;
   reusable: boolean;
+  draft: boolean;
   toDelete: boolean;
 }
 
