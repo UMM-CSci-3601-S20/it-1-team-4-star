@@ -115,12 +115,13 @@ public class UserController {
    * @param ctx a Javalin HTTP context
    */
   public void addNewUser(Context ctx) {
-    User newUser = ctx.bodyValidator(User.class)
+    User newUser = ctx // I think this is the part causing issues with not being able to deserialize the ctx body to User
+      .bodyValidator(User.class)
       .check((usr) -> usr.name != null && usr.name.length() > 0) //Verify that the user has a name that is not blank
       .check((usr) -> usr.email.matches(emailRegex)) // Verify that the provided email is a valid email
       .check((usr) -> usr.building != null && usr.building.length() > 0) // Verify that the provided building is not blank
       .check((usr) -> usr.officeNumber != null && usr.officeNumber.length() > 0) // Verify that the office number is not blank
-      .get();
+         .get();
 
     userCollection.insertOne(newUser);
     ctx.status(201);
