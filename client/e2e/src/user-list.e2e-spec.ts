@@ -32,6 +32,8 @@ describe('User list', () => {
     });
   });
 
+/*
+
   it('Should type something partial in the building filter and check that it returned correct elements', async () => {
     await page.typeInput('user-building-input', 'sci');
 
@@ -59,6 +61,8 @@ describe('User list', () => {
     expect(names).not.toContain('Nic McPhee');
 
   });
+
+  */
 
   it('Should change the view', async () => {
     await page.changeView('list');
