@@ -2,7 +2,6 @@ export interface User {
   _id: string;
   name: string;
   email: string;
-  //avatar?: string;
   building: string;
   officeNumber: string;
 }
