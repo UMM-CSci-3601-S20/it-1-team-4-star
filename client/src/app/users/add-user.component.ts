@@ -37,28 +37,17 @@ export class AddUserComponent implements OnInit {
     ],
 
     building: [
-<<<<<<< HEAD
-      {type: 'required', message: 'Building is required'},
-      {type: 'maxlength', message: 'Building cannot be more than 30 characters long'}
-=======
       {type: 'required', message: 'Building name is required'},
       {type: 'minlength', message: 'Building name must be at least 2 characters long'},
       {type: 'maxlength', message: 'Office number name must be no more than 25 characters long'},
       {type: 'pattern', message: 'Building name must contain only numbers and letters'}
->>>>>>> Fix html validation calls for add user feature
     ],
 
     officeNumber: [
       {type: 'required', message: 'Office number is required'},
-<<<<<<< HEAD
-      {type: 'maxlength', message: 'Office cannot be more than 30 characters long'},
-      {type: 'pattern', message: 'Office number must contain only numbers'},
-      {type: 'existingName', message: 'Office number has already been taken'}
-=======
       {type: 'minlength', message: 'Office number name must be at least one character long'},
       {type: 'maxlength', message: 'Office number name must be no more than 6 characters long'},
       {type: 'pattern', message: 'Office must only contain numbers'}
->>>>>>> Fix html validation calls for add user feature
     ]
   };
 
