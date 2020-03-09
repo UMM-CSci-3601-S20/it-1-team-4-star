@@ -11,9 +11,9 @@
           <!-- Examples of filtering in Angular -->
 
           <mat-form-field class="input-field">
-            <mat-label>Creator</mat-label>
-            <input matInput id="note-creator-input" placeholder="Filter by creator"
-            [(ngModel)]="creator" (input)="updateFilter()">
+            <mat-label>owner</mat-label>
+            <input matInput id="note-owner-input" placeholder="Filter by owner"
+            [(ngModel)]="owner" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
 
@@ -44,7 +44,7 @@
 
       <!-- Card grid view -->
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="note-cards-container">
-        <app-note-card simple="true" *ngFor="let note of filterednotes" class="note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
+        <app-note-card simple="true" *ngFor="let note of filteredNotes" class="note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
       </div>
 
       <!-- List view -->
@@ -54,8 +54,8 @@
             <h3 mat-subheader>Notes</h3>
             <a mat-list-item *ngFor="let note of this.filteredNotes" [routerLink]="['/notes', note._id]" class="note-list-item">
 
-              <h3 matLine class="note-list-creator"> {{note.creator}} </h3>
-              <p matLine class="note-list-addDate"> {{note.addDate}} </p>
+              <h3 matLine class="note-list-owner"> {{note.owner}} </h3>
+              <!-- <p matLine class="note-list-addDate"> {{note.addDate}} </p> -->
             </a>
           </mat-nav-list>
         </mat-card-content>
