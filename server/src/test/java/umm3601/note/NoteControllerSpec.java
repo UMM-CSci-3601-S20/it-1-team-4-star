@@ -302,20 +302,7 @@ public class NoteControllerSpec {
 
   @Test
   public void AddInvalidOwner() throws IOException {
-    String testNewNote = "{\n\t\"owner\": \"Test OwnerA@123#$487120881***\",\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
-    mockReq.setBodyContent(testNewNote);
-    mockReq.setMethod("POST");
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes/new");
-
-    assertThrows(BadRequestResponse.class, () -> {
-      noteController.addNewNote(ctx);
-    });
-  }
-
-
-  @Test
-  public void AddInvalidDraftOwner() throws IOException {
-    String testNewNote = "{\n\t\"owner\": \"Test Owner\",\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
+    String testNewNote = "{\n\t\"owner\": \"Test OwnerA@123#$487120881*** asdfj;sj lsjaf lsdjf asfd\",\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
     mockReq.setBodyContent(testNewNote);
     mockReq.setMethod("POST");
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes/new");
