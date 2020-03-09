@@ -20,6 +20,7 @@ import { NoteCardComponent } from './note-card.component';
 import { NoteListComponent } from './note-list.component';
 import { NoteService } from './note.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MockNoteService } from 'src/testing/note.service.mock';
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -66,16 +67,16 @@ describe('Note list', () => {
     expect(noteList.serverFilteredNotes.length).toBe(3);
   });
 
-  it('contains a note with creator \'Juan\'', () => {
-    expect(noteList.serverFilteredNotes.some((note: Note) => note.creator === 'Juan')).toBe(true);
+  it('contains a note with owner \'Juan\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Juan')).toBe(true);
   });
 
-  it('contains a note with creator \'Juana\'', () => {
-    expect(noteList.serverFilteredNotes.some((note: Note) => note.creator === 'Juana')).toBe(true);
+  it('contains a note with owner \'Juana\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Juana')).toBe(true);
   });
 
-  it('doesn\'t contain a note with creator \'Santa\'', () => {
-    expect(noteList.serverFilteredNotes.some((note: Note) => note.creator === 'Santa')).toBe(false);
+  it('doesn\'t contain a note with owner \'Santa\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Santa')).toBe(false);
   });
 
 });
