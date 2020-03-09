@@ -267,7 +267,7 @@ public class NoteControllerSpec {
   @Test
   public void AddNote() throws IOException {
 
-    String testNewNote = "{\n\t\"owner\":\"Test Owner\",\n\t\"body\":\"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
+    String testNewNote = "{\n\t\"owner\":\"mongoID_c\",\n\t\"body\":\"Body C\",\n\t\"reuse\":false,\n\t\"draft\":false,\n\t\"toDelete\":false\n}";
 
     mockReq.setBodyContent(testNewNote);
     mockReq.setMethod("POST");
@@ -288,12 +288,13 @@ public class NoteControllerSpec {
     //verify note was added to the database and the correct ID
     Document addedNote = db.getCollection("notes").find(eq("_id", new ObjectId(id))).first();
     assertNotNull(addedNote);
-    assertEquals("Test Owner", addedNote.getString("owner"));
-    assertEquals("test body", addedNote.getString("body"));
-    assertEquals(true, addedNote.getBoolean("reuse"));
-    assertEquals(true, addedNote.getBoolean("draft"));
+    assertEquals("mongoID_c", addedNote.getString("owner"));
+    assertEquals("Body C", addedNote.getString("body"));
+    assertEquals(false, addedNote.getBoolean("reuse"));
+    assertEquals(false, addedNote.getBoolean("draft"));
     assertEquals(false, addedNote.getBoolean("toDelete"));
   }
+
 
 
   @Test
