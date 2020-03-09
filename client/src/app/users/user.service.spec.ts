@@ -8,31 +8,26 @@ describe('User service: ', () => {
   // A small collection of test users
   const testUsers: User[] = [
     {
-      _id: 'chris_id',
-      name: 'Chris',
-      age: 25,
-      company: 'UMM',
-      email: 'chris@this.that',
-      role: 'admin',
-      avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
+      _id: 'Rachel_id',
+      name: 'Rachel Johnson',
+      email: 'rmjohns@morris.umn.edu',
+      building: 'science',
+      officeNumber: '123'
+
     },
     {
-      _id: 'pat_id',
-      name: 'Pat',
-      age: 37,
-      company: 'IBM',
-      email: 'pat@something.com',
-      role: 'editor',
-      avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
+      _id: 'Nic_id',
+      name: 'Nic',
+      email: 'mcphee@morris.umn.edu',
+      building: 'science',
+      officeNumber: '456'
     },
     {
-      _id: 'jamie_id',
-      name: 'Jamie',
-      age: 37,
-      company: 'Frogs, Inc.',
-      email: 'jamie@frogs.com',
-      role: 'viewer',
-      avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
+      _id: 'Joe_id',
+      name: 'Joe',
+      email: 'jbeaver@morris.umn.edu',
+      building: 'imholte',
+      officeNumber: '789'
     }
   ];
   let userService: UserService;
@@ -80,65 +75,64 @@ describe('User service: ', () => {
     req.flush(testUsers);
   });
 
-  it('getUsers() calls api/users with filter parameter \'admin\'', () => {
+  it('getUsers() calls api/users with filter parameter \'name\'', () => {
 
-    userService.getUsers({ role: 'admin' }).subscribe(
+    userService.getUsers({ name: 'Rachel Johnson' }).subscribe(
       users => expect(users).toBe(testUsers)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(userService.userUrl) && request.params.has('role')
+      (request) => request.url.startsWith(userService.userUrl) && request.params.has('name')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was 'admin'
-    expect(req.request.params.get('role')).toEqual('admin');
+    expect(req.request.params.get('name')).toEqual('Rachel Johnson');
 
     req.flush(testUsers);
   });
 
-  it('getUsers() calls api/users with filter parameter \'age\'', () => {
+  it('getUsers() calls api/users with filter parameter \'building\'', () => {
 
-    userService.getUsers({ age: 25 }).subscribe(
+    userService.getUsers({ building: 'science' }).subscribe(
       users => expect(users).toBe(testUsers)
     );
 
-    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+    // Specify that (exactly) one request will be made to the specified URL with the building parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(userService.userUrl) && request.params.has('age')
+      (request) => request.url.startsWith(userService.userUrl) && request.params.has('building')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was 'admin'
-    expect(req.request.params.get('age')).toEqual('25');
+    expect(req.request.params.get('building')).toEqual('science');
 
     req.flush(testUsers);
   });
 
   it('getUsers() calls api/users with multiple filter parameters', () => {
 
-    userService.getUsers({ role: 'editor', company: 'IBM', age: 37 }).subscribe(
+    userService.getUsers({ name: 'Joe Beaver', building: 'imholte' }).subscribe(
       users => expect(users).toBe(testUsers)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
     const req = httpTestingController.expectOne(
       (request) => request.url.startsWith(userService.userUrl)
-        && request.params.has('role') && request.params.has('company') && request.params.has('age')
+        && request.params.has('name') && request.params.has('building')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameters are correct
-    expect(req.request.params.get('role')).toEqual('editor');
-    expect(req.request.params.get('company')).toEqual('IBM');
-    expect(req.request.params.get('age')).toEqual('37');
+    expect(req.request.params.get('name')).toEqual('Joe Beaver');
+    expect(req.request.params.get('building')).toEqual('imholte');
 
     req.flush(testUsers);
   });
@@ -156,23 +150,23 @@ describe('User service: ', () => {
     req.flush(targetUser);
   });
 
-  it('filterUsers() filters by name', () => {
+  it('filterUsers() filters by email', () => {
     expect(testUsers.length).toBe(3);
-    const userName = 'a';
-    expect(userService.filterUsers(testUsers, { name: userName }).length).toBe(2);
+    const userEmail = 'j';
+    expect(userService.filterUsers(testUsers, { email: userEmail }).length).toBe(2);
   });
 
-  it('filterUsers() filters by company', () => {
+  it('filterUsers() filters by office number', () => {
     expect(testUsers.length).toBe(3);
-    const userCompany = 'UMM';
-    expect(userService.filterUsers(testUsers, { company: userCompany }).length).toBe(1);
+    const userOfficeNumber = '789';
+    expect(userService.filterUsers(testUsers, { officeNumber: userOfficeNumber }).length).toBe(1);
   });
 
-  it('filterUsers() filters by name and company', () => {
+  it('filterUsers() filters by email and office number', () => {
     expect(testUsers.length).toBe(3);
-    const userCompany = 'UMM';
-    const userName = 'chris';
-    expect(userService.filterUsers(testUsers, { name: userName, company: userCompany }).length).toBe(1);
+    const userOfficeNumber = '789';
+    const userEmail = 'jbeaver@morris.umn.edu';
+    expect(userService.filterUsers(testUsers, { email: userEmail, officeNumber: userOfficeNumber }).length).toBe(1);
   });
 
   it('addUser() calls api/users/new', () => {

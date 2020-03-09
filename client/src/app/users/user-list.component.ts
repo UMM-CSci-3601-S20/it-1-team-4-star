@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { User, UserRole } from './user';
+import { User } from './user';
 import { UserService } from './user.service';
 import { Subscription } from 'rxjs';
 
@@ -12,15 +12,18 @@ import { Subscription } from 'rxjs';
 
 export class UserListComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
+
   public serverFilteredUsers: User[];
   public filteredUsers: User[];
 
-  public userName: string;
-  public userAge: number;
-  public userRole: UserRole;
-  public userCompany: string;
+  public name: string;
+  public email: string;
+  public building: string;
+  public officeNumber: string;
+
   public viewType: 'card' | 'list' = 'card';
   getUsersSub: Subscription;
+
 
 
   // Inject the UserService into this component.
@@ -36,8 +39,8 @@ export class UserListComponent implements OnInit, OnDestroy  {
   getUsersFromServer(): void {
     this.unsub();
     this.getUsersSub = this.userService.getUsers({
-      role: this.userRole,
-      age: this.userAge
+      name: this.name,
+      building: this.building
     }).subscribe(returnedUsers => {
       this.serverFilteredUsers = returnedUsers;
       this.updateFilter();
@@ -48,7 +51,7 @@ export class UserListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredUsers = this.userService.filterUsers(
-      this.serverFilteredUsers, { name: this.userName, company: this.userCompany });
+      this.serverFilteredUsers, { name: this.name, building: this.building, email: this.email, officeNumber: this.officeNumber });
   }
 
   /**
@@ -58,6 +61,7 @@ export class UserListComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
     this.getUsersFromServer();
   }
+
 
   ngOnDestroy(): void {
     this.unsub();

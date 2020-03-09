@@ -30,21 +30,24 @@ export class AddUserComponent implements OnInit {
       {type: 'existingName', message: 'Name has already been taken'}
     ],
 
-    age: [
-      {type: 'pattern', message: 'Age must be a number'},
-      {type: 'min', message: 'Age must be at least 15'},
-      {type: 'max', message: 'Age may not be greater than 200'},
-      {type: 'required', message: 'Age is required'}
-    ],
-
     email: [
       {type: 'email', message: 'Email must be formatted properly'},
-      {type: 'required', message: 'Email is required'}
+      {type: 'required', message: 'Email is required'},
+      {type: 'existingName', message: 'Email has already been taken'}
     ],
 
-    role: [
-      { type: 'required', message: 'Role is required' },
-      { type: 'pattern', message: 'Role must be Admin, Editor, or Viewer' },
+    building: [
+      {type: 'required', message: 'Building name is required'},
+      {type: 'minlength', message: 'Building name must be at least 2 characters long'},
+      {type: 'maxlength', message: 'Office number name must be no more than 25 characters long'},
+      {type: 'pattern', message: 'Building name must contain only numbers and letters'}
+    ],
+
+    officeNumber: [
+      {type: 'required', message: 'Office number is required'},
+      {type: 'minlength', message: 'Office number name must be at least one character long'},
+      {type: 'maxlength', message: 'Office number name must be no more than 6 characters long'},
+      {type: 'pattern', message: 'Office must only contain numbers'}
     ]
   };
 
@@ -60,7 +63,7 @@ export class AddUserComponent implements OnInit {
         // an upper limit like this because people can sometimes have
         // very long names. This demonstrates that it's possible, though,
         // to have maximum length limits.
-        Validators.maxLength(50),
+        Validators.maxLength(20),
         Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
         (fc) => {
           if (fc.value.toLowerCase() === 'abc123' || fc.value.toLowerCase() === '123abc') {
@@ -71,18 +74,6 @@ export class AddUserComponent implements OnInit {
         },
       ])),
 
-      // Since this is for a company, we need workers to be old enough to work, and probably not older than 200.
-      age: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]+[0-9]?'),
-        Validators.min(15),
-        Validators.max(200),
-      ])),
-
-      // We don't care much about what is in the company field, so we just add it here as part of the form
-      // without any particular validation.
-      company: new FormControl(),
-
       // We don't need a special validator just for our app here, but there is a default one for email.
       // We will require the email, though.
       email: new FormControl('', Validators.compose([
@@ -90,10 +81,20 @@ export class AddUserComponent implements OnInit {
         Validators.email,
       ])),
 
-      role: new FormControl('viewer', Validators.compose([
+      building: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('^(admin|editor|viewer)$'),
+        Validators.minLength(2),
+        Validators.maxLength(25),
+        Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
       ])),
+
+      officeNumber: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(6),
+        Validators.pattern('^\\d+$'),
+      ]))
+
     });
 
   }

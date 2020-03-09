@@ -13,7 +13,7 @@ describe('App', () => {
 
   it('Should have the correct title', () => {
     page.navigateTo();
-    expect(page.getAppTitle()).toEqual('CSCI 3601 Iteration Template');
+    expect(page.getAppTitle()).toEqual('DoorBoard - Your Office Door, Made Simple');
   });
 
   it('Should open the sidenav', () => {
