@@ -90,22 +90,22 @@ describe('Note service: ', () => {
     req.flush(testNotes);
   });
 
-  it('getNotes() calls api/notes with filter parameter \'creator\'', () => {
+  it('getNotes() calls api/notes with filter parameter \'owner\'', () => {
 
-    noteService.getNotes({ creator: '588935f57546a2daea44de7c' }).subscribe(
+    noteService.getNotes({ owner: '588935f57546a2daea44de7c' }).subscribe(
       notes => expect(notes).toBe(testNotes)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('creator')
+      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('owner')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was '588935f57546a2daea44de7c'
-    expect(req.request.params.get('creator')).toEqual('588935f57546a2daea44de7c');
+    expect(req.request.params.get('owner')).toEqual('588935f57546a2daea44de7c');
 
     req.flush(testNotes);
   });
