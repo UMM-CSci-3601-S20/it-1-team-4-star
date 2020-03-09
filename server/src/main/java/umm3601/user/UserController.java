@@ -87,24 +87,30 @@ public class UserController {
 
     List<Bson> filters = new ArrayList<Bson>(); // start with a blank document
 
-    if (ctx.queryParamMap().containsKey("age")) {
-        int targetAge = ctx.queryParam("age", Integer.class).get();
-        filters.add(eq("age", targetAge));
+    if (ctx.queryParamMap().containsKey("name")) {
+      filters.add(eq("name", ctx.queryParam("name")));
     }
 
-    if (ctx.queryParamMap().containsKey("company")) {
-      filters.add(regex("company", ctx.queryParam("company"), "i"));
+    if (ctx.queryParamMap().containsKey("building")) {
+      filters.add(eq("building", ctx.queryParam("building")));
     }
 
-    if (ctx.queryParamMap().containsKey("role")) {
-      filters.add(eq("role", ctx.queryParam("role")));
+    if (ctx.queryParamMap().containsKey("email")) {
+      filters.add(regex("email", ctx.queryParam("email"), "i"));
+    }
+
+    if (ctx.queryParamMap().containsKey("officeNumber")) {
+      int targetNumber =  ctx.queryParam("officeNumber", Integer.class).get();
+      filters.add(eq("officeNumber", targetNumber));
     }
 
     String sortBy = ctx.queryParam("sortby", "name"); //Sort by sort query param, default is name
     String sortOrder = ctx.queryParam("sortorder", "asc");
 
+    System.out.println(filters);
+
     ctx.json(userCollection.find(filters.isEmpty() ? new Document() : and(filters))
-      .sort(sortOrder.equals("desc") ?  Sorts.descending(sortBy) : Sorts.ascending(sortBy))
+      .sort(sortOrder.equals("desc") ?  Sorts.descending(sortBy) : Sorts.ascending(sortBy))//sorting
       .into(new ArrayList<>()));
   }
 
@@ -114,20 +120,13 @@ public class UserController {
    * @param ctx a Javalin HTTP context
    */
   public void addNewUser(Context ctx) {
-    User newUser = ctx.bodyValidator(User.class)
+    User newUser = ctx // I think this is the part causing issues with not being able to deserialize the ctx body to User
+      .bodyValidator(User.class)
       .check((usr) -> usr.name != null && usr.name.length() > 0) //Verify that the user has a name that is not blank
       .check((usr) -> usr.email.matches(emailRegex)) // Verify that the provided email is a valid email
-      .check((usr) -> usr.age > 0) // Verify that the provided age is > 0
-      .check((usr) -> usr.role.matches("^(admin|editor|viewer)$")) // Verify that the role is one of the valid roles
-      .check((usr) -> usr.company != null && usr.company.length() > 0) // Verify that the user has a company that is not blank
-      .get();
-
-    // Generate user avatar (you won't need this part for todos)
-    try {
-      newUser.avatar = "https://gravatar.com/avatar/" + md5(newUser.email) + "?d=identicon";  // generate unique md5 code for identicon
-    } catch (NoSuchAlgorithmException ignored) {
-      newUser.avatar = "https://gravatar.com/avatar/?d=mp";                           // set to mystery person
-    }
+      .check((usr) -> usr.building != null && usr.building.length() > 0) // Verify that the provided building is not blank
+      .check((usr) -> usr.officeNumber != null && usr.officeNumber.length() > 0) // Verify that the office number is not blank
+         .get();
 
     userCollection.insertOne(newUser);
     ctx.status(201);
