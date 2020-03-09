@@ -124,7 +124,7 @@ public class NoteController {
   public void addNewNote(Context ctx) {
     Note newNote = ctx.
     bodyValidator(Note.class)
-    .check((usr) -> usr.owner != null && usr.owner.length() > 1 && usr.owner.length() < 30) //Verify that the todo has a owner that is not blank and is less than 35 characters long
+    .check((usr) -> usr.owner != null && usr.owner.length() > 1 && usr.owner.length() < 36) //Verify that the todo has a owner that is not blank and is less than 35 characters long
     .check((usr) -> usr.body != null && usr.body.length() > 0 && usr.body.length() < 151) // Verify that the todo has a body that is not blank and is less than 150 characters long
     .check((usr) -> usr.reuse == true || false) // Verify that the input is a boolean value
     .check((usr) -> usr.draft == true || false) // Verify that the input is a boolean value
