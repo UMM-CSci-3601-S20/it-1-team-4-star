@@ -16,13 +16,14 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public filteredNotes: Note[];
   public body: string;
   public addDate: Date;
-  public expirationDate: Date;
-  public creator: string;
+  // public expirationDate: Date;
+  // public owner: string;
   public reusable: boolean;
   public draft: boolean;
   public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
   getNotesSub: Subscription;
+  owner: string;
 
 
   // Inject the NoteService into this component.
@@ -38,7 +39,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   getNotesFromServer(): void {
     this.unsub();
     this.getNotesSub = this.noteService.getNotes({
-      creator: this.creator
+      owner: this.owner
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
       this.updateFilter();
@@ -49,7 +50,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, addDate: this.addDate, expirationDate: this.expirationDate, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
   }
 
   /**
