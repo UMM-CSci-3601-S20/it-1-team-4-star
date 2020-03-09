@@ -13,13 +13,13 @@ var json = JSON.stringify(date);
 console.log(json);
 */
 
-//ADDS THE CURRENT DATE AND TIME
-let date: Date = new Date();
-console.log("Date = " + date); //Date = Tue Feb 05 2019 12:05:22 GMT+0530 (IST)
+// //ADDS THE CURRENT DATE AND TIME
+// let date: Date = new Date();
+// console.log("Date = " + date); //Date = Tue Feb 05 2019 12:05:22 GMT+0530 (IST)
 
-//FUTURE DATE-NOT ENTIRELY SURE IF THIS WORKS. SETTING THE DATE TO BE THE CURRENT DAY PLUS A DAY
-var futureDate = new Date();
-futureDate.setDate(futureDate.getDate() + 1);
+// //FUTURE DATE-NOT ENTIRELY SURE IF THIS WORKS. SETTING THE DATE TO BE THE CURRENT DAY PLUS A DAY
+// var futureDate = new Date();
+// futureDate.setDate(futureDate.getDate() + 1);
 
 describe('NoteCardComponent', () => {
   let component: NoteCardComponent;
@@ -41,10 +41,10 @@ describe('NoteCardComponent', () => {
     component = fixture.componentInstance;
     component.note = {
       _id: 'rachel_id',
-      creator: 'Rachel Johnson',
+      owner: 'Rachel Johnson',
       body: 'this is a sample note',
-      expirationDate: futureDate,
-      addDate: date,
+      // expirationDate: futureDate,
+      // addDate: date,
       draft: true,
       reusable: true,
       toDelete: false
