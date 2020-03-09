@@ -265,7 +265,12 @@ public class NoteControllerSpec {
   @Test
   public void AddNote() throws IOException {
 
-    String testNewNote = "{\n\t\"owner\":\"mongoID_c\",\n\t\"body\":\"Body C\",\n\t\"reuse\":false,\n\t\"draft\":false,\n\t\"toDelete\":false\n}";
+    String testNewNote = "{ "
+      + "\"owner\": \"mongoID_c\", "
+      + "\"body\": \"Body C\", "
+      + "\"reuse\": false, "
+      + "\"draft\": false, "
+      + "\"toDelete\": false }";
 
     mockReq.setBodyContent(testNewNote);
     mockReq.setMethod("POST");
