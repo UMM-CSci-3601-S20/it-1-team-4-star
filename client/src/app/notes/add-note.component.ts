@@ -53,7 +53,7 @@ export class AddNoteComponent implements OnInit {
     // add note form validations
     this.addNoteForm = this.fb.group({
       // We allow alphanumeric input and limit the length for name.
-      name: new FormControl('', Validators.compose([
+      owner: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2),
         // In the real world you'd want to be very careful about having
@@ -79,15 +79,18 @@ export class AddNoteComponent implements OnInit {
       ])),
 
       reusable: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('^(true|false)$')
       ])),
 
       draft: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('^(true|false)$')
       ])),
 
       toDelete: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern('^(true|false)$')
       ]))
 
     });

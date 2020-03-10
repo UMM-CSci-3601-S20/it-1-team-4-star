@@ -23,11 +23,11 @@ is potentially helpful and contributed to the shaping of this example -->
 
           <mat-form-field>
             <mat-label>Body</mat-label>
-            <input matInput id="bodyField" placeholder="Note" formControlName="body"
-                  required>
+            <input matInput #input id="bodyField" placeholder="Your message"
+                  formControlName="body" required>
             <mat-error *ngFor="let validation of add_note_validation_messages.body">
               <mat-error class="error-message" id="body-error"
-                        *ngIf="addNoteForm.get('body').hasError(validation.type) && (addNoteForm.get('body').dirty || addNoteForm.get('body').touched)">
+                        *ngIf="addNoteForm.get('body').hasError(validation.type) && (addNoteForm.get('body').dirty || addNoteForm.get('category').touched)">
                 {{validation.message}}
               </mat-error>
             </mat-error>
@@ -35,7 +35,7 @@ is potentially helpful and contributed to the shaping of this example -->
 
           <mat-form-field>
             <mat-label>Reusable</mat-label>
-            <mat-select id="reusableField" required formControlName="reusable">
+            <mat-select id="reusableField" required formControlName="resuable">
               <mat-option value="true">True</mat-option>
               <mat-option value="false">False</mat-option>
             </mat-select>
@@ -45,20 +45,6 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-error>
           </mat-form-field>
 
-          <!--
-            <mat-form-field>
-            <mat-label>Status</mat-label>
-            <mat-select id="statusField" required formControlName="status">
-              <mat-option value="true">Complete</mat-option>
-              <mat-option value="false">Incomplete</mat-option>
-            </mat-select>
-            <mat-error *ngIf="addTodoForm.get('status').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addTodoForm.get('status').hasError('pattern') && !addTodoForm.get('status').hasError('required')">
-              Your selection is invalid
-            </mat-error>
-          </mat-form-field>
-          -->
-
           <mat-form-field>
             <mat-label>Draft</mat-label>
             <mat-select id="draftField" required formControlName="draft">
@@ -66,13 +52,13 @@ is potentially helpful and contributed to the shaping of this example -->
               <mat-option value="false">False</mat-option>
             </mat-select>
             <mat-error *ngIf="addNoteForm.get('draft').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('draft').hasError('pattern') && !addNoteForm.get('draft').hasError('draft')">
+            <mat-error *ngIf="addNoteForm.get('draft').hasError('pattern') && !addNoteForm.get('draft').hasError('required')">
               Your selection is invalid
             </mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>toDelete</mat-label>
+            <mat-label>To Delete</mat-label>
             <mat-select id="toDeleteField" required formControlName="toDelete">
               <mat-option value="true">True</mat-option>
               <mat-option value="false">False</mat-option>
@@ -83,10 +69,11 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-error>
           </mat-form-field>
 
+
         </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-button id="confirmAddNoteButton" type="button" color="primary"
-          [disabled]="!addNoteForm.valid" type="submit">
+          <button mat-stroked-button id="confirmAddNoteButton" type="button" color="primary"
+                  [disabled]="!addNoteForm.valid" type="submit">
                   ADD NOTE
           </button>
         </mat-card-actions>
