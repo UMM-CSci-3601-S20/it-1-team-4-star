@@ -3,9 +3,9 @@
     "_id": {
        "$oid": "584f3a600343927e48e87212"
     },
-    "owner": "588935f57546a2daea44de7c",
+    "owner": "Rachel Johnson",
     "body": "I am running late for office hours today. I expect to be on campus in 15 minutes.",
-    "reuse": false,
+    "reusable": false,
     "draft": false,
     "toDelete": false
   },
@@ -15,9 +15,9 @@
     "_id": {
        "$oid": "586f3a600343927e48e87210"
     },
-    "owner": "588935f5556f992bf8f37c01",
+    "owner": "Joe Beaver",
     "body": "This note is bad. I want to delete it.",
-    "reuse": false,
+    "reusable": false,
     "draft": true,
     "toDelete": true
   },
@@ -27,9 +27,9 @@
     "_id": {
        "$oid": "588f3a600343927e48e87211"
     },
-    "owner": "588935f55b432bb2ff322160",
+    "owner": "Nic McPhee",
     "body": "I am feeling sick today, and am leaving the office early.",
-    "reuse": true,
+    "reusable": true,
     "draft": false,
     "toDelete": false
   }

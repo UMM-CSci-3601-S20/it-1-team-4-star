@@ -11,9 +11,16 @@
           <!-- Examples of filtering in Angular -->
 
           <mat-form-field class="input-field">
-            <mat-label>owner</mat-label>
+            <mat-label>Owner</mat-label>
             <input matInput id="note-owner-input" placeholder="Filter by owner"
             [(ngModel)]="owner" (input)="updateFilter()">
+            <mat-hint>Filtered in Angular</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Body</mat-label>
+            <input matInput id="note-body-input" placeholder="Filter by body"
+            [(ngModel)]="body" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
 
@@ -21,6 +28,36 @@
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering on the server -->
+
+          <mat-form-field class="input-field">
+            <mat-label>Reusable</mat-label>
+            <mat-select (selectionChange)="getNotesFromServer()" [(ngModel)]="reusable" id="note-reusable-select">
+              <mat-option value>--</mat-option>
+              <mat-option value="false">False</mat-option>
+              <mat-option value="true">True</mat-option>
+            </mat-select>
+            <mat-hint>Filtered on server</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Draft</mat-label>
+            <mat-select (selectionChange)="getNotesFromServer()" [(ngModel)]="draft" id="note-draft-select">
+              <mat-option value>--</mat-option>
+              <mat-option value="false">False</mat-option>
+              <mat-option value="true">True</mat-option>
+            </mat-select>
+            <mat-hint>Filtered on server</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>To Delete</mat-label>
+            <mat-select (selectionChange)="getNotesFromServer()" [(ngModel)]="toDelete" id="note-toDelete-select">
+              <mat-option value>--</mat-option>
+              <mat-option value="false">False</mat-option>
+              <mat-option value="true">True</mat-option>
+            </mat-select>
+            <mat-hint>Filtered on server</mat-hint>
+          </mat-form-field>
         </div>
 
         <br>

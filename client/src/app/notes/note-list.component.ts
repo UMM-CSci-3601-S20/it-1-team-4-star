@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Note } from './note';
+import { Note, reusable, draft, toDelete } from './note';
 import { NoteService } from './note.service';
 import { Subscription } from 'rxjs';
 
@@ -15,12 +15,12 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
   public body: string;
-  public addDate: Date;
+  //public addDate: Date;
   // public expirationDate: Date;
   // public owner: string;
-  public reusable: boolean;
-  public draft: boolean;
-  public toDelete: boolean;
+  public reusable: reusable;
+  public draft: draft;
+  public toDelete: toDelete;
   public viewType: 'card' | 'list' = 'card';
   getNotesSub: Subscription;
   owner: string;
@@ -39,7 +39,9 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   getNotesFromServer(): void {
     this.unsub();
     this.getNotesSub = this.noteService.getNotes({
-      owner: this.owner
+      reusable: this.reusable,
+      draft: this.draft,
+      toDelete: this.toDelete
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
       this.updateFilter();
@@ -50,7 +52,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {owner: this.owner, body: this.body });
   }
 
   /**

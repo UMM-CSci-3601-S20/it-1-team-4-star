@@ -32,6 +32,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
+import { AddNoteComponent } from './notes/add-note.component';
+import { NoteProfileComponent } from './notes/note-profile.component';
+
 
 import { NoteListComponent } from './notes/note-list.component';
 import { NoteService } from './notes/note.service';
@@ -68,8 +71,10 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
+    AddNoteComponent,
     NoteListComponent,
     NoteCardComponent,
+    NoteProfileComponent,
 
     // ADD THESE MODULES ONCE THE ADD NOTE PAGE HAS BEEN CREATED
     // NoteProfileComponent,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Note } from './note';
+import { Note, reusable, draft, toDelete } from './note';
 import { NoteService } from './note.service';
 import { ɵɵresolveBody } from '@angular/core';
 
@@ -16,8 +16,8 @@ describe('Note service: ', () => {
   const testNotes: Note[] = [
     {
       _id: '4126554g28628d3hefr33de3d',
-      owner:'588935f57546a2daea44de7c',
-      body: 'ducks go quack',
+      owner:'Rachel Johnson',
+      body: 'Kid sick, study hard',
       // addDate: date,
       // expirationDate: date2,
       draft: true,
@@ -26,7 +26,7 @@ describe('Note service: ', () => {
     },
     {
       _id: '1233211w32122v3etfd88c8d',
-      owner: '588935f55b432bb2ff322160',
+      owner: 'Joe Beaver',
       body: 'cookie wuz hear',
       // addDate: date,
       // expirationDate: date2,
@@ -36,8 +36,8 @@ describe('Note service: ', () => {
     },
     {
       _id: '4444444a55555s6dddd77f8g',
-      owner: '588935f5556f992bf8f37c01',
-      body: 'cookie wuz hear prabubly',
+      owner: 'Nic McPhee',
+      body: 'Rawr, I need some sleep',
       // addDate: date,
       // expirationDate: date2,
       draft: false,
@@ -90,22 +90,62 @@ describe('Note service: ', () => {
     req.flush(testNotes);
   });
 
-  it('getNotes() calls api/notes with filter parameter \'owner\'', () => {
+  it('getNotes() calls api/notes with filter parameter \'reusable\'', () => {
 
-    noteService.getNotes({ owner: '588935f57546a2daea44de7c' }).subscribe(
+    noteService.getNotes({ reusable: 'true' }).subscribe(
       notes => expect(notes).toBe(testNotes)
     );
 
-    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+    // Specify that (exactly) one request will be made to the specified URL with the reusable parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('owner')
+      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('reusable')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
-    // Check that the role parameter was '588935f57546a2daea44de7c'
-    expect(req.request.params.get('owner')).toEqual('588935f57546a2daea44de7c');
+    // Check that the boolean value was 'true'
+    expect(req.request.params.get('reusable')).toEqual('true');
+
+    req.flush(testNotes);
+  });
+
+  it('getNotes() calls api/notes with filter parameter \'draft\'', () => {
+
+    noteService.getNotes({ draft: 'true' }).subscribe(
+      notes => expect(notes).toBe(testNotes)
+    );
+
+    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+    const req = httpTestingController.expectOne(
+      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('draft')
+    );
+
+    // Check that the request made to that URL was a GET request.
+    expect(req.request.method).toEqual('GET');
+
+    // Check that the boolean value was 'true'
+    expect(req.request.params.get('draft')).toEqual('true');
+
+    req.flush(testNotes);
+  });
+
+  it('getNotes() calls api/notes with filter parameter \'toDelete\'', () => {
+
+    noteService.getNotes({ toDelete: 'true' }).subscribe(
+      notes => expect(notes).toBe(testNotes)
+    );
+
+    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+    const req = httpTestingController.expectOne(
+      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('toDelete')
+    );
+
+    // Check that the request made to that URL was a GET request.
+    expect(req.request.method).toEqual('GET');
+
+    // Check that the boolean value was 'true'
+    expect(req.request.params.get('toDelete')).toEqual('true');
 
     req.flush(testNotes);
   });
@@ -127,45 +167,14 @@ describe('Note service: ', () => {
   it('filterNotes() filters by body', () => {
     expect(testNotes.length).toBe(3);
     const noteBody = 'cook';
-    expect(noteService.filterNotes(testNotes, { body: noteBody }).length).toBe(2);
+    expect(noteService.filterNotes(testNotes, { body: noteBody }).length).toBe(1);
   });
 
-  it('filterNotes() filters by addDate', () => {
+  it('filterNotes() filters by owner', () => {
     expect(testNotes.length).toBe(3);
-    const noteAddDate = date;
-    expect(noteService.filterNotes(testNotes, { addDate: noteAddDate }).length).toBe(3);
+    const noteOwner = 'Rachel Johnson';
+    expect(noteService.filterNotes(testNotes, { owner: noteOwner }).length).toBe(1);
   });
-
-  it('filterNotes() filters by expirationDate', () => {
-    expect(testNotes.length).toBe(3);
-    const noteExpirationDate = date2;
-    expect(noteService.filterNotes(testNotes, { expirationDate: noteExpirationDate }).length).toBe(2);
-  });
-
-  it('filterNotes() filters by draft', () => {
-    expect(testNotes.length).toBe(3);
-    const noteDraft = false;
-    expect(noteService.filterNotes(testNotes, { draft: noteDraft }).length).toBe(2);
-  });
-
-  it('filterNotes() filters by toDelete', () => {
-    expect(testNotes.length).toBe(3);
-    const noteToDelete = true;
-    expect(noteService.filterNotes(testNotes, { toDelete: noteToDelete }).length).toBe(1);
-  });
-
-  it('filterNotes() filters by reusable', () => {
-    expect(testNotes.length).toBe(3);
-    const noteReusable = false;
-    expect(noteService.filterNotes(testNotes, { reusable: noteReusable}).length).toBe(1);
-  });
-
-  it('filterNotes() filters by body and expiration date', () => {
-    expect(testNotes.length).toBe(3);
-    const noteBody = 'wuz';
-    const noteExpirationDate = date2;
-    expect(noteService.filterNotes(testNotes, { body: noteBody, expirationDate: noteExpirationDate }).length).toBe(1);
-  }) ;
 
   it('addNote() calls api/notes/new', () => {
 

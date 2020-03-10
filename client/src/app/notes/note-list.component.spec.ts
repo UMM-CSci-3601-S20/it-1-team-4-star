@@ -67,12 +67,12 @@ describe('Note list', () => {
     expect(noteList.serverFilteredNotes.length).toBe(3);
   });
 
-  it('contains a note with owner \'Juan\'', () => {
-    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Juan')).toBe(true);
+  it('contains a note with owner \'Rachel Johnson\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Rachel Johnson')).toBe(true);
   });
 
-  it('contains a note with owner \'Juana\'', () => {
-    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Juana')).toBe(true);
+  it('contains a note with owner \'Joe Beaver\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Joe Beaver')).toBe(true);
   });
 
   it('doesn\'t contain a note with owner \'Santa\'', () => {

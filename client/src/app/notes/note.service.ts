@@ -2,7 +2,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Note } from './note';
+import { Note, reusable, draft, toDelete } from './note';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -12,11 +12,18 @@ export class NoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getNotes(filters?: { owner?: string }): Observable<Note[]> {
+  //FILTERING BY THE SERVER
+  getNotes(filters?: { reusable?: reusable, draft?: draft, toDelete?: toDelete }): Observable<Note[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.owner) {
-        httpParams = httpParams.set('owner', filters.owner);
+      if (filters.reusable) {
+        httpParams = httpParams.set('reusable', filters.reusable);
+      }
+      if (filters.draft) {
+        httpParams = httpParams.set('draft', filters.draft);
+      }
+      if (filters.toDelete) {
+        httpParams = httpParams.set('toDelete', filters.toDelete);
       }
     }
     return this.httpClient.get<Note[]>(this.noteUrl, {
@@ -28,8 +35,8 @@ export class NoteService {
     return this.httpClient.get<Note>(this.noteUrl + '/' + id);
   }
 
-  filterNotes(notes: Note[], filters: { body?: string
-    reusable?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
+//FILTERING WITH ANGULAR
+  filterNotes(notes: Note[], filters: { owner?: string, body?: string }): Note[] {
     // taking this out of filter notes
     // addDate?: Date, expirationDate?: Date
     let filteredNotes = notes;
@@ -40,6 +47,15 @@ export class NoteService {
 
       filteredNotes = filteredNotes.filter(note => {
         return note.body.toLowerCase().indexOf(filters.body) !== -1;
+      });
+    }
+
+    //Filter by owner
+    if (filters.owner) {
+      filters.owner = filters.owner.toLowerCase();
+
+      filteredNotes = filteredNotes.filter(note => {
+        return note.owner.toLowerCase().indexOf(filters.owner) !== -1;
       });
     }
 
@@ -64,32 +80,7 @@ export class NoteService {
     //   });
     // }
 
-    // Filter by reusable
-    if (filters.reusable) {
-       filters.reusable = filters.reusable;
 
-       filteredNotes = filteredNotes.filter(note => {
-        return note.reusable.toString().indexOf(filters.reusable.toString()) !== -1;
-      });
-    }
-
-    // Filter by draft
-    if (filters.draft) {
-          filters.draft = filters.draft;
-
-          filteredNotes = filteredNotes.filter(note => {
-           return note.draft.toString().indexOf(filters.draft.toString()) !== -1;
-         });
-       }
-
-    // Filter by toDelete
-    if (filters.toDelete) {
-      filters.toDelete = filters.toDelete;
-
-      filteredNotes = filteredNotes.filter(note => {
-       return note.toDelete.toString().indexOf(filters.toDelete.toString()) !== -1;
-     });
-   }
 
     return filteredNotes;
   }
