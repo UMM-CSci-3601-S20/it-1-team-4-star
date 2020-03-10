@@ -6,32 +6,6 @@
         <mat-card-title class="note-list-title">Notes - This is displaying all notes.</mat-card-title>
       </mat-card-header>
       <mat-card-content fxLayout="column" >
-
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-          <!-- Examples of filtering in Angular -->
-
-          <mat-form-field class="input-field">
-            <mat-label>owner</mat-label>
-            <input matInput id="note-owner-input" placeholder="Filter by owner"
-            [(ngModel)]="owner" (input)="updateFilter()">
-            <mat-hint>Filtered in Angular</mat-hint>
-          </mat-form-field>
-
-        </div>
-
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-          <!-- Examples of filtering on the server -->
-        </div>
-
-        <br>
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-          <label>View type: </label>
-          <mat-radio-group aria-label="View type" [(ngModel)]="viewType" id="view-type-radio">
-            <mat-radio-button value="card">Card</mat-radio-button>
-            <mat-radio-button value="list">List</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
       </mat-card-content>
     </mat-card>
   </div>
@@ -47,19 +21,6 @@
         <app-note-card simple="true" *ngFor="let note of filteredNotes" class="note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
       </div>
 
-      <!-- List view -->
-      <mat-card *ngSwitchCase="'list'">
-        <mat-card-content>
-          <mat-nav-list class="note-nav-list">
-            <h3 mat-subheader>Notes</h3>
-            <a mat-list-item *ngFor="let note of this.filteredNotes" [routerLink]="['/notes', note._id]" class="note-list-item">
-
-              <h3 matLine class="note-list-owner"> {{note.owner}} </h3>
-              <!-- <p matLine class="note-list-addDate"> {{note.addDate}} </p> -->
-            </a>
-          </mat-nav-list>
-        </mat-card-content>
-      </mat-card>
 
     </div>
   </div>
