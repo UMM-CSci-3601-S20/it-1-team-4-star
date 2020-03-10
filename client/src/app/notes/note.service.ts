@@ -82,6 +82,7 @@ export class NoteService {
        }
 
     // Filter by toDelete
+
     if (filters.toDelete) {
       filters.toDelete = filters.toDelete;
 

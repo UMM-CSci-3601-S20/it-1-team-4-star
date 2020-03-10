@@ -34,38 +34,38 @@ is potentially helpful and contributed to the shaping of this example -->
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Reusable?</mat-label>
-            <mat-select id="reusableField" required formControlName="reusable">
-              <mat-option value="true">True</mat-option>
-              <mat-option value="false">False</mat-option>
-            </mat-select>
-            <mat-error *ngIf="addNoteForm.get('reusable').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('reusable').hasError('pattern') && !addNoteForm.get('reusable').hasError('required')">
-              Your selection is invalid
+            <mat-label>Reusable</mat-label>
+            <input matInput id="reusableField" placeholder="Reusable? True or False" formControlName="reusable"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.reusable">
+              <mat-error class="error-message" id="reusable-error"
+                        *ngIf="addNoteForm.get('reusable').hasError(validation.type) && (addNoteForm.get('reusable').dirty || addNoteForm.get('reusable').touched)">
+                {{validation.message}}
+              </mat-error>
             </mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Post on DoorBoard?</mat-label>
-            <mat-select id="draftField" required formControlName="draft">
-              <mat-option value="true">True</mat-option>
-              <mat-option value="false">False</mat-option>
-            </mat-select>
-            <mat-error *ngIf="addNoteForm.get('draft').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('draft').hasError('pattern') && !addNoteForm.get('draft').hasError('required')">
-              Your selection is invalid
+            <mat-label>Draft</mat-label>
+            <input matInput id="draftField" placeholder="Post on DoorBoard? True or False" formControlName="draft"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.draft">
+              <mat-error class="error-message" id="draft-error"
+                        *ngIf="addNoteForm.get('draft').hasError(validation.type) && (addNoteForm.get('draft').dirty || addNoteForm.get('draft').touched)">
+                {{validation.message}}
+              </mat-error>
             </mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Delete after note expires?</mat-label>
-            <mat-select id="toDeleteField" required formControlName="toDelete">
-              <mat-option value="true">True</mat-option>
-              <mat-option value="false">False</mat-option>
-            </mat-select>
-            <mat-error *ngIf="addNoteForm.get('toDelete').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('toDelete').hasError('pattern') && !addNoteForm.get('toDelete').hasError('toDelete')">
-              Your selection is invalid
+            <mat-label>ToDelete</mat-label>
+            <input matInput id="toDeleteField" placeholder="Delete note after being removed from DoorBoard? True or False" formControlName="toDelete"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.toDelete">
+              <mat-error class="error-message" id="toDelete-error"
+                        *ngIf="addNoteForm.get('toDelete').hasError(validation.type) && (addNoteForm.get('toDelete').dirty || addNoteForm.get('toDelete').touched)">
+                {{validation.message}}
+              </mat-error>
             </mat-error>
           </mat-form-field>
 
