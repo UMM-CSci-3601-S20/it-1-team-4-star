@@ -9,4 +9,8 @@
   <mat-card-actions>
     <button mat-button *ngIf="this.simple" [routerLink]="['/notes', this.note._id]">EDIT NOTE</button>
   </mat-card-actions>
+  <mat-card-actions>
+    <button mat-button *ngIf="!this.note.toDelete"  (click)="clickEvent()">DELETE </button>
+  </mat-card-actions>
 </mat-card>
+

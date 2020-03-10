@@ -44,26 +44,6 @@ export class NoteService {
     }
 
 
-    // Kept for future iterations
-
-    // // Filter by addDate
-    // if (filters.addDate) {
-    //   filters.addDate = filters.addDate;
-
-    //   filteredNotes = filteredNotes.filter(note => {
-    //     return note.addDate.toDateString().indexOf(filters.addDate.toDateString()) !== -1;
-    //   });
-    // }
-
-    // // Filter by expirationDate
-    // if (filters.expirationDate) {
-    //   filters.expirationDate = filters.expirationDate;
-
-    //   filteredNotes = filteredNotes.filter(note => {
-    //     return note.expirationDate.toDateString().indexOf(filters.addDate.toDateString()) !== -1;
-    //   });
-    // }
-
     // Filter by reusable
     if (filters.reusable) {
        filters.reusable = filters.reusable;
@@ -98,4 +78,12 @@ export class NoteService {
     // Send post request to add a new note with the note data as the body.
     return this.httpClient.post<{id: string}>(this.noteUrl + '/new', newNote).pipe(map(res => res.id));
   }
+
+  deleteNote(newNote: Note): Observable<string> {
+    // Send post request to add a new note with the note data as the body.
+    return this.httpClient.delete<{id: string}>(this.noteUrl).pipe(map(res => res.id));
+  }
+
+
+
 }
