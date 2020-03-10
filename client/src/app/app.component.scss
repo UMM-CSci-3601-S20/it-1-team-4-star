@@ -9,7 +9,6 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
-  justify-content: center;
 }
 
 .mat-toolbar.mat-primary {
@@ -22,8 +21,6 @@
 }
 
 .app-title {
-  //padding-left: 1000px;
-  //justify-content: center;// I don't think this is working right?
   flex: 1 1 auto;
   text-align: center;
 }
