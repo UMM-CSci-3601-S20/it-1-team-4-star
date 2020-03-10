@@ -41,7 +41,7 @@ describe('NoteCardComponent', () => {
     component = fixture.componentInstance;
     component.note = {
       _id: 'rachel_id',
-      owner: 'Rachel Johnson',
+      //owner: 'Rachel Johnson',
       body: 'this is a sample note',
       // expirationDate: futureDate,
       // addDate: date,

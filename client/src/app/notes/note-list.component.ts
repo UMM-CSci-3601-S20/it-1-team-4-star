@@ -23,7 +23,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public toDelete: toDelete;
   public viewType: 'card' | 'list' = 'card';
   getNotesSub: Subscription;
-  owner: string;
+  //owner: string;
 
 
   // Inject the NoteService into this component.
@@ -52,7 +52,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {owner: this.owner, body: this.body });
+      this.serverFilteredNotes, { body: this.body });
   }
 
   /**

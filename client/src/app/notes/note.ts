@@ -1,6 +1,6 @@
 export interface Note {
   _id: string;
-  owner: string;
+  //owner: string;
   body: string;
   reusable: boolean;
   draft: boolean;

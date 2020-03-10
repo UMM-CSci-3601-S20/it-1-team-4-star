@@ -36,7 +36,7 @@ export class NoteService {
   }
 
 //FILTERING WITH ANGULAR
-  filterNotes(notes: Note[], filters: { owner?: string, body?: string }): Note[] {
+  filterNotes(notes: Note[], filters: { body?: string }): Note[] {
     // taking this out of filter notes
     // addDate?: Date, expirationDate?: Date
     let filteredNotes = notes;
@@ -50,6 +50,7 @@ export class NoteService {
       });
     }
 
+    /*
     //Filter by owner
     if (filters.owner) {
       filters.owner = filters.owner.toLowerCase();
@@ -58,7 +59,7 @@ export class NoteService {
         return note.owner.toLowerCase().indexOf(filters.owner) !== -1;
       });
     }
-
+*/
 
     // Kept for future iterations
 

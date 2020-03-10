@@ -22,7 +22,7 @@ export class MockNoteService extends NoteService {
   static testNotes: Note[] = [
     {
       _id: '4126554g28628d3hefr33de3d',
-      owner:'Rachel Johnson',
+      //owner:'Rachel Johnson',
       body: 'Kid sick, study hard',
       // addDate: date,
       // expirationDate: date2,
@@ -32,7 +32,7 @@ export class MockNoteService extends NoteService {
     },
     {
       _id: '1233211w32122v3etfd88c8d',
-      owner: 'Joe Beaver',
+      //owner: 'Joe Beaver',
       body: 'cookie wuz hear',
       // addDate: date,
       // expirationDate: date2,
@@ -42,7 +42,7 @@ export class MockNoteService extends NoteService {
     },
     {
       _id: '4444444a55555s6dddd77f8g',
-      owner: 'Nic McPhee',
+      //owner: 'Nic McPhee',
       body: 'Rawr, I need some sleep',
       // addDate: date,
       // expirationDate: date2,
@@ -56,7 +56,7 @@ export class MockNoteService extends NoteService {
     super(null);
   }
 
-  getUsers(filters: { owner?: string, }): Observable<Note[]> {
+  getUsers(filters: {  }): Observable<Note[]> {
     // Just return the test users regardless of what filters are passed in
     return of(MockNoteService.testNotes);
   }

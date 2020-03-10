@@ -10,12 +10,13 @@
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering in Angular -->
 
+          <!--
           <mat-form-field class="input-field">
             <mat-label>Owner</mat-label>
             <input matInput id="note-owner-input" placeholder="Filter by owner"
             [(ngModel)]="owner" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
-          </mat-form-field>
+          </mat-form-field> -->
 
           <mat-form-field class="input-field">
             <mat-label>Body</mat-label>
@@ -90,8 +91,8 @@
           <mat-nav-list class="note-nav-list">
             <h3 mat-subheader>Notes</h3>
             <a mat-list-item *ngFor="let note of this.filteredNotes" [routerLink]="['/notes', note._id]" class="note-list-item">
-
-              <h3 matLine class="note-list-owner"> {{note.owner}} </h3>
+              <!--
+              <h3 matLine class="note-list-owner"> {{note.owner}} </h3> -->
               <!-- <p matLine class="note-list-addDate"> {{note.addDate}} </p> -->
             </a>
           </mat-nav-list>

@@ -64,7 +64,7 @@ describe('AddNoteComponent', () => {
   it('form should be invalid when empty', () => {
     expect(addNoteForm.valid).toBeFalsy();
   });
-
+/*
   describe('The owner field', () => {
     let ownerControl: AbstractControl;
 
@@ -112,7 +112,7 @@ describe('AddNoteComponent', () => {
       expect(ownerControl.valid).toBeTruthy();
     });
   });
-
+*/
   describe('The body field', () => {
     let bodyControl: AbstractControl;
 

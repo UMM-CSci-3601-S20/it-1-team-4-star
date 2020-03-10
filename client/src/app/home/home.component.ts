@@ -16,7 +16,7 @@ export class HomeComponent {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
-  public owner: string;
+  //public owner: string;
   public body: string;
   //public addDate: Date;
   // public expirationDate: Date;
@@ -27,7 +27,7 @@ export class HomeComponent {
   public viewType: 'card' | 'list' = 'card';
   getNotesSub: Subscription;
 
-  ownerId: string;
+  //ownerId: string;
 
   constructor(private noteService: NoteService) {
   }
@@ -47,7 +47,7 @@ export class HomeComponent {
   }
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {owner: this.owner, body: this.body });
+      this.serverFilteredNotes, {body: this.body });
   }
 
   ngOnInit(): void {

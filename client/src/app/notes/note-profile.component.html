@@ -1,8 +1,8 @@
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
-    <mat-card-title class="note-card-owner">{{ this.note.owner }}</mat-card-title>
+    <!--<mat-card-title class="note-card-owner">{{ this.note.owner }}</mat-card-title> -->
+    <mat-card-title class="note-card-body">{{ this.note.body }}</mat-card-title>
     <mat-card-subtitle class="note-card-id">{{ this.note._id }}</mat-card-subtitle>
-    <mat-card-subtitle class="note-card-body">{{ this.note.body }}</mat-card-subtitle>
     <mat-card-subtitle class="note-card-reusable">{{ this.note.reusable }}</mat-card-subtitle>
     <mat-card-subtitle class="note-card-draft">{{ this.note.draft }}</mat-card-subtitle>
     <mat-card-subtitle class="note-card-toDelete">{{ this.note.toDelete }}</mat-card-subtitle>
