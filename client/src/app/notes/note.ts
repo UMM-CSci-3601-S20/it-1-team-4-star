@@ -6,4 +6,3 @@ export interface Note {
   draft: boolean;
   toDelete: boolean;
 }
-

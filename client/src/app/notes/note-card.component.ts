@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Note } from './note';
 
-// Components
 @Component({
   selector: 'app-note-card',
   templateUrl: './note-card.component.html',

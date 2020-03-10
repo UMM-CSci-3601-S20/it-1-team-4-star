@@ -16,6 +16,8 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public filteredNotes: Note[];
   public body: string;
   public addDate: Date;
+  // public expirationDate: Date;
+  // public owner: string;
   public reusable: boolean;
   public draft: boolean;
   public toDelete: boolean;
@@ -68,5 +70,4 @@ export class NoteListComponent implements OnInit, OnDestroy  {
       this.getNotesSub.unsubscribe();
     }
   }
-
 }

@@ -1,4 +1,8 @@
 import {Component} from '@angular/core';
+import { Note } from '../notes/note';
+import { NoteService } from '../notes/note.service';
+import { NoteListComponent } from '../notes/note-list.component';
+import { NoteCardComponent } from '../notes/note-card.component';
 
 @Component({
   selector: 'app-home-component',
@@ -8,6 +12,37 @@ import {Component} from '@angular/core';
 })
 export class HomeComponent {
 
-  constructor() {
+  // These are public so that tests can reference them (.spec.ts)
+  public serverFilteredNotes: Note[];
+  public filteredNotes: Note[];
+  public body: string;
+  public addDate: Date;
+  // public expirationDate: Date;
+  // public owner: string;
+  public reusable: boolean;
+  public draft: boolean;
+  public toDelete: boolean;
+  public viewType: 'card' | 'list' = 'card';
+  //getNotesSub: Subscription;
+
+  ownerId: string;
+
+  constructor(private noteService: NoteService) {
   }
+  public updateFilter(): void {
+    this.filteredNotes = this.noteService.filterNotes(
+      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+  }
+
+  // getNotesFromServer(): void {
+  //   this.unsub();
+  //   this.getNotesSub = this.noteService.getNotes({
+  //     owner: this.owner
+  //   }).subscribe(returnedNotes => {
+  //     this.serverFilteredNotes = returnedNotes;
+  //     this.updateFilter();
+  //   }, err => {
+  //     console.log(err);
+  //   });
+  // }
 }

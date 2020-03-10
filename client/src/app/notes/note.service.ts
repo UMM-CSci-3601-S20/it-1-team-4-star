@@ -28,9 +28,10 @@ export class NoteService {
     return this.httpClient.get<Note>(this.noteUrl + '/' + id);
   }
 
-  filterNotes(notes: Note[], filters: { body?: string, addDate?: Date, expirationDate?: Date,
+  filterNotes(notes: Note[], filters: { body?: string
     reusable?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
-
+    // taking this out of filter notes
+    // addDate?: Date, expirationDate?: Date
     let filteredNotes = notes;
 
     // Filter by body
@@ -42,6 +43,53 @@ export class NoteService {
       });
     }
 
+
+    // Kept for future iterations
+
+    // // Filter by addDate
+    // if (filters.addDate) {
+    //   filters.addDate = filters.addDate;
+
+    //   filteredNotes = filteredNotes.filter(note => {
+    //     return note.addDate.toDateString().indexOf(filters.addDate.toDateString()) !== -1;
+    //   });
+    // }
+
+    // // Filter by expirationDate
+    // if (filters.expirationDate) {
+    //   filters.expirationDate = filters.expirationDate;
+
+    //   filteredNotes = filteredNotes.filter(note => {
+    //     return note.expirationDate.toDateString().indexOf(filters.addDate.toDateString()) !== -1;
+    //   });
+    // }
+
+    // Filter by reusable
+    if (filters.reusable) {
+       filters.reusable = filters.reusable;
+
+       filteredNotes = filteredNotes.filter(note => {
+        return note.reusable.toString().indexOf(filters.reusable.toString()) !== -1;
+      });
+    }
+
+    // Filter by draft
+    if (filters.draft) {
+          filters.draft = filters.draft;
+
+          filteredNotes = filteredNotes.filter(note => {
+           return note.draft.toString().indexOf(filters.draft.toString()) !== -1;
+         });
+       }
+
+    // Filter by toDelete
+    if (filters.toDelete) {
+      filters.toDelete = filters.toDelete;
+
+      filteredNotes = filteredNotes.filter(note => {
+       return note.toDelete.toString().indexOf(filters.toDelete.toString()) !== -1;
+     });
+   }
 
     return filteredNotes;
   }

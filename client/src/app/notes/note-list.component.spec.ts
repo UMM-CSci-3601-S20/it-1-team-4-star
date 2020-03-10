@@ -81,7 +81,6 @@ describe('Note list', () => {
 
 });
 
-
 describe('Misbehaving Note List', () => {
   let noteList: NoteListComponent;
   let fixture: ComponentFixture<NoteListComponent>;
