@@ -11,6 +11,7 @@ import com.mongodb.client.MongoDatabase;
 import io.javalin.Javalin;
 
 import umm3601.user.UserController;
+import umm3601.note.NoteController;
 
 public class Server {
 
@@ -37,12 +38,11 @@ public class Server {
 
     // Initialize dependencies
     UserController userController = new UserController(database);
+    NoteController noteController = new NoteController(database);
     //UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
     Javalin server = Javalin.create().start(4567);
 
-    // Simple example route
-    server.get("hello", ctx -> ctx.result("Hello World"));
 
     // Utility routes
     server.get("api", ctx -> ctx.result(appName));
@@ -50,15 +50,26 @@ public class Server {
     // Get specific user
     server.get("api/users/:id", userController::getUser);
 
+    // Get specific note
+    server.get("api/notes/:id", noteController::getNote);
+
+    // Delete a specific user
     server.delete("api/users/:id", userController::deleteUser);
+
+    // Delete a specific note
+    server.delete("api/notes/:id", noteController::deleteNote);
 
     // List users, filtered using query parameters
     server.get("api/users", userController::getUsers);
 
+    // List notes, filtered using query parameters
+    server.get("api/notes", noteController::getNotes);
+
     // Add new user
     server.post("api/users/new", userController::addNewUser);
 
-
+    // Add new note
+    server.post("api/notes/new", noteController::addNewNote);
 
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);
