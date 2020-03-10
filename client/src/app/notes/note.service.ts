@@ -28,9 +28,10 @@ export class NoteService {
     return this.httpClient.get<Note>(this.noteUrl + '/' + id);
   }
 
-  filterNotes(notes: Note[], filters: { body?: string, addDate?: Date, expirationDate?: Date,
+  filterNotes(notes: Note[], filters: { body?: string
     reusable?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
-
+    // taking this out of filter notes
+    // addDate?: Date, expirationDate?: Date
     let filteredNotes = notes;
 
     // Filter by body
