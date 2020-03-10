@@ -24,8 +24,6 @@ export class MockNoteService extends NoteService {
       _id: '4126554g28628d3hefr33de3d',
       owner:'588935f57546a2daea44de7c',
       body: 'ducks go quack',
-      addDate: date,
-      expirationDate: date2,
       draft: true,
       reusable: false,
       toDelete: true
@@ -34,8 +32,6 @@ export class MockNoteService extends NoteService {
       _id: '1233211w32122v3etfd88c8d',
       owner: '588935f55b432bb2ff322160',
       body: 'cookie wuz hear',
-      addDate: date,
-      expirationDate: date2,
       draft: false,
       reusable: true,
       toDelete: false
@@ -44,8 +40,6 @@ export class MockNoteService extends NoteService {
       _id: '4444444a55555s6dddd77f8g',
       owner: '588935f5556f992bf8f37c01',
       body: 'cookie wuz hear prabubly',
-      addDate: date,
-      expirationDate: date3,
       draft: false,
       reusable: true,
       toDelete: false
