@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Note } from './note';
+import { Note, reusable, draft, toDelete } from './note';
 import { NoteService } from './note.service';
 
 @Component({
@@ -16,8 +16,13 @@ export class AddNoteComponent implements OnInit {
 
   note: Note;
 
+  public reusable: reusable;
+  public draft: draft;
+  public toDelete: toDelete;
+
   constructor(private fb: FormBuilder, private noteService: NoteService, private snackBar: MatSnackBar, private router: Router) {
   }
+
 
   // not sure if this name is magical and making it be found or if I'm missing something,
   // but this is where the red text that shows up (when there is invalid input) comes from
@@ -36,15 +41,18 @@ export class AddNoteComponent implements OnInit {
     ],
 
     reusable: [
-      {type: 'required', message: 'Reusable field is required'}
+      {type: 'required', message: 'Reusable field is required'},
+      { type: 'pattern', message: 'Reusable must be True or False' }
     ],
 
     draft: [
-      {type: 'required', message: 'Draft field is required'}
+      {type: 'required', message: 'Draft field is required'},
+      { type: 'pattern', message: 'Reusable must be True or False' }
     ],
 
     toDelete: [
-      {type: 'required', message: 'toDelete field is required'}
+      {type: 'required', message: 'toDelete field is required'},
+      { type: 'pattern', message: 'Reusable must be True or False' }
     ]
   };
 
@@ -78,19 +86,19 @@ export class AddNoteComponent implements OnInit {
         Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?'),
       ])),
 
-      reusable: new FormControl('', Validators.compose([
+      reusable: new FormControl('true', Validators.compose([
         Validators.required,
-        Validators.pattern('^(true|false)$')
+        Validators.pattern('^(true|false)$'),
       ])),
 
-      draft: new FormControl('', Validators.compose([
+      draft: new FormControl('true', Validators.compose([
         Validators.required,
-        Validators.pattern('^(true|false)$')
+        Validators.pattern('^(true|false)$'),
       ])),
 
-      toDelete: new FormControl('', Validators.compose([
+      toDelete: new FormControl('true', Validators.compose([
         Validators.required,
-        Validators.pattern('^(true|false)$')
+        Validators.pattern('^(true|false)$'),
       ]))
 
     });

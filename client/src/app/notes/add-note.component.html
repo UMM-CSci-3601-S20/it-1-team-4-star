@@ -27,46 +27,40 @@ is potentially helpful and contributed to the shaping of this example -->
                   formControlName="body" required>
             <mat-error *ngFor="let validation of add_note_validation_messages.body">
               <mat-error class="error-message" id="body-error"
-                        *ngIf="addNoteForm.get('body').hasError(validation.type) && (addNoteForm.get('body').dirty || addNoteForm.get('category').touched)">
+                        *ngIf="addNoteForm.get('body').hasError(validation.type) && (addNoteForm.get('body').dirty || addNoteForm.get('body').touched)">
                 {{validation.message}}
               </mat-error>
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="input-field">
             <mat-label>Reusable</mat-label>
-            <mat-select id="reusableField" required formControlName="resuable">
-              <mat-option value="true">True</mat-option>
+            <mat-select formControlName="reusable" id="note-reusable-select">
+              <mat-option value>--</mat-option>
               <mat-option value="false">False</mat-option>
+              <mat-option value="true">True</mat-option>
             </mat-select>
-            <mat-error *ngIf="addNoteForm.get('reusable').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('reusable').hasError('pattern') && !addNoteForm.get('reusable').hasError('required')">
-              Your selection is invalid
-            </mat-error>
+            <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="input-field">
             <mat-label>Draft</mat-label>
-            <mat-select id="draftField" required formControlName="draft">
-              <mat-option value="true">True</mat-option>
+            <mat-select formControlName="draft" id="note-draft-select">
+              <mat-option value>--</mat-option>
               <mat-option value="false">False</mat-option>
+              <mat-option value="true">True</mat-option>
             </mat-select>
-            <mat-error *ngIf="addNoteForm.get('draft').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('draft').hasError('pattern') && !addNoteForm.get('draft').hasError('required')">
-              Your selection is invalid
-            </mat-error>
+            <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="input-field">
             <mat-label>To Delete</mat-label>
-            <mat-select id="toDeleteField" required formControlName="toDelete">
-              <mat-option value="true">True</mat-option>
+            <mat-select formControlName="toDelete" id="note-toDelete-select">
+              <mat-option value>--</mat-option>
               <mat-option value="false">False</mat-option>
+              <mat-option value="true">True</mat-option>
             </mat-select>
-            <mat-error *ngIf="addNoteForm.get('toDelete').hasError('required')">You must make a selection</mat-error>
-            <mat-error *ngIf="addNoteForm.get('toDelete').hasError('pattern') && !addNoteForm.get('toDelete').hasError('required')">
-              Your selection is invalid
-            </mat-error>
+            <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
 
