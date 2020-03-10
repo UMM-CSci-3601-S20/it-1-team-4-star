@@ -1,0 +1,82 @@
+<!-- example from
+https://github.com/AngularTemplates/angular-forms-and-validations/blob/master/src/app/form-component/form.component.html
+is potentially helpful and contributed to the shaping of this example -->
+<div fxLayout="row">
+  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
+    <form [formGroup]="addNoteForm" (ngSubmit)="submitForm();">
+    <mat-card class="add-note-card">
+        <mat-card-header>
+          <mat-card-title class="add-note-title">New Note</mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxLayout="column">
+          <mat-form-field>
+            <mat-label>Owner</mat-label>
+            <input matInput id="ownerField" placeholder="Owner" formControlName="owner"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.owner">
+              <mat-error class="error-message" id="owner-error"
+                        *ngIf="addNoteForm.get('owner').hasError(validation.type) && (addNoteForm.get('owner').dirty || addNoteForm.get('owner').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Note</mat-label>
+            <input matInput id="bodyField" placeholder="Body" formControlName="body"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.body">
+              <mat-error class="error-message" id="body-error"
+                        *ngIf="addNoteForm.get('body').hasError(validation.type) && (addNoteForm.get('body').dirty || addNoteForm.get('body').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Reusable</mat-label>
+            <input matInput id="reusableField" placeholder="Reusable? True or False" formControlName="reusable"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.reusable">
+              <mat-error class="error-message" id="reusable-error"
+                        *ngIf="addNoteForm.get('reusable').hasError(validation.type) && (addNoteForm.get('reusable').dirty || addNoteForm.get('reusable').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Draft</mat-label>
+            <input matInput id="draftField" placeholder="Post on DoorBoard? True or False" formControlName="draft"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.draft">
+              <mat-error class="error-message" id="draft-error"
+                        *ngIf="addNoteForm.get('draft').hasError(validation.type) && (addNoteForm.get('draft').dirty || addNoteForm.get('draft').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>ToDelete</mat-label>
+            <input matInput id="toDeleteField" placeholder="Delete note after being removed from DoorBoard? True or False" formControlName="toDelete"
+                  required>
+            <mat-error *ngFor="let validation of add_note_validation_messages.toDelete">
+              <mat-error class="error-message" id="toDelete-error"
+                        *ngIf="addNoteForm.get('toDelete').hasError(validation.type) && (addNoteForm.get('toDelete').dirty || addNoteForm.get('toDelete').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-button id="confirmAddNoteButton" type="button" color="primary"
+          [disabled]="!addNoteForm.valid" type="submit">
+                  ADD NOTE
+          </button>
+        </mat-card-actions>
+    </mat-card>
+  </form>
+  </div>
+</div>
