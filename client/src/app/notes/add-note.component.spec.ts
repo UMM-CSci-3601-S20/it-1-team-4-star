@@ -82,7 +82,7 @@ describe('AddNoteComponent', () => {
       expect(ownerControl.valid).toBeTruthy();
     });
 
-    it('should fail on single character names', () => {
+    it('should fail on single character owners', () => {
       ownerControl.setValue('x');
       expect(ownerControl.valid).toBeFalsy();
       // Annoyingly, Angular uses lowercase 'l' here
@@ -91,9 +91,9 @@ describe('AddNoteComponent', () => {
     });
 
     // In the real world, you'd want to be pretty careful about
-    // setting upper limits on things like name lengths just
-    // because there are people with really long names.
-    it('should fail on really long names', () => {
+    // setting upper limits on things like owner lengths just
+    // because there are people with really long owner names.
+    it('should fail on really long owner names', () => {
       ownerControl.setValue('x'.repeat(100));
       expect(ownerControl.valid).toBeFalsy();
       // Annoyingly, Angular uses lowercase 'l' here
@@ -101,44 +101,44 @@ describe('AddNoteComponent', () => {
       expect(ownerControl.hasError('maxlength')).toBeTruthy();
     });
 
-    it('should not allow a name to contain a symbol', () => {
+    it('should not allow an owner to contain a symbol', () => {
       ownerControl.setValue('bad@email.com');
       expect(ownerControl.valid).toBeFalsy();
       expect(ownerControl.hasError('pattern')).toBeTruthy();
     });
 
-    it('should allow digits in the name', () => {
+    it('should allow digits in the owner', () => {
       ownerControl.setValue('Bad2Th3B0ne');
       expect(ownerControl.valid).toBeTruthy();
     });
   });
 
   describe('The body field', () => {
-    let buildingControl: AbstractControl;
+    let bodyControl: AbstractControl;
 
     beforeEach(() => {
-      buildingControl = addNoteComponent.addNoteForm.controls[`body`];
+      bodyControl = addNoteComponent.addNoteForm.controls[`body`];
     });
 
     it('should not allow empty body field', () => {
-      buildingControl.setValue('');
-      expect(buildingControl.valid).toBeFalsy();
-      expect(buildingControl.hasError('required')).toBeTruthy();
+      bodyControl.setValue('');
+      expect(bodyControl.valid).toBeFalsy();
+      expect(bodyControl.hasError('required')).toBeTruthy();
     });
 
     it('should be fine with "Kid sick, read chapter 3.1"', () => {
-      buildingControl.setValue('Kid sick, read chapter 3.1');
-      expect(buildingControl.valid).toBeTruthy();
+      bodyControl.setValue('Kid sick, read chapter 3.1');
+      expect(bodyControl.valid).toBeTruthy();
     });
 
     // In the real world, you'd want to be pretty careful about
     // setting upper limits on things like ages.
     it('should fail on really long body messages', () => {
-      buildingControl.setValue('m'.repeat(130));
-      expect(buildingControl.valid).toBeFalsy();
+      bodyControl.setValue('moo'.repeat(130));
+      expect(bodyControl.valid).toBeFalsy();
       // Annoyingly, Angular uses lowercase 'l' here
       // when it's an upper case 'L' in `Validators.maxLength(2)`.
-      expect(buildingControl.hasError('maxlength')).toBeTruthy();
+      expect(bodyControl.hasError('maxlength')).toBeTruthy();
     });
   });
 });
