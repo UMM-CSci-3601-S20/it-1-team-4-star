@@ -1,8 +1,6 @@
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
-    <mat-card class="home-card">
-      Enter your professor's name to view their notes.
-    </mat-card>
+
     <mat-card class="search-card">
       <mat-card-header>
         <mat-card-title class="note-list-title">Notes</mat-card-title>
@@ -15,7 +13,8 @@
           <mat-form-field class="input-field">
             <mat-label>owner</mat-label>
             <input matInput id="note-owner-input" placeholder="Filter by owner"
-            [(ngModel)]="ownerId" (input)="updateFilter()">
+            [(ngModel)]="owner" (input)="updateFilter()">
+            <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
 
         </div>
@@ -39,7 +38,7 @@
 </div>
 
 <div fxLayout="row">
-  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else " >
+  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else notesError" >
     <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
     <div [ngSwitch]="viewType">
 
@@ -64,3 +63,22 @@
 
     </div>
   </div>
+
+  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+  <ng-template #notesError>
+    <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="note-error">
+      <mat-error>
+        There was a problem loading the notes. Possibly the server is down or perhaps there are network
+        issues.
+      </mat-error>
+      <mat-error>
+        Please wait a bit and try again or start the server.
+      </mat-error>
+    </div>
+  </ng-template>
+
+</div>
+
+<button mat-fab class="add-note-fab" matTooltip="Add Note" matTooltipPosition="left" routerLink="/notes/new">
+    <mat-icon class="md-24" aria-label="Add Note">add</mat-icon>
+</button>
