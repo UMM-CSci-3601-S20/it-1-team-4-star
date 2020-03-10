@@ -4,6 +4,7 @@
 
 .sidenav {
   width: 256px;
+  background: #ffe203;
 }
 
 .sidenav .mat-toolbar {
@@ -14,10 +15,14 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: #ffe203;
+  color: black;
+
 }
 
 .app-title {
-  padding-left: 1000px;
+  //padding-left: 1000px;
+  align-items: center;// I don't think this is working right?
 }
 
 
