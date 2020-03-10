@@ -7,6 +7,6 @@
     <p>To Delete: <span class="note-card-toDelete">{{ this.note.toDelete }}</span></p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button *ngIf="this.simple" [routerLink]="['/notes', this.note._id]">VIEW NOTE</button>
+    <button mat-button *ngIf="this.simple" [routerLink]="['/notes', this.note._id]">EDIT NOTE</button>
   </mat-card-actions>
 </mat-card>
