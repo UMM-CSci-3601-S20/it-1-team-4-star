@@ -6,7 +6,6 @@ import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
 import { NoteListComponent } from './notes/note-list.component';
 import { AddNoteComponent } from './notes/add-note.component';
-// import { AddNoteComponent } from '.notes/add-note.component';
 
 
 const routes: Routes = [
@@ -16,7 +15,6 @@ const routes: Routes = [
   {path: 'users/:id', component: UserProfileComponent},
   {path: 'notes', component: NoteListComponent},
   {path: 'notes/new', component: AddNoteComponent}
-  // {path: 'notes/new', component: AddNoteComponent}
 
 ];
 
