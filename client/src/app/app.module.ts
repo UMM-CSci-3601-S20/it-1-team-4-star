@@ -33,6 +33,15 @@ import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
 
+
+import { NoteListComponent } from './notes/note-list.component';
+import { NoteService } from './notes/note.service';
+import { NoteCardComponent } from './notes/note-card.component';
+
+// ADD THESE IMPORTS ONCE THE ADD NOTE PAGES HAVE BEEN CREATED
+// import { NoteProfileComponent } from './notes/note-profile.component';
+// import { AddNoteComponent } from './notes/add-note.component';
+
 const MATERIAL_MODULES: any[] = [
   MatListModule,
   MatButtonModule,
@@ -60,6 +69,12 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
+    NoteListComponent,
+    NoteCardComponent,
+
+    // ADD THESE MODULES ONCE THE ADD NOTE PAGE HAS BEEN CREATED
+    // NoteProfileComponent,
+    // AddNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -70,10 +85,11 @@ const MATERIAL_MODULES: any[] = [
     FlexLayoutModule,
     HttpClientModule,
     MATERIAL_MODULES,
-    LayoutModule,
+    LayoutModule
   ],
   providers: [
-    UserService
+    UserService,
+    NoteService
   ],
   bootstrap: [AppComponent]
 })
