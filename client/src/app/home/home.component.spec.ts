@@ -4,7 +4,7 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
 import { NoteService } from '../notes/note.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('Home', () => {
 
@@ -17,7 +17,7 @@ describe('Home', () => {
     TestBed.configureTestingModule({
       imports: [ MatCardModule ],
       declarations: [ HomeComponent ], // declare the test component
-      providers: [ NoteService, HttpClient ]
+      providers: [ NoteService, HttpClient, HttpHandler, HttpHandler ]
     });
 
     fixture = TestBed.createComponent(HomeComponent);
