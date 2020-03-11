@@ -72,29 +72,45 @@ public class NoteController {
     } catch (IllegalArgumentException e) {
       throw new BadRequestResponse("The requested note id wasn't a legal Mongo Object ID.");
     }
-    // Boolean state = (ctx.queryParamMap().containsKey("toDelete"));
     Document contextBody = ctx.bodyAsClass(Document.class);
     noteCollection.updateOne(eq("_id", objId), new Document("$set", new Document("toDelete", contextBody.get("toDelete"))));
 
     ctx.status(200);
     ctx.json(noteCollection.find(eq("_id", objId)).first());
+   }
 
+   public void editDraftField(Context ctx) {
+    String id = ctx.pathParam("id");
+    ObjectId objId;
+    try{
+      objId = new ObjectId(id);
+    } catch (IllegalArgumentException e) {
+      throw new BadRequestResponse("The requested note id wasn't a legal Mongo Object ID.");
+    }
+    Document contextBody = ctx.bodyAsClass(Document.class);
+    noteCollection.updateOne(eq("_id", objId), new Document("$set", new Document("draft", contextBody.get("draft"))));
+
+    ctx.status(200);
+    ctx.json(noteCollection.find(eq("_id", objId)).first());
    }
 
 
-  //  public void editDraftField(Context ctx) {
-  //   String id = ctx.pathParam("id");
-  //   Boolean state = (ctx.queryParamMap().containsKey("draft"));
-  //   // Note note;
-  //   noteCollection.updateOne(eq("_id", new ObjectId(id)), new Document("$set", new Document("draft", state)));
-  //  }
+   public void editReuseField(Context ctx) {
+    String id = ctx.pathParam("id");
+    ObjectId objId;
+    try{
+      objId = new ObjectId(id);
+    } catch (IllegalArgumentException e) {
+      throw new BadRequestResponse("The requested note id wasn't a legal Mongo Object ID.");
+    }
+    Document contextBody = ctx.bodyAsClass(Document.class);
+    noteCollection.updateOne(eq("_id", objId), new Document("$set", new Document("reuse", contextBody.get("reuse"))));
 
-  //  public void editReuseField(Context ctx) {
-  //   String id = ctx.pathParam("id");
-  //   Boolean state = (ctx.queryParamMap().containsKey("reuse"));
-  //   // Note note;
-  //   noteCollection.updateOne(eq("_id", new ObjectId(id)), new Document("$set", new Document("reuse", state)));
-  //  }
+    ctx.status(200);
+    ctx.json(noteCollection.find(eq("_id", objId)).first());
+   }
+
+
 
   /**
    * Delete the note specified by the `id` parameter in the request.
