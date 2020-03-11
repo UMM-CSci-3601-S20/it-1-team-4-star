@@ -75,11 +75,10 @@ public class Server {
     server.patch("api/notes/:id", noteController::editToDeleteField);
 
 
-    // // Edit draft field
-    // server.patch("api/notes/:id", noteController::editDraftField);
+    server.patch("api/notes/:id", noteController::editDraftField);
 
-    // // Edit reuse field
-    // server.patch("api/notes/:id", noteController::editReuseField);
+    // Edit reuse field
+    server.patch("api/notes/:id", noteController::editReuseField);
 
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);
