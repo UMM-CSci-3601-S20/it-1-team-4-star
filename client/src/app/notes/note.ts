@@ -6,3 +6,7 @@ export interface Note {
   draft: boolean;
   toDelete: boolean;
 }
+
+export type reusable = 'true' | 'false';
+export type draft = 'true' | 'false';
+export type toDelete = 'true' | 'false';

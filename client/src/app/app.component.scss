@@ -21,8 +21,8 @@
 }
 
 .app-title {
-  //padding-left: 1000px;
-  align-items: center;// I don't think this is working right?
+  flex: 1 1 auto;
+  text-align: center;
 }
 
 
