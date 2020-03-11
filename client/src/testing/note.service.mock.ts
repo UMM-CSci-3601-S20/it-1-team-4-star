@@ -56,15 +56,15 @@ export class MockNoteService extends NoteService {
     super(null);
   }
 
-  getUsers(filters: { owner?: string, }): Observable<Note[]> {
-    // Just return the test users regardless of what filters are passed in
+  getNotes(filters: { owner?: string, body?: string, reusable?: boolean, draft?: boolean, toDelete?: boolean }): Observable<Note[]> {
+    // Just return the test notes regardless of what filters are passed in
     return of(MockNoteService.testNotes);
   }
 
-  getUserById(id: string): Observable<Note> {
-    // If the specified ID is for the first test user,
-    // return that user, otherwise return `null` so
-    // we can test illegal user requests.
+  getNotesById(id: string): Observable<Note> {
+    // If the specified ID is for the first test note,
+    // return that note, otherwise return `null` so
+    // we can test illegal note requests.
     if (id === MockNoteService.testNotes[0]._id) {
       return of(MockNoteService.testNotes[0]);
     } else {
