@@ -17,6 +17,7 @@ export class MockUserService extends UserService {
       building: 'Science',
       officeNumber: '27',
     },
+
     {
       _id: 'exampleID_2',
       name: 'Nic McPhee',
@@ -24,6 +25,7 @@ export class MockUserService extends UserService {
       building: 'Humanities',
       officeNumber: '120',
     },
+
     {
       _id: 'exampleID_3',
       name: 'Professor C',
