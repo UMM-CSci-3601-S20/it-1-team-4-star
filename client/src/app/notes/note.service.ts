@@ -12,13 +12,26 @@ export class NoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getNotes(filters?: { owner?: string /*body?: string*/ }): Observable<Note[]> {
+  getNotes(filters?: { owner?: string, body?: string, reusable?: boolean, draft?: boolean, toDelete?: boolean}): Observable<Note[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
       }
+      if (filters.body) {
+        httpParams = httpParams.set('body', filters.body);
+      }
+      if (filters.reusable) {
+        httpParams = httpParams.set('reuseable', filters.reusable.toString());
+      }
+      if (filters.draft) {
+        httpParams = httpParams.set('draft', filters.draft.toString());
+      }
+      if (filters.toDelete) {
+        httpParams = httpParams.set('toDelete', filters.toDelete.toString());
+      }
     }
+
     return this.httpClient.get<Note[]>(this.noteUrl, {
       params: httpParams,
     });
@@ -61,13 +74,17 @@ export class NoteService {
        }
 
     // Filter by toDelete
-    if (filters.toDelete) {
-      filters.toDelete = filters.toDelete;
-
-      filteredNotes = filteredNotes.filter(note => {
-       return note.toDelete.toString().indexOf(filters.toDelete.toString()) !== -1;
-     });
+    if (filters.toDelete === true) {
+      return notes.filter(note => {
+        return note.toDelete.valueOf() === true;
+      });
    }
+
+    if (filters.toDelete === false) {
+    return notes.filter(note => {
+      return note.toDelete.valueOf() === false;
+    });
+    }
 
     return filteredNotes;
   }

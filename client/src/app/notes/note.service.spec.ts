@@ -5,18 +5,14 @@ import { Note } from './note';
 import { NoteService } from './note.service';
 import { ɵɵresolveBody } from '@angular/core';
 
-/*let date: Date = new Date();
-console.log("Date= " + date);
 
-let date2: Date = new Date();
-console.log("Date= " + date2 + 1);*/
 
 describe('Note service: ', () => {
   // A small collection of test notes
   const testNotes: Note[] = [
     {
       _id: '4126554g28628d3hefr33de3d',
-      owner:'588935f57546a2daea44de7c',
+      owner: '588935f57546a2daea44de7c',
       body: 'ducks go quack',
       // addDate: date,
       // expirationDate: date2,
@@ -130,18 +126,6 @@ describe('Note service: ', () => {
     expect(noteService.filterNotes(testNotes, { body: noteBody }).length).toBe(2);
   });
 
-  /*it('filterNotes() filters by addDate', () => {
-    expect(testNotes.length).toBe(3);
-    const noteAddDate = date;
-    expect(noteService.filterNotes(testNotes, { addDate: noteAddDate }).length).toBe(3);
-  });
-
-  it('filterNotes() filters by expirationDate', () => {
-    expect(testNotes.length).toBe(3);
-    const noteExpirationDate = date2;
-    expect(noteService.filterNotes(testNotes, { expirationDate: noteExpirationDate }).length).toBe(2);
-  });*/
-
   it('filterNotes() filters by draft', () => {
     expect(testNotes.length).toBe(3);
     const noteDraft = true;
@@ -160,12 +144,6 @@ describe('Note service: ', () => {
     expect(noteService.filterNotes(testNotes, { reusable: noteReusable}).length).toBe(2);
   });
 
-  /*it('filterNotes() filters by body and expiration date', () => {
-    expect(testNotes.length).toBe(3);
-    const noteBody = 'wuz';
-    const noteExpirationDate = date2;
-    expect(noteService.filterNotes(testNotes, { body: noteBody, expirationDate: noteExpirationDate }).length).toBe(1);
-  }) ;*/
 
   it('addNote() calls api/notes/new', () => {
 
