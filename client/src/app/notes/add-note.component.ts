@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Note, reusable, draft, toDelete } from './note';
+import { Note } from './note';
+//import { Note, reusable, draft, toDelete } from './note';
 import { NoteService } from './note.service';
 
 @Component({
@@ -16,9 +17,9 @@ export class AddNoteComponent implements OnInit {
 
   note: Note;
 
-  public reusable: reusable;
-  public draft: draft;
-  public toDelete: toDelete;
+  //public reusable: reusable;
+  //public draft: draft;
+  //public toDelete: toDelete;
 
   constructor(private fb: FormBuilder, private noteService: NoteService, private snackBar: MatSnackBar, private router: Router) {
   }
