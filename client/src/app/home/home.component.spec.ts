@@ -21,6 +21,7 @@ describe('Home', () => {
     });
 
     fixture = TestBed.createComponent(HomeComponent);
+    fixture.detectChanges();
 
     component = fixture.componentInstance; // BannerComponent test instance
 

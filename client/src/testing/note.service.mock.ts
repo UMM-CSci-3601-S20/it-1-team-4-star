@@ -22,7 +22,7 @@ export class MockNoteService extends NoteService {
     },
     {
       _id: '1233211w32122v3etfd88c8d',
-      owner: '588935f55b432bb2ff322160',
+      owner: 'Juana',
       body: 'cookie wuz hear',
       draft: false,
       reusable: true,
