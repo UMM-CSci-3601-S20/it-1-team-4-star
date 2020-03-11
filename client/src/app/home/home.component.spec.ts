@@ -4,6 +4,7 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
 import { NoteService } from '../notes/note.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('Home', () => {
 
@@ -14,12 +15,13 @@ describe('Home', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatCardModule],
-      declarations: [HomeComponent], // declare the test component
-      providers: [ NoteService ]
+      imports: [ MatCardModule ],
+      declarations: [ HomeComponent ], // declare the test component
+      providers: [ NoteService, HttpClient ]
     });
 
     fixture = TestBed.createComponent(HomeComponent);
+    fixture.detectChanges();
 
     component = fixture.componentInstance; // BannerComponent test instance
 
@@ -29,7 +31,6 @@ describe('Home', () => {
   });
 
   it('It has the basic home page text', () => {
-    fixture.detectChanges();
     expect(el.textContent).toContain('Welcome to DoorBoard! Checkout the menu on the left to see the features.');
   });
 

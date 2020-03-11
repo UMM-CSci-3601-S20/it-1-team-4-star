@@ -68,7 +68,7 @@ describe('Note list', () => {
   });
 
   it('contains a note with owner \'Juan\'', () => {
-    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Juan')).toBe(true);
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.owner === 'Juan')).toBe(false);
   });
 
   it('contains a note with owner \'Juana\'', () => {

@@ -144,8 +144,8 @@ describe('Note service: ', () => {
 
   it('filterNotes() filters by draft', () => {
     expect(testNotes.length).toBe(3);
-    const noteDraft = false;
-    expect(noteService.filterNotes(testNotes, { draft: noteDraft }).length).toBe(2);
+    const noteDraft = true;
+    expect(noteService.filterNotes(testNotes, { draft: noteDraft }).length).toBe(1);
   });
 
   it('filterNotes() filters by toDelete', () => {
@@ -156,8 +156,8 @@ describe('Note service: ', () => {
 
   it('filterNotes() filters by reusable', () => {
     expect(testNotes.length).toBe(3);
-    const noteReusable = false;
-    expect(noteService.filterNotes(testNotes, { reusable: noteReusable}).length).toBe(1);
+    const noteReusable = true;
+    expect(noteService.filterNotes(testNotes, { reusable: noteReusable}).length).toBe(2);
   });
 
   /*it('filterNotes() filters by body and expiration date', () => {
