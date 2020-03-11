@@ -32,6 +32,7 @@ export class NoteCardComponent implements OnInit {
       this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
       });
+      window.location.reload();
       this.router.navigate(['/notes/:', this.note._id]);
     }, err => {
       this.snackBar.open('Failed to delete the note', null, {
@@ -39,18 +40,6 @@ export class NoteCardComponent implements OnInit {
       });
     });
 
-    // window.location.reload();
-      // this.noteService.deleteNote(this.note._id).subscribe(noteID => {
-      //   this.snackBar.open('Deleted Note ', null, {
-      //     duration: 2000,
-      //   });
-      //   this.router.navigate(['/notes/:', this.note._id]);
-      // }, err => {
-      //   this.snackBar.open('Failed to delete the note', null, {
-      //     duration: 2000,
-      //   });
-      // });
-      // window.location.reload();
-    }
 
+    }
   }
