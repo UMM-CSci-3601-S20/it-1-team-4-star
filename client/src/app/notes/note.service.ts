@@ -79,11 +79,33 @@ export class NoteService {
     return this.httpClient.post<{id: string}>(this.noteUrl + '/new', newNote).pipe(map(res => res.id));
   }
 
-  deleteNote(newNote: Note): Observable<string> {
-    // Send post request to add a new note with the note data as the body.
-    return this.httpClient.delete<{id: string}>(this.noteUrl).pipe(map(res => res.id));
+
+  // deleteNote(noteID): Observable<string> {
+  //   // Send delete request
+  //   return this.httpClient.delete<{noteID: }>(this.noteUrl + noteID).pipe(map(res => res.noteID));
+  // }
+
+
+  deleteNote(id: string): Observable<Note> {
+    return this.httpClient.delete<Note>(this.noteUrl + '/' + id);
   }
 
+  // editToDeleteField(id: string, value: boolean): Observable<string> {
+  //   this.httpClient.patch(this.noteUrl + '/' + id, {'toDelete': value});
+  //   this.httpClient.
+  // }
+
+  editToDeleteField(id: string, value: boolean): Observable<Note> {
+    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, {'toDelete': value});
+  }
+
+  // editReuseField(id: string, value: boolean): Observable<Note> {
+  //   return this.httpClient.patch(this.noteUrl + '/' + id, {'reuse': value});
+  // }
+
+  // editDraftField(id: string, value: boolean): Observable<Note> {
+  //   return this.httpClient.patch(this.noteUrl + '/' + id, {'draft': value});
+  // }
 
 
 }
