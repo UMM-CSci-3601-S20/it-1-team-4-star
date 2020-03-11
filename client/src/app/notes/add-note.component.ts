@@ -28,6 +28,11 @@ export class AddNoteComponent implements OnInit {
   // but this is where the red text that shows up (when there is invalid input) comes from
   add_note_validation_messages = {
 
+    owner: [
+      {type: 'required',message: 'Owner field is required'},
+      {type: 'minLength',message: 'Owner field must be at least two characters'},
+      {type: 'maxLength',message: 'Owner field must be less than 36 characters'}
+    ],
 
     body: [
       {type: 'required', message: 'Body message is required'},
