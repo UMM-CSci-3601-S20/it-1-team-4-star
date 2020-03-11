@@ -47,7 +47,6 @@ export class NoteService {
     // Filter by reusable
     if (filters.reusable) {
        filters.reusable = filters.reusable;
-
        filteredNotes = filteredNotes.filter(note => {
         return note.reusable.toString().indexOf(filters.reusable.toString()) !== -1;
       });
@@ -56,7 +55,6 @@ export class NoteService {
     // Filter by draft
     if (filters.draft) {
           filters.draft = filters.draft;
-
           filteredNotes = filteredNotes.filter(note => {
            return note.draft.toString().indexOf(filters.draft.toString()) !== -1;
          });
