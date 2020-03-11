@@ -28,6 +28,14 @@ export class AddNoteComponent implements OnInit {
   add_note_validation_messages = {
 
 
+    /*owner: [
+      {type: 'required', message: 'Owner name is required'},
+      {type: 'minlength', message: 'Owner name must be at least 2 characters long'},
+      {type: 'maxlength', message: 'Owner name cannot be more than 50 characters long'},
+      {type: 'pattern', message: 'Owner name must contain only numbers and letters'},
+      {type: 'existingName', message: 'Owner name has already been taken'}
+    ],*/
+
     body: [
       {type: 'required', message: 'Body message is required'},
       {type: 'minlength', message: 'Body message must be at least 2 characters long'},
@@ -55,7 +63,7 @@ export class AddNoteComponent implements OnInit {
     // add note form validations
     this.addNoteForm = this.fb.group({
       // We allow alphanumeric input and limit the length for owner.
-      /*
+
       owner: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2),
@@ -73,7 +81,7 @@ export class AddNoteComponent implements OnInit {
           }
         },
       ])),
-*/
+
       body: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2),

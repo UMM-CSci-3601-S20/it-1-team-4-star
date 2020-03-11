@@ -12,7 +12,7 @@ export class NoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getNotes(filters?: { owner?: string }): Observable<Note[]> {
+  getNotes(filters?: { owner?: string /*body?: string*/ }): Observable<Note[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.owner) {
