@@ -15,39 +15,42 @@ export class NoteCardComponent implements OnInit {
 
 
   deleteNoteForm: FormGroup;
-  note: Note;
+  noteForm: Note;
 
-  constructor(private fb: FormBuilder, private noteService: NoteService, private snackBar: MatSnackBar, private router: Router){
+  constructor(private fb: FormBuilder, private noteService: NoteService, private snackBar: MatSnackBar, private router: Router) {
   }
 
-  @Input() Note: Note;
+  @Input() note: Note;
   @Input() simple ? = false;
 
-
-  add_note_validation_messages = {
-  };
-
-  createForms() {
+  ngOnInit() {
   }
 
-  ngOnInit(): void {
-    this.createForms();
-  }
+   clickEvent() {
 
-
-  submitForm() {
-    this.noteService.deleteNote(this.deleteNoteForm.value).subscribe(newID => {
-      this.snackBar.open('Deleted Note ' + this.deleteNoteForm.value.name, null, {
+    this.noteService.editToDeleteField(this.note._id, true).subscribe(noteID => {
+      this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
       });
-      this.router.navigate(['/notes/', newID]);
+      this.router.navigate(['/notes/:', this.note._id]);
     }, err => {
       this.snackBar.open('Failed to delete the note', null, {
         duration: 2000,
       });
     });
+
+    // window.location.reload();
+      // this.noteService.deleteNote(this.note._id).subscribe(noteID => {
+      //   this.snackBar.open('Deleted Note ', null, {
+      //     duration: 2000,
+      //   });
+      //   this.router.navigate(['/notes/:', this.note._id]);
+      // }, err => {
+      //   this.snackBar.open('Failed to delete the note', null, {
+      //     duration: 2000,
+      //   });
+      // });
+      // window.location.reload();
+    }
+
   }
-
-
-
-}
