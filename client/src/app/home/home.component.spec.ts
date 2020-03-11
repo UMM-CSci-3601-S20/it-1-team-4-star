@@ -3,6 +3,8 @@ import {HomeComponent} from './home.component';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
+import { NoteService } from '../notes/note.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('Home', () => {
 
@@ -13,8 +15,9 @@ describe('Home', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatCardModule],
-      declarations: [HomeComponent], // declare the test component
+      imports: [ MatCardModule ],
+      declarations: [ HomeComponent ], // declare the test component
+      providers: [ NoteService, HttpClient, HttpHandler, HttpHandler ]
     });
 
     fixture = TestBed.createComponent(HomeComponent);
