@@ -1,8 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {HomeComponent} from './home.component';
-import {DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HomeComponent } from './home.component';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
+import { NoteService } from '../notes/note.service';
 
 describe('Home', () => {
 
@@ -15,6 +16,7 @@ describe('Home', () => {
     TestBed.configureTestingModule({
       imports: [MatCardModule],
       declarations: [HomeComponent], // declare the test component
+      providers: [ NoteService ]
     });
 
     fixture = TestBed.createComponent(HomeComponent);
@@ -28,7 +30,7 @@ describe('Home', () => {
 
   it('It has the basic home page text', () => {
     fixture.detectChanges();
-    expect(el.textContent).toContain('This is a home page! It doesn\'t do anything!');
+    expect(el.textContent).toContain('Welcome to DoorBoard! Checkout the menu on the left to see the features.');
   });
 
 });
