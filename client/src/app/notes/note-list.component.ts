@@ -15,9 +15,6 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
   public body: string;
-  public addDate: Date;
-  // public expirationDate: Date;
-  // public owner: string;
   public reusable: boolean;
   public draft: boolean;
   public toDelete: boolean;
@@ -52,6 +49,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
     this.filteredNotes = this.noteService.filterNotes(
       this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
   }
+
 
   /**
    * Starts an asynchronous operation to update the notes list
