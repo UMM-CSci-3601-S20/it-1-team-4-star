@@ -63,27 +63,27 @@ describe('Reusable Note', () => {
     });
   }));
 
-  //these test from the mock note service
+  // these test from the mock note service
 
-  it('contains all the notes', () => {
+  it('contains all the reusable notes', () => {
     expect(reusableNote.serverFilteredNotes.length).toBe(3);
   });
 
-  it('contains a note named \'Rachel Johnson\'', () => {
-    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.name === 'Rachel Johnson')).toBe(true);
+  it('contains a reusable note with owner \'Rachel Johnson\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.owner === 'Rachel Johnson')).toBe(true);
   });
 
-  it('contain a note named \'Nic McPhee\'', () => {
-    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.name === 'Nic McPhee')).toBe(true);
+  it('contain a reusable note with owner \'Nic McPhee\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.owner === 'Nic McPhee')).toBe(true);
   });
 
-  it('doesn\'t contain a note named \'John Cena\'', () => {
-    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.name === 'John Cena')).toBe(false);
+  it('doesn\'t contain a reusable note with owner \'John Cena\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.owner === 'John Cena')).toBe(false);
   });
 
-  it('has two notes that are in the same building', () => {
-    expect(reusableNote.serverFilteredNotes.filter((note: Note) => note.building === 'Science').length).toBe(2);
-  });
+  /* it('has two reusable notes that are in the same building', () => {
+    expect(reusableNote.serverFilteredNotes.filter((note: Note) => note.body === 'Science').length).toBe(2);
+  }); */
 });
 
 describe('Misbehaving Reusable Note', () => {
@@ -91,17 +91,17 @@ describe('Misbehaving Reusable Note', () => {
   let fixture: ComponentFixture<ReusableNoteComponent>;
 
   let noteServiceStub: {
-    getNotes: () => Observable<Note[]>;
-    getNotesFiltered: () => Observable<Note[]>;
+    getReusableNotes: () => Observable<Note[]>;
+    getReusableNotesFiltered: () => Observable<Note[]>;
   };
 
   beforeEach(() => {
     // stub NoteService for test purposes
     noteServiceStub = {
-      getNotes: () => new Observable(observer => {
+      getReusableNotes: () => new Observable(observer => {
         observer.error('Error-prone observable');
       }),
-      getNotesFiltered: () => new Observable(observer => {
+      getReusableNotesFiltered: () => new Observable(observer => {
         observer.error('Error-prone observable');
       })
     };
