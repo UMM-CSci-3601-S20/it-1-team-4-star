@@ -82,7 +82,6 @@ const MATERIAL_MODULES: any[] = [
     MATERIAL_MODULES,
     LayoutModule,
     ReactiveFormsModule,
-    FormBuilder,
   ],
   providers: [
     UserService,
