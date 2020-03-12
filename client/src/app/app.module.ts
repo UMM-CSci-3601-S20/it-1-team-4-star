@@ -72,7 +72,7 @@ const MATERIAL_MODULES: any[] = [
     NoteListComponent,
     NoteCardComponent,
     AddNoteComponent,
-    ReusableNoteComponent
+    ReusableNoteComponent,
     DeletedNoteComponent,
   ],
   imports: [
