@@ -13,6 +13,8 @@
   <mat-card-actions>
     <button mat-button *ngIf="!this.note.toDelete" (click)="clickEvent()" >DELETE </button>
   </mat-card-actions>
-
+  <mat-card-actions>
+    <button mat-button *ngIf="this.note.toDelete" (click)="clickEvent2()" > RESTORE </button>
+  </mat-card-actions>
 </mat-card>
 

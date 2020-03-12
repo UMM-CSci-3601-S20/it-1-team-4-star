@@ -29,7 +29,6 @@ export class NoteCardComponent implements OnInit {
   }
 
    clickEvent() {
-
     this.noteService.editToDeleteField(this.note._id, true).subscribe(noteID => {
       this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
@@ -43,5 +42,19 @@ export class NoteCardComponent implements OnInit {
     });
 
 
+    }
+
+    clickEvent2() {
+      this.noteService.editToDeleteField(this.note._id, false).subscribe(noteID => {
+        this.snackBar.open('Restored Note ', null, {
+          duration: 2000,
+        });
+        //this.deleteEvent.emit(null);
+        location.reload();
+      }, err => {
+        this.snackBar.open('Failed to restore note', null, {
+          duration: 2000,
+        });
+      });
     }
   }
