@@ -67,7 +67,7 @@ export class AddNoteComponent implements OnInit {
         Validators.pattern('^(true|false)$'),
       ])),
 
-      toDelete: new FormControl('', Validators.compose([
+      toDelete: new FormControl('false', Validators.compose([
         Validators.required,
         Validators.pattern('^(true|false)$'),
       ]))
