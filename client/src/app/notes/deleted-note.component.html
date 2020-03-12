@@ -14,7 +14,7 @@
     <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
       <!-- Card grid view -->
       <div fxLayout="row wrap" fxLayoutGap="10px" class="deleted-note-cards-container">
-        <app-note-card *ngFor="let note of filteredNotes" class="deleted-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
+        <app-note-card *ngFor= "let note of filteredNotes" class="deleted-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
       </div>
   </div>
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
