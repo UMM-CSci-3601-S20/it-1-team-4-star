@@ -38,6 +38,7 @@ import { AddNoteComponent } from './notes/add-note.component';
 import { NoteListComponent } from './notes/note-list.component';
 import { NoteService } from './notes/note.service';
 import { NoteCardComponent } from './notes/note-card.component';
+import { DeletedNoteComponent } from './notes/deleted-note.component';
 
 
 const MATERIAL_MODULES: any[] = [
@@ -70,6 +71,7 @@ const MATERIAL_MODULES: any[] = [
     NoteListComponent,
     NoteCardComponent,
     AddNoteComponent,
+    DeletedNoteComponent,
   ],
   imports: [
     BrowserModule,

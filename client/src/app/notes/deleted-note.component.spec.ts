@@ -66,24 +66,25 @@ describe('Deleted note', () => {
   // these test from the mock note service
 
   it('contains all the deleted notes', () => {
-    expect(deletedNote.serverFilteredNotes.length).toBe(3);
+    expect(deletedNote.serverFilteredNotes.length).toBe(0);
   });
 
-  it('contains a deleted note owner with the name \'Rachel Johnson\'', () => {
-    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owner === 'Rachel Johnson')).toBe(true);
+  it('contains a deleted note with the text \'ducks go quack\'', () => {
+    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.body === 'ducks go quack')).toBe(true);
   });
 
-  it('contains a deleted note owner with the name \'Nic McPhee\'', () => {
-    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owner === 'Nic McPhee')).toBe(true);
+  it('contain a deleted note with field toDelete \'true\'', () => {
+    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.toDelete === true)).toBe(true);
   });
 
-  it('doesn\'t contain a deleted note named \'John Cena\'', () => {
-    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owner === 'John Cena')).toBe(false);
+  it('contain a deleted note with field reuse \'false\'', () => {
+    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.reuse === false)).toBe(true);
   });
 
-  /* it('has two notes that are in the same building', () => {
-    expect(deletedNote.serverFilteredNotes.filter((note: Note) => note.body === 'Science').length).toBe(2);
-  }); */
+  it('contain a deleted note with field draft \'true\'', () => {
+    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.draft === true)).toBe(true);
+  });
+
 });
 
 describe('Misbehaving Deleted Note', () => {

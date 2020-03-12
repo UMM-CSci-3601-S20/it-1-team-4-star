@@ -2,7 +2,7 @@
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
     <mat-card class="search-card">
       <mat-card-header>
-        <mat-card-title class="deleted-note-title">Deleted Notes - This is displaying all deleted notes.</mat-card-title>
+        <mat-card-title class="deleted-note-list-title">Deleted Notes - This is displaying all deleted notes.</mat-card-title>
       </mat-card-header>
       <mat-card-content fxLayout="column" >
       </mat-card-content>
@@ -15,7 +15,7 @@
     <div [ngSwitch]="viewType">
       <!-- Card grid view -->
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="deleted-note-cards-container">
-        <app-deleted-note-card simple="true" *ngFor="let note of filteredNotes" class="deleted-note-card" [note]="note" fxFlex="1 1 280px"></app-deleted-note-card>
+        <app-note-card simple="true" *ngFor="let note of filteredNotes" class="deleted-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
   <ng-template #notesError>
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="deleted-note-error">
       <mat-error>
-        There was a problem loading the notes. Possibly the server is down or perhaps there are network
+        There was a problem loading the deleted notes. Possibly the server is down or perhaps there are network
         issues.
       </mat-error>
       <mat-error>
@@ -32,6 +32,6 @@
     </div>
   </ng-template>
 </div>
-<button mat-fab class="empty-notes-bin-fab" matTooltip="Empty Notes Bin" matTooltipPosition="left" routerLink="/notes/new">
-    <mat-icon class="md-24" aria-label="Empty Notes Bin">empty</mat-icon>
+<button mat-fab class="add-deleted-note-fab" matTooltip="Delete Note Permanently" matTooltipPosition="left" routerLink="/notes/toDelete">
+    <mat-icon class="md-24" aria-label="Add Note">delete</mat-icon>
 </button>
