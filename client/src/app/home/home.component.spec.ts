@@ -31,7 +31,7 @@ describe('Home', () => {
   });
 
   it('It has the basic home page text', () => {
-    expect(el.textContent).toContain('Welcome to DoorBoard! Checkout the menu on the left to see the features.');
+    expect(el.textContent).toContain('Welcome to DoorBoard! Your office door, made simple. Checkout the menu on the left to see the features.');
   });
 
 });
