@@ -9,13 +9,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./reusable-note.component.scss'],
   providers: []
 })
+
 export class ReusableNoteComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
-  owner: string;
   public body: string;
-  public reusable: boolean;
+  public reuse: boolean;
   public draft: boolean;
   public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
@@ -32,8 +32,8 @@ export class ReusableNoteComponent implements OnInit, OnDestroy  {
 
   getReusableNotesFromServer(): void {
     this.unsub();
-    this.getReusableNotesSub = this.noteService.getReusableNotes({
-      owner: this.owner
+    this.getReusableNotesSub = this.noteService.getNotes({
+      body: this.body
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
       this.updateFilter();
@@ -44,7 +44,7 @@ export class ReusableNoteComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete });
   }
 
   /**

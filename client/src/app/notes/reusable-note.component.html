@@ -16,7 +16,7 @@
     <div [ngSwitch]="viewType">
       <!-- Card grid view -->
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="reusable-note-cards-container">
-        <app-reusable-note-card simple="true" *ngFor="let note of filteredNotes" class="reusable-note-card" [note]="note" fxFlex="1 1 280px"></app-reusable-note-card>
+        <app-note-card simple= "true" *ngFor= "let note of filteredNotes" class="reusable-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
       </div>
     </div>
   </div>
@@ -34,6 +34,6 @@
     </div>
   </ng-template>
 </div>
-<button mat-fab class="add-reusable-note-fab" matTooltip="Add Reusable Note" matTooltipPosition="left" routerLink="/notes/new">
+<button mat-fab class="add-reusable-note-fab" matTooltip="Add Reusable Note" matTooltipPosition="left" routerLink="/notes/reuse">
     <mat-icon class="md-24" aria-label="Add Reusable Note">add</mat-icon>
 </button>

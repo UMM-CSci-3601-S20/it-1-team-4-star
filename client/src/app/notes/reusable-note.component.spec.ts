@@ -65,20 +65,24 @@ describe('Reusable Note', () => {
 
   // these test from the mock note service
 
-  it('contains all the reusable notes', () => {
+  /* it('contains all the reusable notes', () => {
     expect(reusableNote.serverFilteredNotes.length).toBe(3);
+  }); */
+
+  it('contains a note with the text \'ducks go quack\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.body === 'ducks go quack')).toBe(true);
   });
 
-  it('contains a reusable note with owner \'Rachel Johnson\'', () => {
-    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.owner === 'Rachel Johnson')).toBe(true);
+  it('contain a note with field toDelete \'true\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.toDelete === true)).toBe(true);
   });
 
-  it('contain a reusable note with owner \'Nic McPhee\'', () => {
-    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.owner === 'Nic McPhee')).toBe(true);
+  it('contain a note with field reuse \'false\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.reuse === false)).toBe(true);
   });
 
-  it('doesn\'t contain a reusable note with owner \'John Cena\'', () => {
-    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.owner === 'John Cena')).toBe(false);
+  it('contain a note with field draft \'true\'', () => {
+    expect(reusableNote.serverFilteredNotes.some((note: Note) => note.draft === true)).toBe(true);
   });
 
   /* it('has two reusable notes that are in the same building', () => {
@@ -91,17 +95,17 @@ describe('Misbehaving Reusable Note', () => {
   let fixture: ComponentFixture<ReusableNoteComponent>;
 
   let noteServiceStub: {
-    getReusableNotes: () => Observable<Note[]>;
-    getReusableNotesFiltered: () => Observable<Note[]>;
+    getNotes: () => Observable<Note[]>;
+    getNotesFiltered: () => Observable<Note[]>;
   };
 
   beforeEach(() => {
     // stub NoteService for test purposes
     noteServiceStub = {
-      getReusableNotes: () => new Observable(observer => {
+      getNotes: () => new Observable(observer => {
         observer.error('Error-prone observable');
       }),
-      getReusableNotesFiltered: () => new Observable(observer => {
+      getNotesFiltered: () => new Observable(observer => {
         observer.error('Error-prone observable');
       })
     };

@@ -25,6 +25,12 @@
         Notes
       </mat-list-item>
 
+      <mat-list-item routerLink="/notes/reuse" routerLinkActive="drawer-list-item-active"
+      (click)="drawer.close()">
+        <mat-icon matListIcon>loop</mat-icon>
+        Reuse
+      </mat-list-item>
+
     </mat-nav-list>
   </mat-sidenav>
 
