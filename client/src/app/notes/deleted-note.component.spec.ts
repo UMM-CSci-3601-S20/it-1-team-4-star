@@ -65,19 +65,19 @@ describe('Deleted note', () => {
 
   // these test from the mock note service
 
-  it('contains all the notes', () => {
+  it('contains all the deleted notes', () => {
     expect(deletedNote.serverFilteredNotes.length).toBe(3);
   });
 
-  it('contains a note owner with the name \'Rachel Johnson\'', () => {
+  it('contains a deleted note owner with the name \'Rachel Johnson\'', () => {
     expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owner === 'Rachel Johnson')).toBe(true);
   });
 
-  it('ontains a note owner with the name \'Nic McPhee\'', () => {
-    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owenr === 'Nic McPhee')).toBe(true);
+  it('contains a deleted note owner with the name \'Nic McPhee\'', () => {
+    expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owner === 'Nic McPhee')).toBe(true);
   });
 
-  it('doesn\'t contain a note named \'John Cena\'', () => {
+  it('doesn\'t contain a deleted note named \'John Cena\'', () => {
     expect(deletedNote.serverFilteredNotes.some((note: Note) => note.owner === 'John Cena')).toBe(false);
   });
 
@@ -91,17 +91,17 @@ describe('Misbehaving Deleted Note', () => {
   let fixture: ComponentFixture<DeletedNoteComponent>;
 
   let noteServiceStub: {
-    getNotes: () => Observable<Note[]>;
-    getNotesFiltered: () => Observable<Note[]>;
+    getDeletedNotes: () => Observable<Note[]>;
+    getDeletedNotesFiltered: () => Observable<Note[]>;
   };
 
   beforeEach(() => {
     // stub NoteService for test purposes
     noteServiceStub = {
-      getNotes: () => new Observable(observer => {
+      getDeletedNotes: () => new Observable(observer => {
         observer.error('Error-prone observable');
       }),
-      getNotesFiltered: () => new Observable(observer => {
+      getDeletedNotesFiltered: () => new Observable(observer => {
         observer.error('Error-prone observable');
       })
     };

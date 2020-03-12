@@ -12,19 +12,15 @@ import { Subscription } from 'rxjs';
 
 export class DeletedNoteComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
-
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
-
-  public owner: string;
+  owner: string;
   public body: string;
   public reusable: boolean;
   public draft: boolean;
   public toDelete: boolean;
-
   public viewType: 'card' | 'list' = 'card';
   getDeletedNotesSub: Subscription;
-
 
 
   // Inject the NoteService into this component.
@@ -32,16 +28,13 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
   //
   // We can call upon the service for interacting
   // with the server.
-
   constructor(private noteService: NoteService) {
 
   }
-
   getDeletedNotesFromServer(): void {
     this.unsub();
     this.getDeletedNotesSub = this.noteService.getDeletedNotes({
-      owner: this.owner,
-      body: this.body
+      owner: this.owner
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
       this.updateFilter();
@@ -52,8 +45,7 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, { owner: this.owner, body: this.body, reusable: this.reusable, draft: this.draft,
-        toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
   }
 
   /**
@@ -63,7 +55,6 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
     this.getDeletedNotesFromServer();
   }
-
 
   ngOnDestroy(): void {
     this.unsub();
