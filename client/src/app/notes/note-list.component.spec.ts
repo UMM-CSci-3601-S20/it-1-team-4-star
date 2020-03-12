@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Note } from './note';
+
 import { NoteCardComponent } from './note-card.component';
 import { NoteListComponent } from './note-list.component';
 import { NoteService } from './note.service';
@@ -68,10 +69,28 @@ describe('Note list', () => {
     });
   }));
 
+  //these test from the mock note service
+
   it('contains all the notes', () => {
     console.log('Contains all the notes: \n');
     console.log(noteList.serverFilteredNotes.length);
     expect(noteList.serverFilteredNotes.length).toBe(3);
+  });
+
+  it('contains a note with \'ducks go quack\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.body === 'ducks go quack')).toBe(true);
+  });
+
+  it('contain a note with field toDelete \'true\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.toDelete === true)).toBe(true);
+  });
+
+  it('contain a note with field reuse \'false\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.reuse === false)).toBe(true);
+  });
+
+  it('contain a note with field draft \'true\'', () => {
+    expect(noteList.serverFilteredNotes.some((note: Note) => note.draft === true)).toBe(true);
   });
 
 });

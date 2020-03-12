@@ -12,18 +12,7 @@
 </div>
 
 <div fxLayout="row">
-  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else notesError" >
-    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
-    <div [ngSwitch]="viewType">
 
-      <!-- Card grid view -->
-      <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="note-cards-container">
-        <app-note-card simple="true" *ngFor="let note of filteredNotes" class="note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
-      </div>
-
-
-    </div>
-  </div>
 
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #notesError>

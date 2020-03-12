@@ -18,7 +18,6 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public reuse: boolean;
   public draft: boolean;
   public toDelete: boolean;
-  public viewType: 'card' | 'list' = 'card';
   getNotesSub: Subscription;
 
 
@@ -51,7 +50,6 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
       this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete === false});
-      //this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete });
   }
 
 
