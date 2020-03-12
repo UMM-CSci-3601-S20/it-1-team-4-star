@@ -12,17 +12,14 @@ export class NoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getNotes(filters?: { owner?: string, body?: string, reusable?: boolean, draft?: boolean, toDelete?: boolean}): Observable<Note[]> {
+  getNotes(filters?: {body?: string, reuse?: boolean, draft?: boolean, toDelete?: boolean}): Observable<Note[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.owner) {
-        httpParams = httpParams.set('owner', filters.owner);
-      }
       if (filters.body) {
         httpParams = httpParams.set('body', filters.body);
       }
-      if (filters.reusable) {
-        httpParams = httpParams.set('reuseable', filters.reusable.toString());
+      if (filters.reuse) {
+        httpParams = httpParams.set('reuseable', filters.reuse.toString());
       }
       if (filters.draft) {
         httpParams = httpParams.set('draft', filters.draft.toString());
@@ -42,7 +39,7 @@ export class NoteService {
   }
 
   filterNotes(notes: Note[], filters: { body?: string
-    reusable?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
+    reuse?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
     // taking this out of filter notes
     // addDate?: Date, expirationDate?: Date
     let filteredNotes = notes;
@@ -57,11 +54,11 @@ export class NoteService {
     }
 
 
-    // Filter by reusable
-    if (filters.reusable) {
-       filters.reusable = filters.reusable;
+    // Filter by reuse
+    if (filters.reuse) {
+       filters.reuse = filters.reuse;
        filteredNotes = filteredNotes.filter(note => {
-        return note.reusable.toString().indexOf(filters.reusable.toString()) !== -1;
+        return note.reuse.toString().indexOf(filters.reuse.toString()) !== -1;
       });
     }
 

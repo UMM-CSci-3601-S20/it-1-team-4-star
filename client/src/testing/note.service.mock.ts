@@ -14,26 +14,23 @@ export class MockNoteService extends NoteService {
   static testNotes: Note[] = [
     {
       _id: '4126554g28628d3hefr33de3d',
-      owner: '588935f57546a2daea44de7c',
       body: 'ducks go quack',
       draft: true,
-      reusable: false,
+      reuse: false,
       toDelete: true
     },
     {
       _id: '1233211w32122v3etfd88c8d',
-      owner: 'Juana',
       body: 'cookie wuz hear',
       draft: false,
-      reusable: true,
+      reuse: true,
       toDelete: false
     },
     {
       _id: '4444444a55555s6dddd77f8g',
-      owner: '588935f5556f992bf8f37c01',
       body: 'cookie wuz hear prabubly',
       draft: false,
-      reusable: true,
+      reuse: true,
       toDelete: false
     }
   ];
@@ -42,7 +39,7 @@ export class MockNoteService extends NoteService {
     super(null);
   }
 
-  getNotes(filters: { owner?: string, body?: string, reusable?: boolean, draft?: boolean, toDelete?: boolean }): Observable<Note[]> {
+  getNotes(filters: {body?: string, reuse?: boolean, draft?: boolean, toDelete?: boolean }): Observable<Note[]> {
     // Just return the test notes regardless of what filters are passed in
     return of(MockNoteService.testNotes);
   }

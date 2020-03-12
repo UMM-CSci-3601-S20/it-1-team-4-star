@@ -25,10 +25,9 @@ describe('NoteCardComponent', () => {
     component = fixture.componentInstance;
     component.note = {
       _id: 'rachel_id',
-      owner: 'Rachel Johnson',
       body: 'this is a sample note',
       draft: true,
-      reusable: true,
+      reuse: true,
       toDelete: false
     };
     fixture.detectChanges();

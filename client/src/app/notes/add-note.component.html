@@ -9,18 +9,6 @@ is potentially helpful and contributed to the shaping of this example -->
           <mat-card-title class="add-note-title">New Note</mat-card-title>
         </mat-card-header>
         <mat-card-content fxLayout="column">
-          <!--
-          <mat-form-field>
-            <mat-label>Owner</mat-label>
-            <input matInput id="ownerField" placeholder="Owner" formControlName="owner"
-                  required>
-            <mat-error *ngFor="let validation of add_note_validation_messages.owner">
-              <mat-error class="error-message" id="owner-error"
-                        *ngIf="addNoteForm.get('owner').hasError(validation.type) && (addNoteForm.get('owner').dirty || addNoteForm.get('owner').touched)">
-                {{validation.message}}
-              </mat-error>
-            </mat-error>
-          </mat-form-field> -->
 
           <mat-form-field>
             <mat-label>Body</mat-label>
@@ -34,34 +22,40 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="input-field">
-            <mat-label>Reusable</mat-label>
-            <mat-select formControlName="reusable" id="note-reusable-select">
-              <mat-option value>--</mat-option>
-              <mat-option value="false">False</mat-option>
-              <mat-option value="true">True</mat-option>
+          <mat-form-field>
+            <mat-label>Reuse</mat-label>
+            <mat-select id="reuseField" required formControlName="reuse">
+              <mat-option value=true>Reuse</mat-option>
+              <mat-option value=false>Single Use</mat-option>
             </mat-select>
-
+            <mat-error *ngIf="addNoteForm.get('reuse').hasError('required')">You must make a selection</mat-error>
+            <mat-error *ngIf="addNoteForm.get('reuse').hasError('pattern') && !addNoteForm.get('reuse').hasError('required')">
+              Your selection is must be reuse or one-time
+            </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="input-field">
+          <mat-form-field>
             <mat-label>Draft</mat-label>
-            <mat-select formControlName="draft" id="note-draft-select">
-              <mat-option value>--</mat-option>
-              <mat-option value="false">False</mat-option>
-              <mat-option value="true">True</mat-option>
+            <mat-select id="draftField" required formControlName="draft">
+              <mat-option value=true>Draft</mat-option>
+              <mat-option value=false>Post</mat-option>
             </mat-select>
-
+            <mat-error *ngIf="addNoteForm.get('draft').hasError('required')">You must make a selection</mat-error>
+            <mat-error *ngIf="addNoteForm.get('draft').hasError('pattern') && !addNoteForm.get('draft').hasError('required')">
+              Your selection is must be draft or post
+            </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="input-field">
-            <mat-label>To Delete</mat-label>
-            <mat-select formControlName="toDelete" id="note-toDelete-select">
-              <mat-option value>--</mat-option>
-              <mat-option value="false">False</mat-option>
-              <mat-option value="true">True</mat-option>
+          <mat-form-field>
+            <mat-label>Trash</mat-label>
+            <mat-select id="toDeleteField" required formControlName="toDelete">
+              <mat-option value=true>True</mat-option>
+              <mat-option value=false>False</mat-option>
             </mat-select>
-
+            <mat-error *ngIf="addNoteForm.get('toDelete').hasError('required')">You must make a selection</mat-error>
+            <mat-error *ngIf="addNoteForm.get('toDelete').hasError('pattern') && !addNoteForm.get('toDelete').hasError('required')">
+              Your selection is must be true or false
+            </mat-error>
           </mat-form-field>
 
 

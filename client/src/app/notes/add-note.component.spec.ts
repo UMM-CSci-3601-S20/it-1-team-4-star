@@ -64,55 +64,7 @@ describe('AddNoteComponent', () => {
   it('form should be invalid when empty', () => {
     expect(addNoteForm.valid).toBeFalsy();
   });
-/*
-  describe('The owner field', () => {
-    let ownerControl: AbstractControl;
 
-    beforeEach(() => {
-      ownerControl = addNoteComponent.addNoteForm.controls[`owner`];
-    });
-
-    it('should not allow empty owners', () => {
-      ownerControl.setValue('');
-      expect(ownerControl.valid).toBeFalsy();
-    });
-
-    it('should be fine with "Chris Smith"', () => {
-      ownerControl.setValue('Chris Smith');
-      expect(ownerControl.valid).toBeTruthy();
-    });
-
-    it('should fail on single character owners', () => {
-      ownerControl.setValue('x');
-      expect(ownerControl.valid).toBeFalsy();
-      // Annoyingly, Angular uses lowercase 'l' here
-      // when it's an upper case 'L' in `Validators.minLength(2)`.
-      expect(ownerControl.hasError('minlength')).toBeTruthy();
-    });
-
-    // In the real world, you'd want to be pretty careful about
-    // setting upper limits on things like owner lengths just
-    // because there are people with really long owner names.
-    it('should fail on really long owner names', () => {
-      ownerControl.setValue('x'.repeat(100));
-      expect(ownerControl.valid).toBeFalsy();
-      // Annoyingly, Angular uses lowercase 'l' here
-      // when it's an upper case 'L' in `Validators.maxLength(2)`.
-      expect(ownerControl.hasError('maxlength')).toBeTruthy();
-    });
-
-    it('should not allow an owner to contain a symbol', () => {
-      ownerControl.setValue('bad@email.com');
-      expect(ownerControl.valid).toBeFalsy();
-      expect(ownerControl.hasError('pattern')).toBeTruthy();
-    });
-
-    it('should allow digits in the owner', () => {
-      ownerControl.setValue('Bad2Th3B0ne');
-      expect(ownerControl.valid).toBeTruthy();
-    });
-  });
-*/
   describe('The body field', () => {
     let bodyControl: AbstractControl;
 

@@ -17,9 +17,7 @@ export class HomeComponent {
   public filteredNotes: Note[];
   public body: string;
   public addDate: Date;
-  // public expirationDate: Date;
-  // public owner: string;
-  public reusable: boolean;
+  public reuse: boolean;
   public draft: boolean;
   public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
@@ -31,18 +29,7 @@ export class HomeComponent {
   }
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete });
   }
 
-  // getNotesFromServer(): void {
-  //   this.unsub();
-  //   this.getNotesSub = this.noteService.getNotes({
-  //     owner: this.owner
-  //   }).subscribe(returnedNotes => {
-  //     this.serverFilteredNotes = returnedNotes;
-  //     this.updateFilter();
-  //   }, err => {
-  //     console.log(err);
-  //   });
-  // }
 }

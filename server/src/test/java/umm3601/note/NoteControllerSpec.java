@@ -85,21 +85,18 @@ public class NoteControllerSpec {
     noteDocuments.drop();
     List<Document> testNotes = new ArrayList<>();
     testNotes.add(Document.parse("{\n" +
-    "                    owner: \"mongoID_a\",\n" +
     "                    body: \"Body A\",\n" +
     "                    reuse: true,\n" +
     "                    draft: false,\n" +
     "                    toDelete: false,\n" +
     "                }"));
     testNotes.add(Document.parse("{\n" +
-    "                    owner: \"mongoID_b\",\n" +
     "                    body: \"Body B\",\n" +
     "                    reuse: false,\n" +
     "                    draft: true,\n" +
     "                    toDelete: true,\n" +
     "                }"));
     testNotes.add(Document.parse("{\n" +
-    "                    owner: \"mongoID_c\",\n" +
     "                    body: \"Body C\",\n" +
     "                    reuse: false,\n" +
     "                    draft: false,\n" +
@@ -108,8 +105,7 @@ public class NoteControllerSpec {
 
     ownerId = new ObjectId();
     BasicDBObject sam = new BasicDBObject("_id", ownerId);
-    sam = sam.append("owner", "Sam")
-      .append("owner", "588935f5556f992bf8f37c01")
+    sam = sam.append("body", "Sam")
       .append("body", "This is an example body")
       .append("reuse", true)
       .append("draft", false)
@@ -142,18 +138,6 @@ public class NoteControllerSpec {
     assertEquals(db.getCollection("notes").countDocuments(), JavalinJson.fromJson(result, Note[].class).length);
   }
 
-  /**
-  * Test for existing owner
-  */
-  @Test
-  public void GetNotesByOwner() throws IOException {  mockReq.setQueryString("owner=mongoID_a");
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes");
-    noteController.getNotes(ctx);    assertEquals(200, mockRes.getStatus());
-    String result = ctx.resultString();
-    for (Note note : JavalinJson.fromJson(result, Note[].class)) {
-      assertEquals("mongoID_a", note.owner);
-    }
-  }
 
 
 
@@ -244,29 +228,11 @@ public class NoteControllerSpec {
   }
 
 
-  @Test
-  public void GetNotesByOwnerAndBody() throws IOException {
-
-    mockReq.setQueryString("owner=mongoID_c&body=Body C");
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes");
-    noteController.getNotes(ctx);
-
-    assertEquals(200, mockRes.getStatus());
-    String result = ctx.resultString();
-    Note[] resultNotes = JavalinJson.fromJson(result, Note[].class);
-
-    for (Note note : resultNotes) {
-       assertEquals("mongoID_c", note.owner);
-       assertEquals("Body C", note.body);
-     }
-  }
-
 
   @Test
   public void AddNote() throws IOException {
 
     String testNewNote = "{ "
-      + "\"owner\": \"mongoID_c\", "
       + "\"body\": \"Body C\", "
       + "\"reuse\": false, "
       + "\"draft\": false, "
@@ -291,7 +257,6 @@ public class NoteControllerSpec {
     //verify note was added to the database and the correct ID
     Document addedNote = db.getCollection("notes").find(eq("_id", new ObjectId(id))).first();
     assertNotNull(addedNote);
-    assertEquals("mongoID_c", addedNote.getString("owner"));
     assertEquals("Body C", addedNote.getString("body"));
     assertEquals(false, addedNote.getBoolean("reuse"));
     assertEquals(false, addedNote.getBoolean("draft"));
@@ -301,21 +266,8 @@ public class NoteControllerSpec {
 
 
   @Test
-  public void AddInvalidOwner() throws IOException {
-    String testNewNote = "{\n\t\"owner\": \"Test OwnerA@123#$487120881*** asdfj;sj lsjaf lsdjf asfd\",\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
-    mockReq.setBodyContent(testNewNote);
-    mockReq.setMethod("POST");
-    Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes/new");
-
-    assertThrows(BadRequestResponse.class, () -> {
-      noteController.addNewNote(ctx);
-    });
-  }
-
-
-  @Test
   public void AddInvalidReuse() throws IOException {
-    String testNewNote = "{\n\t\"owner\": \"Test Owner\",\n\t\"body\": \"test body\",\n\t\"reuse\":\"invalidBoolean\",\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
+    String testNewNote = "{\n\t\"body\": \"test body\",\n\t\"reuse\":\"invalidBoolean\",\n\t\"draft\":true,\n\t\"toDelete\":false\n}";
     mockReq.setBodyContent(testNewNote);
     mockReq.setMethod("POST");
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes/new");
@@ -327,7 +279,7 @@ public class NoteControllerSpec {
 
   @Test
   public void AddInvalidDraft() throws IOException {
-    String testNewNote = "{\n\t\"owner\": \"Test Owner\",\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":\"invalidBoolean\",\n\t\"toDelete\":false\n}";
+    String testNewNote = "{\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":\"invalidBoolean\",\n\t\"toDelete\":false\n}";
     mockReq.setBodyContent(testNewNote);
     mockReq.setMethod("POST");
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes/new");
@@ -339,7 +291,7 @@ public class NoteControllerSpec {
 
   @Test
   public void AddInvalidToDelete() throws IOException {
-    String testNewNote = "{\n\t\"owner\": \"Test Owner\",\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":\"invalidBoolean\"\n}";
+    String testNewNote = "{\n\t\"body\": \"test body\",\n\t\"reuse\":true,\n\t\"draft\":true,\n\t\"toDelete\":\"invalidBoolean\"\n}";
     mockReq.setBodyContent(testNewNote);
     mockReq.setMethod("POST");
     Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes/new");

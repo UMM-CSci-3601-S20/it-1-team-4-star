@@ -1,8 +1,7 @@
 export interface Note {
   _id: string;
-  owner: string;
   body: string;
-  reusable: boolean;
+  reuse: boolean;
   draft: boolean;
   toDelete: boolean;
 }

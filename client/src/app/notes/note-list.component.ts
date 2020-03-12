@@ -14,9 +14,8 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
-  public owner: string;
   public body: string;
-  public reusable: boolean;
+  public reuse: boolean;
   public draft: boolean;
   public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
@@ -37,9 +36,8 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   getNotesFromServer(): void {
     this.unsub();
     this.getNotesSub = this.noteService.getNotes({
-      owner: this.owner,
       body: this.body,
-      reusable: this.reusable,
+      reuse: this.reuse,
       draft: this.draft,
       toDelete: this.toDelete
     }).subscribe(returnedNotes => {
@@ -52,8 +50,8 @@ export class NoteListComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete === false});
-      //this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete === false});
+      //this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete });
   }
 
 

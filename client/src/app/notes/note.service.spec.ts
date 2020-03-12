@@ -12,32 +12,29 @@ describe('Note service: ', () => {
   const testNotes: Note[] = [
     {
       _id: '4126554g28628d3hefr33de3d',
-      owner: '588935f57546a2daea44de7c',
       body: 'ducks go quack',
       // addDate: date,
       // expirationDate: date2,
       draft: true,
-      reusable: false,
+      reuse: false,
       toDelete: true
     },
     {
       _id: '1233211w32122v3etfd88c8d',
-      owner: '588935f55b432bb2ff322160',
       body: 'cookie wuz hear',
       // addDate: date,
       // expirationDate: date2,
       draft: false,
-      reusable: true,
+      reuse: true,
       toDelete: false
     },
     {
       _id: '4444444a55555s6dddd77f8g',
-      owner: '588935f5556f992bf8f37c01',
       body: 'cookie wuz hear prabubly',
       // addDate: date,
       // expirationDate: date2,
       draft: false,
-      reusable: true,
+      reuse: true,
       toDelete: false
     }
   ];
@@ -86,26 +83,6 @@ describe('Note service: ', () => {
     req.flush(testNotes);
   });
 
-  it('getNotes() calls api/notes with filter parameter \'owner\'', () => {
-
-    noteService.getNotes({ owner: '588935f57546a2daea44de7c' }).subscribe(
-      notes => expect(notes).toBe(testNotes)
-    );
-
-    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
-    const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(noteService.noteUrl) && request.params.has('owner')
-    );
-
-    // Check that the request made to that URL was a GET request.
-    expect(req.request.method).toEqual('GET');
-
-    // Check that the role parameter was '588935f57546a2daea44de7c'
-    expect(req.request.params.get('owner')).toEqual('588935f57546a2daea44de7c');
-
-    req.flush(testNotes);
-  });
-
 
   it('getNoteById() calls api/notes/id', () => {
     const targetNote: Note = testNotes[1];
@@ -138,10 +115,10 @@ describe('Note service: ', () => {
     expect(noteService.filterNotes(testNotes, { toDelete: noteToDelete }).length).toBe(1);
   });
 
-  it('filterNotes() filters by reusable', () => {
+  it('filterNotes() filters by reuse', () => {
     expect(testNotes.length).toBe(3);
-    const noteReusable = true;
-    expect(noteService.filterNotes(testNotes, { reusable: noteReusable}).length).toBe(2);
+    const noteReuse = true;
+    expect(noteService.filterNotes(testNotes, { reuse: noteReuse}).length).toBe(2);
   });
 
 

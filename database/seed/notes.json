@@ -3,7 +3,6 @@
     "_id": {
        "$oid": "584f3a600343927e48e87212"
     },
-    "owner": "588935f57546a2daea44de7c",
     "body": "I am running late for office hours today. I expect to be on campus in 15 minutes.",
     "reuse": false,
     "draft": false,
@@ -15,7 +14,6 @@
     "_id": {
        "$oid": "586f3a600343927e48e87210"
     },
-    "owner": "588935f5556f992bf8f37c01",
     "body": "This note is bad. I want to delete it.",
     "reuse": false,
     "draft": true,
@@ -27,7 +25,6 @@
     "_id": {
        "$oid": "588f4a600343927e48e87211"
     },
-    "owner": "example_owner_0",
     "body": "Good morning students! I'll be here in five minutes.",
     "reuse": true,
     "draft": false,
@@ -38,7 +35,6 @@
     "_id": {
        "$oid": "588f5a600343927e48e87211"
     },
-    "owner": "example_owner_1",
     "body": "I am not in my office this week. Please submit homework in Professor Logan's office. I have arranged with him to organize the homework assignments so they don't pile up under my door.",
     "reuse": true,
     "draft": false,
@@ -49,7 +45,6 @@
     "_id": {
        "$oid": "588f6a600343927e48e87211"
     },
-    "owner": "588935f55b432bb2ff322160",
     "body": "My car broke down on the way here. I am going getting it towed right now and should be on campus in 20 minutes.",
     "reuse": true,
     "draft": false,
@@ -60,7 +55,6 @@
     "_id": {
        "$oid": "588f7a600343927e48e87211"
     },
-    "owner": "588935f5b432bb2ff322160",
     "body": "Good morning! I am in my office. Just open the door.",
     "reuse": true,
     "draft": false,
@@ -71,7 +65,6 @@
     "_id": {
        "$oid": "588f8a600343927e48e87211"
     },
-    "owner": "588935f55b432bb2ff322160",
     "body": "Happy Monday!",
     "reuse": true,
     "draft": false,
@@ -82,7 +75,6 @@
     "_id": {
        "$oid": "588f9b600343927e48e87211"
     },
-    "owner": "588935f55b432bb2ff322160",
     "body": "I am out for lunch. I'll be back in 5 minutes.",
     "reuse": true,
     "draft": false,

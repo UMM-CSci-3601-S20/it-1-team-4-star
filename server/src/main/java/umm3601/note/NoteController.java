@@ -131,10 +131,6 @@ public class NoteController {
 
     List<Bson> filters = new ArrayList<Bson>(); // start with a blank document
 
-    if (ctx.queryParamMap().containsKey("owner")) {
-      filters.add(eq("owner", ctx.queryParam("owner")));
-    }
-
     if (ctx.queryParamMap().containsKey("body")) {
       filters.add(eq("body", ctx.queryParam("body")));
     }
@@ -154,7 +150,7 @@ public class NoteController {
       filters.add(eq("toDelete", targetStatus));
     }
 
-    String sortBy = ctx.queryParam("sortby", "owner");
+    String sortBy = ctx.queryParam("sortby", "body");
     String sortOrder = ctx.queryParam("sortorder", "asc");
 
     System.out.println(filters);
@@ -172,7 +168,6 @@ public class NoteController {
   public void addNewNote(Context ctx) {
     Note newNote = ctx.
     bodyValidator(Note.class)
-    .check((usr) -> usr.owner != null && usr.owner.length() > 1 && usr.owner.length() < 36) //Verify that the todo has a owner that is not blank and is less than 35 characters long
     .check((usr) -> usr.body != null && usr.body.length() > 0 && usr.body.length() < 151) // Verify that the todo has a body that is not blank and is less than 150 characters long
     .check((usr) -> usr.reuse == true || usr.reuse == false) // Verify that the input is a boolean value
     .check((usr) -> usr.draft == true || usr.draft == false) // Verify that the input is a boolean value
