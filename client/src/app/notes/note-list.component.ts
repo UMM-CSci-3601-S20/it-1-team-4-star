@@ -35,22 +35,22 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   getNotesFromServer(): void {
     this.unsub();
     this.getNotesSub = this.noteService.getNotes({
-      body: this.body,
       reuse: this.reuse,
-      draft: this.draft,
       toDelete: this.toDelete
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
-      this.updateFilter();
+      this.updateFilterOnce();
     }, err => {
       console.log(err);
     });
   }
 
-  public updateFilter(): void {
+  public updateFilterOnce(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, toDelete: this.toDelete = false, draft: this.draft = false });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse = false, draft: this.draft, toDelete: this.toDelete = false});
   }
+
+
 
 
   /**
