@@ -16,6 +16,8 @@ export class AddNoteComponent implements OnInit {
 
   note: Note;
 
+
+
   public reusable: reusable;
   public draft: draft;
   public toDelete: toDelete;
@@ -63,7 +65,7 @@ export class AddNoteComponent implements OnInit {
     // add note form validations
     this.addNoteForm = this.fb.group({
       // We allow alphanumeric input and limit the length for owner.
-
+/*
       owner: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2),
@@ -81,24 +83,25 @@ export class AddNoteComponent implements OnInit {
           }
         },
       ])),
-
+*/
       body: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(120)
+        Validators.maxLength(120),
+        //Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?')
       ])),
 
-      reusable: new FormControl('true', Validators.compose([
+      reusable: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^(true|false)$'),
       ])),
 
-      draft: new FormControl('true', Validators.compose([
+      draft: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^(true|false)$'),
       ])),
 
-      toDelete: new FormControl('true', Validators.compose([
+      toDelete: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^(true|false)$'),
       ]))
@@ -114,7 +117,7 @@ export class AddNoteComponent implements OnInit {
 
   submitForm() {
     this.noteService.addNote(this.addNoteForm.value).subscribe(newID => {
-      this.snackBar.open('Added Note ' + this.addNoteForm.value.body, null, {
+      this.snackBar.open('Added Note ' + this.addNoteForm.value, null, {
         duration: 2000,
       });
       this.router.navigate(['/notes/', newID]);
