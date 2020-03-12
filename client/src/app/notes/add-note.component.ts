@@ -83,7 +83,7 @@ export class AddNoteComponent implements OnInit {
 
   submitForm() {
     this.noteService.addNote(this.addNoteForm.value).subscribe(newID => {
-      this.snackBar.open('Added Note ' + this.addNoteForm.value, null, {
+      this.snackBar.open('Added Note ', null, {
         duration: 2000,
       });
       this.router.navigate(['/notes']);
