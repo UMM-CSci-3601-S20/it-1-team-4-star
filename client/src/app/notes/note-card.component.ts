@@ -34,7 +34,8 @@ export class NoteCardComponent implements OnInit {
       this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
       });
-      this.deleteEvent.emit(null);
+      //this.deleteEvent.emit(null);
+      location.reload();
     }, err => {
       this.snackBar.open('Failed to delete the note', null, {
         duration: 2000,
