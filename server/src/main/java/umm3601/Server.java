@@ -62,6 +62,9 @@ public class Server {
     // List users, filtered using query parameters
     server.get("api/users", userController::getUsers);
 
+    // List deleted notes
+    server.get("api/notes/deleted", noteController::getNotes);
+
     // List notes, filtered using query parameters
     server.get("api/notes", noteController::getNotes);
 
