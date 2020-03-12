@@ -1,7 +1,5 @@
 <div fxLayout="row">
-  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
-
-    <mat-card class="search-card">
+  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">    <mat-card class="search-card">
       <mat-card-header>
         <mat-card-title class="note-list-title">Notes - This is displaying all notes.</mat-card-title>
       </mat-card-header>
@@ -9,12 +7,14 @@
       </mat-card-content>
     </mat-card>
   </div>
-</div>
+</div><div fxLayout="row">
+  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else notesError" >
+    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
 
-<div fxLayout="row">
-
-
-  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+      <div fxLayout="row wrap" fxLayoutGap="10px" class="note-cards-container">
+        <app-note-card simple="true" *ngFor="let note of filteredNotes" class="note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
+      </div>
+  </div>  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #notesError>
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="note-error">
       <mat-error>
@@ -25,10 +25,6 @@
         Please wait a bit and try again or start the server.
       </mat-error>
     </div>
-  </ng-template>
-
-</div>
-
-<button mat-fab class="add-note-fab" matTooltip="Add Note" matTooltipPosition="left" routerLink="/notes/new">
+  </ng-template></div><button mat-fab class="add-note-fab" matTooltip="Add Note" matTooltipPosition="left" routerLink="/notes/new">
     <mat-icon class="md-24" aria-label="Add Note">add</mat-icon>
 </button>
