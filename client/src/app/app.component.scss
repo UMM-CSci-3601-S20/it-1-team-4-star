@@ -17,12 +17,12 @@
   z-index: 1;
   background-color: #ffe203;
   color: black;
-
 }
 
 .app-title {
   flex: 1 1 auto;
   text-align: center;
+
 }
 
 
@@ -31,4 +31,5 @@
   @media (max-width: 599px) {
     margin: 16px;
   }
+  background-image: url(/assets/chalkboard.jpeg);
 }
