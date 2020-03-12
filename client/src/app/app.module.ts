@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -32,6 +32,13 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
+import { AddNoteComponent } from './notes/add-note.component';
+
+
+import { NoteListComponent } from './notes/note-list.component';
+import { NoteService } from './notes/note.service';
+import { NoteCardComponent } from './notes/note-card.component';
+
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -49,7 +56,7 @@ const MATERIAL_MODULES: any[] = [
   MatFormFieldModule,
   MatDividerModule,
   MatRadioModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 ];
 
 @NgModule({
@@ -60,6 +67,9 @@ const MATERIAL_MODULES: any[] = [
     UserCardComponent,
     UserProfileComponent,
     AddUserComponent,
+    NoteListComponent,
+    NoteCardComponent,
+    AddNoteComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,9 +81,11 @@ const MATERIAL_MODULES: any[] = [
     HttpClientModule,
     MATERIAL_MODULES,
     LayoutModule,
+    ReactiveFormsModule,
   ],
   providers: [
-    UserService
+    UserService,
+    NoteService,
   ],
   bootstrap: [AppComponent]
 })

@@ -71,6 +71,15 @@ public class Server {
     // Add new note
     server.post("api/notes/new", noteController::addNewNote);
 
+    // Edit toDelete field
+    server.patch("api/notes/:id", noteController::editToDeleteField);
+
+
+    server.patch("api/notes/:id", noteController::editDraftField);
+
+    // Edit reuse field
+    server.patch("api/notes/:id", noteController::editReuseField);
+
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);
       ctx.json(e); // you probably want to remove this in production
