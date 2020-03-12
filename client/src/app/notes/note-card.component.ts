@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { NoteService } from './note.service';
   templateUrl: './note-card.component.html',
   styleUrls: ['./note-card.component.scss']
 })
+
 export class NoteCardComponent implements OnInit {
 
 
@@ -22,6 +23,7 @@ export class NoteCardComponent implements OnInit {
 
   @Input() note: Note;
   @Input() simple ? = false;
+  @Output() deleteEvent = new EventEmitter();
 
   ngOnInit() {
   }
@@ -32,8 +34,7 @@ export class NoteCardComponent implements OnInit {
       this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
       });
-      window.location.reload();
-      this.router.navigate(['/notes/:', this.note._id]);
+      this.deleteEvent.emit(null);
     }, err => {
       this.snackBar.open('Failed to delete the note', null, {
         duration: 2000,
