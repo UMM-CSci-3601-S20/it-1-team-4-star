@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MockNoteService } from '../../testing/note.service.mock';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Note } from './note';
 
 import { NoteCardComponent } from './note-card.component';
@@ -51,7 +52,7 @@ describe('Reusable Note', () => {
       declarations: [ReusableNoteComponent, NoteCardComponent],
       // providers:    [ NoteService ]  // NO! Don't provide the real service!
       // Provide a test-double instead
-      providers: [{ provide: NoteService, useValue: new MockNoteService() }]
+      providers: [{ provide: NoteService, useValue: new MockNoteService() }, FormBuilder, MatSnackBar]
     });
   });
 
@@ -65,9 +66,9 @@ describe('Reusable Note', () => {
 
   // these test from the mock note service
 
-  /* it('contains all the reusable notes', () => {
+  it('contains all the reusable notes', () => {
     expect(reusableNote.serverFilteredNotes.length).toBe(3);
-  }); */
+  });
 
   it('contains a note with the text \'ducks go quack\'', () => {
     expect(reusableNote.serverFilteredNotes.some((note: Note) => note.body === 'ducks go quack')).toBe(true);
@@ -85,9 +86,6 @@ describe('Reusable Note', () => {
     expect(reusableNote.serverFilteredNotes.some((note: Note) => note.draft === true)).toBe(true);
   });
 
-  /* it('has two reusable notes that are in the same building', () => {
-    expect(reusableNote.serverFilteredNotes.filter((note: Note) => note.body === 'Science').length).toBe(2);
-  }); */
 });
 
 describe('Misbehaving Reusable Note', () => {
