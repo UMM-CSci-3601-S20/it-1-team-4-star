@@ -1,5 +1,11 @@
 .sidenav-container {
   height: 100%;
+  background-image: url(/assets/chalkboard.jpg);
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;/*Fills in the backround for
+  multiple different browser sizes, while still looking sharp*/
+  background-attachment: fixed;
 }
 
 .sidenav {
@@ -17,12 +23,12 @@
   z-index: 1;
   background-color: #ffe203;
   color: black;
-
 }
 
 .app-title {
   flex: 1 1 auto;
   text-align: center;
+
 }
 
 
@@ -31,4 +37,7 @@
   @media (max-width: 599px) {
     margin: 16px;
   }
+
 }
+
+
