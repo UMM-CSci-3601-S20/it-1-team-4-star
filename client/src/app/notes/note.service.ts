@@ -57,10 +57,23 @@ export class NoteService {
 
 
     // Filter by reuse
-    if (filters.reuse) {
-      filters.reuse = filters.reuse;
-      filteredNotes = filteredNotes.filter(note => {
-        return note.reuse.toString().indexOf(filters.reuse.toString()) !== -1;
+    // if (filters.reuse) {
+    //   filters.reuse = filters.reuse;
+    //   filteredNotes = filteredNotes.filter(note => {
+    //     return note.reuse.toString().indexOf(filters.reuse.toString()) !== -1;
+    //   });
+    // }
+
+    // Filter by reuse
+    if (filters.reuse === true) {
+      return notes.filter(note => {
+        return note.reuse.valueOf() === true;
+      });
+    }
+
+    if (filters.reuse === false) {
+      return notes.filter(note => {
+        return note.reuse.valueOf() === false;
       });
     }
 
