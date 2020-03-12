@@ -205,7 +205,32 @@ public class NoteControllerSpec {
 
 
   /**
-  * Test for true toDelete
+  * Test for false toDelete and false draft
+  */
+  @Test
+  public void GetNotesByToDeleteAndDraft() throws IOException {
+
+    // Set the query string to test with
+    mockReq.setQueryString("toDelete=false&draft=false");
+
+    // Create our fake Javalin context
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/notes");
+
+    noteController.getNotes(ctx);
+
+    assertEquals(200, mockRes.getStatus()); // The response status should be 200
+
+    String result = ctx.resultString();
+
+    for (Note note : JavalinJson.fromJson(result, Note[].class)) {
+      assertEquals(false, note.toDelete);
+      assertEquals(false, note.draft);
+    }
+  }
+
+
+  /**
+  * Test for true toDelete and false draft
   */
   @Test
   public void GetNotesByToDelete() throws IOException {
@@ -226,6 +251,7 @@ public class NoteControllerSpec {
       assertEquals(false, note.toDelete);
     }
   }
+
 
 
 

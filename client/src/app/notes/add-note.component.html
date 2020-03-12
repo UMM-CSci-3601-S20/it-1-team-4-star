@@ -30,7 +30,7 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-select>
             <mat-error *ngIf="addNoteForm.get('reuse').hasError('required')">You must make a selection</mat-error>
             <mat-error *ngIf="addNoteForm.get('reuse').hasError('pattern') && !addNoteForm.get('reuse').hasError('required')">
-              Your selection is must be reuse or one-time
+              Your selection must be reuse or one-time
             </mat-error>
           </mat-form-field>
 
@@ -42,11 +42,11 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-select>
             <mat-error *ngIf="addNoteForm.get('draft').hasError('required')">You must make a selection</mat-error>
             <mat-error *ngIf="addNoteForm.get('draft').hasError('pattern') && !addNoteForm.get('draft').hasError('required')">
-              Your selection is must be draft or post
+              Your selection must be draft or post
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>Trash</mat-label>
             <mat-select id="toDeleteField" required formControlName="toDelete">
               <mat-option value=true>True</mat-option>
@@ -54,9 +54,9 @@ is potentially helpful and contributed to the shaping of this example -->
             </mat-select>
             <mat-error *ngIf="addNoteForm.get('toDelete').hasError('required')">You must make a selection</mat-error>
             <mat-error *ngIf="addNoteForm.get('toDelete').hasError('pattern') && !addNoteForm.get('toDelete').hasError('required')">
-              Your selection is must be true or false
+              Your selection must be true or false
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
 
 
         </mat-card-content>
