@@ -86,7 +86,7 @@ export class AddNoteComponent implements OnInit {
       this.snackBar.open('Added Note ', null, {
         duration: 2000,
       });
-      this.router.navigate(['/notes']);
+      this.router.navigate(['/notes/']);
     }, err => {
       this.snackBar.open('Failed to add the note', null, {
         duration: 2000,
