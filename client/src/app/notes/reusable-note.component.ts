@@ -4,23 +4,23 @@ import { NoteService } from './note.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-note-list-component',
+  selector: 'app-reusable-note.component',
   templateUrl: 'reusable-note.component.html',
   styleUrls: ['./reusable-note.component.scss'],
   providers: []
 })
-
 export class ReusableNoteComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
+  owner: string;
   public body: string;
   public reusable: boolean;
   public draft: boolean;
   public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
-  getNotesSub: Subscription;
-  owner: string;
+  getReusableNotesSub: Subscription;
+
   // Inject the NoteService into this component.
   // That's what happens in the following constructor.
   //
@@ -30,9 +30,9 @@ export class ReusableNoteComponent implements OnInit, OnDestroy  {
 
   }
 
-  getNotesFromServer(): void {
+  getReusableNotesFromServer(): void {
     this.unsub();
-    this.getNotesSub = this.noteService.getNotes({
+    this.getReusableNotesSub = this.noteService.getReusableNotes({
       owner: this.owner
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
@@ -52,7 +52,7 @@ export class ReusableNoteComponent implements OnInit, OnDestroy  {
    *
    */
   ngOnInit(): void {
-    this.getNotesFromServer();
+    this.getReusableNotesFromServer();
   }
 
   ngOnDestroy(): void {
@@ -60,9 +60,8 @@ export class ReusableNoteComponent implements OnInit, OnDestroy  {
   }
 
   unsub(): void {
-    if (this.getNotesSub) {
-      this.getNotesSub.unsubscribe();
+    if (this.getReusableNotesSub) {
+      this.getReusableNotesSub.unsubscribe();
     }
   }
-
 }

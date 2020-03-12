@@ -1,22 +1,8 @@
-.reusable-note-cards-container {
-  width: 100%;
-  position: relative;
+.reusable-note-list-title {
+  font-size: 20;
 }
 
 .reusable-note-card {
-  margin-bottom: 10px;
-}
-
-.search-card {
-  margin-bottom: 10px;
-}
-
-.mat-radio-button {
-  margin: 0 12px;
-}
-
-.add-reusable-note-fab {
-  position: fixed;
-  bottom: 15px;
-  right: 30px;
+  padding: 20px;
+  font-weight: 900;
 }

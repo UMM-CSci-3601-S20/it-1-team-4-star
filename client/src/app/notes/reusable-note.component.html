@@ -2,7 +2,7 @@
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
     <mat-card class="search-card">
       <mat-card-header>
-        <mat-card-title class="note-list-title">Reusable Notes - This is displaying all reusable notes.</mat-card-title>
+        <mat-card-title class="reusable-note-title">Reusable Notes - This is displaying all reusable notes.</mat-card-title>
       </mat-card-header>
       <mat-card-content fxLayout="column" >
       </mat-card-content>
@@ -16,10 +16,11 @@
     <div [ngSwitch]="viewType">
       <!-- Card grid view -->
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="reusable-note-cards-container">
-        <app-note-card simple="true" *ngFor="let note of filteredNotes" class="reusable-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
+        <app-reusable-note-card simple="true" *ngFor="let note of filteredNotes" class="reusable-note-card" [note]="note" fxFlex="1 1 280px"></app-reusable-note-card>
       </div>
     </div>
   </div>
+
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #notesError>
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="reusable-note-error">
