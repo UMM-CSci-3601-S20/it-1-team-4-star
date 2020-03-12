@@ -7,6 +7,7 @@ import { AddUserComponent } from './users/add-user.component';
 import { NoteListComponent } from './notes/note-list.component';
 import { AddNoteComponent } from './notes/add-note.component';
 import { DeletedNoteComponent } from './notes/deleted-note.component';
+import { ReusableNoteComponent } from './notes/reusable-note.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'users/:id', component: UserProfileComponent},
   {path: 'notes', component: NoteListComponent},
   {path: 'notes/new', component: AddNoteComponent},
-  {path: 'notes/deleted', component: DeletedNoteComponent}
+  {path: 'notes/deleted', component: DeletedNoteComponent},
+  {path: 'notes/reuse', component: ReusableNoteComponent}
 
 ];
 

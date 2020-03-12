@@ -44,7 +44,7 @@ export class ReusableNoteComponent implements OnInit, OnDestroy  {
 
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse = true, draft: this.draft = true, toDelete: this.toDelete = false });
   }
 
   /**
