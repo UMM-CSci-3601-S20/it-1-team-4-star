@@ -12,7 +12,7 @@ export class NoteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getNotes(filters?: {body?: string, reuse?: boolean, draft?: boolean, toDelete?: boolean}): Observable<Note[]> {
+  getNotes(filters?: { body?: string, reuse?: boolean, draft?: boolean, toDelete?: boolean }): Observable<Note[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.body) {
@@ -38,8 +38,10 @@ export class NoteService {
     return this.httpClient.get<Note>(this.noteUrl + '/' + id);
   }
 
-  filterNotes(notes: Note[], filters: { body?: string
-    reuse?: boolean, draft?: boolean, toDelete?: boolean }): Note[] {
+  filterNotes(notes: Note[], filters: {
+    body?: string
+    reuse?: boolean, draft?: boolean, toDelete?: boolean
+  }): Note[] {
     // taking this out of filter notes
     // addDate?: Date, expirationDate?: Date
     let filteredNotes = notes;
@@ -56,31 +58,44 @@ export class NoteService {
 
     // Filter by reuse
     if (filters.reuse) {
-       filters.reuse = filters.reuse;
-       filteredNotes = filteredNotes.filter(note => {
+      filters.reuse = filters.reuse;
+      filteredNotes = filteredNotes.filter(note => {
         return note.reuse.toString().indexOf(filters.reuse.toString()) !== -1;
       });
     }
 
     // Filter by draft
-    if (filters.draft) {
-          filters.draft = filters.draft;
-          filteredNotes = filteredNotes.filter(note => {
-           return note.draft.toString().indexOf(filters.draft.toString()) !== -1;
-         });
-       }
+    // if (filters.draft) {
+    //       filters.draft = filters.draft;
+    //       filteredNotes = filteredNotes.filter(note => {
+    //        return note.draft.toString().indexOf(filters.draft.toString()) !== -1;
+    //      });
+    //    }
+
+    // Filter by draft
+    if (filters.draft === true) {
+      return notes.filter(note => {
+        return note.draft.valueOf() === true;
+      });
+    }
+
+    if (filters.draft === false) {
+      return notes.filter(note => {
+        return note.draft.valueOf() === false;
+      });
+    }
 
     // Filter by toDelete
     if (filters.toDelete === true) {
       return notes.filter(note => {
         return note.toDelete.valueOf() === true;
       });
-   }
+    }
 
     if (filters.toDelete === false) {
-    return notes.filter(note => {
-      return note.toDelete.valueOf() === false;
-    });
+      return notes.filter(note => {
+        return note.toDelete.valueOf() === false;
+      });
     }
 
     return filteredNotes;
@@ -88,7 +103,7 @@ export class NoteService {
 
   addNote(newNote: Note): Observable<string> {
     // Send post request to add a new note with the note data as the body.
-    return this.httpClient.post<{id: string}>(this.noteUrl + '/new', newNote).pipe(map(res => res.id));
+    return this.httpClient.post<{ id: string }>(this.noteUrl + '/new', newNote).pipe(map(res => res.id));
   }
 
   deleteNote(id: string): Observable<Note> {
@@ -96,15 +111,15 @@ export class NoteService {
   }
 
   editToDeleteField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, {'toDelete': value});
+    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, { 'toDelete': value });
   }
 
   editDraftReuseField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, {'reuse': value});
+    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, { 'reuse': value });
   }
 
   editDraftField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, {'draft': value});
+    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, { 'draft': value });
   }
 
 }
