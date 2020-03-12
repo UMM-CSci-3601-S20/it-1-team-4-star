@@ -16,7 +16,7 @@ describe('Add Note', () => {
   });
 
 
-  it('Should enable and disable the add note button', async () => {
+  it('Should enable and disable the add note button with good input', async () => {
     expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
     await page.typeInput('bodyField', 'Hello, this is a note');
     expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
@@ -27,11 +27,17 @@ describe('Add Note', () => {
     await page.selectMatSelectValue('toDeleteField', 'true');
     expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(true);
 
-    // await page.typeInput('bodyField', '');
-    // await page.typeInput('reuseField', 'true');
-    // await page.typeInput('draftField', 'true');
-    // await page.typeInput('toDelete', 'true');
-    // await expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
+  });
+  it('Should enable and disable the add note button with bad input', async () => {
+    expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
+    await page.typeInput('bodyField', ''); // Blank message shouldn't pass validation.
+    expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
+    await page.selectMatSelectValue('reuseField', 'true');
+    expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
+    await page.selectMatSelectValue('draftField', 'true');
+    expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
+    await page.selectMatSelectValue('toDeleteField', 'true');
+    expect(element(by.buttonText('ADD NOTE')).isEnabled()).toBe(false);
 
   });
 
@@ -46,16 +52,16 @@ describe('Add Note', () => {
     await page.addNote(note);
 
     // Wait until the URL does not contain 'users/new'
-    //await browser.wait(EC.not(EC.urlContains('notes/new')), 2000);
+    await browser.wait(EC.not(EC.urlContains('notes/new')), 2000);
 
-    //const url = await page.getUrl();
+    const url = await page.getUrl();
     //expect(RegExp('.*\/notes\/[0-9a-fA-F]{24}$', 'i').test(url)).toBe(true);
-    //expect(url.endsWith('/notes/new')).toBe(false);
+    expect(url.endsWith('/notes/new')).toBe(false);
 
-    //expect(element(by.className('note-card-body')).getText()).toEqual(note.body);
-   // expect(element(by.className('note-card-reusable')).getText()).toEqual(note.reuse.valueOf());
-    //expect(element(by.className('note-card-draft')).getText()).toEqual(note.draft.valueOf());
-   // expect(element(by.className('note-card-toDelete')).getText()).toEqual(note.toDelete.valueOf());
+    expect(element(by.id('note-card-body')).getText()).toEqual(note.body);
+    expect(element(by.className('note-card-reusable')).getText()).toEqual(note.reuse.valueOf());
+    expect(element(by.className('note-card-draft')).getText()).toEqual(note.draft.valueOf());
+    expect(element(by.className('note-card-toDelete')).getText()).toEqual(note.toDelete.valueOf());
   });
 
 });
