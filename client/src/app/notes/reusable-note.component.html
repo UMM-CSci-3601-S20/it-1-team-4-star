@@ -10,6 +10,7 @@
   </div>
 </div>
 
+
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else notesError" >
     <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
@@ -34,6 +35,10 @@
     </div>
   </ng-template>
 </div>
-<button mat-fab class="add-reusable-note-fab" matTooltip="Add Reusable Note" matTooltipPosition="left" routerLink="/notes/reuse">
-    <mat-icon class="md-24" aria-label="Add Reusable Note">add</mat-icon>
+
+<button mat-fab class="add-note-fab" matTooltip="Add Note" matTooltipPosition="right" routerLink="/notes/new">
+  <mat-icon class="md-24" aria-label="Add Note">add</mat-icon>
 </button>
+
+
+
