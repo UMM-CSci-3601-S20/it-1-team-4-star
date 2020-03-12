@@ -19,7 +19,7 @@ export class NoteService {
         httpParams = httpParams.set('body', filters.body);
       }
       if (filters.reuse) {
-        httpParams = httpParams.set('reuseable', filters.reuse.toString());
+        httpParams = httpParams.set('reuse', filters.reuse.toString());
       }
       if (filters.draft) {
         httpParams = httpParams.set('draft', filters.draft.toString());
@@ -39,80 +39,94 @@ export class NoteService {
   }
 
   filterNotes(notes: Note[], filters: {
-    body?: string
-    reuse?: boolean, draft?: boolean, toDelete?: boolean
+    body?: string, reuse?: boolean, draft?: boolean, toDelete?: boolean
   }): Note[] {
     // taking this out of filter notes
     // addDate?: Date, expirationDate?: Date
-    let filteredNotes = notes;
 
     // Filter by body
     if (filters.body) {
+      console.log('body');
       filters.body = filters.body.toLowerCase();
-
-      filteredNotes = filteredNotes.filter(note => {
+      notes = notes.filter(note => {
         return note.body.toLowerCase().indexOf(filters.body) !== -1;
       });
     }
 
-
-    // Filter by reuse
-    // if (filters.reuse) {
-    //   filters.reuse = filters.reuse;
-    //   filteredNotes = filteredNotes.filter(note => {
-    //     return note.reuse.toString().indexOf(filters.reuse.toString()) !== -1;
-    //   });
-    // }
-
     // Filter by reuse
     if (filters.reuse === true) {
-      return notes.filter(note => {
+      console.log('reuse true');
+      notes = notes.filter(note => {
         return note.reuse.valueOf() === true;
       });
     }
-
+    if (filters.toDelete === false) {
+      console.log('toDelete false');
+      notes = notes.filter(note => {
+        return note.toDelete.valueOf() === false;
+      });
+    }
     if (filters.reuse === false) {
-      return notes.filter(note => {
+      console.log('reuse false');
+      notes = notes.filter(note => {
         return note.reuse.valueOf() === false;
       });
     }
 
     // Filter by draft
-    // if (filters.draft) {
-    //       filters.draft = filters.draft;
-    //       filteredNotes = filteredNotes.filter(note => {
-    //        return note.draft.toString().indexOf(filters.draft.toString()) !== -1;
-    //      });
-    //    }
-
-    // Filter by draft
     if (filters.draft === true) {
-      return notes.filter(note => {
+      console.log('draft true');
+
+      notes = notes.filter(note => {
         return note.draft.valueOf() === true;
       });
     }
 
     if (filters.draft === false) {
-      return notes.filter(note => {
+      console.log('draft false');
+
+      notes =  notes.filter(note => {
         return note.draft.valueOf() === false;
       });
     }
 
     // Filter by toDelete
     if (filters.toDelete === true) {
-      return notes.filter(note => {
+      console.log('toDelete true');
+
+      notes = notes.filter(note => {
         return note.toDelete.valueOf() === true;
       });
     }
 
-    if (filters.toDelete === false) {
-      return notes.filter(note => {
-        return note.toDelete.valueOf() === false;
-      });
-    }
 
-    return filteredNotes;
+
+    return notes;
   }
+
+  // filterReuse(notes: Note[], filters: {
+  //   reuse?: boolean
+  // }): Note[] {
+  //   // taking this out of filter notes
+  //   // addDate?: Date, expirationDate?: Date
+  //   let notes = notes;
+
+  //   // Filter by reuse
+  //   if (filters.reuse === true) {
+  //     notes = notes.filter(note => {
+  //       return note.reuse.valueOf() === true;
+  //     });
+  //   }
+
+  //   if (filters.reuse === false) {
+  //     return notes.filter(note => {
+  //       return note.reuse.valueOf() === false;
+  //     });
+  //   }
+  //   return notes;
+  // }
+
+
 
   addNote(newNote: Note): Observable<string> {
     // Send post request to add a new note with the note data as the body.
