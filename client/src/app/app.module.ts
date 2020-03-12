@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -56,7 +56,7 @@ const MATERIAL_MODULES: any[] = [
   MatFormFieldModule,
   MatDividerModule,
   MatRadioModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 ];
 
 @NgModule({
@@ -80,11 +80,13 @@ const MATERIAL_MODULES: any[] = [
     FlexLayoutModule,
     HttpClientModule,
     MATERIAL_MODULES,
-    LayoutModule
+    LayoutModule,
+    ReactiveFormsModule,
+    FormBuilder,
   ],
   providers: [
     UserService,
-    NoteService
+    NoteService,
   ],
   bootstrap: [AppComponent]
 })

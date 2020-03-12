@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
@@ -14,13 +14,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
-import { MockUserService } from '../../testing/user.service.mock';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Note } from './note';
 import { NoteCardComponent } from './note-card.component';
 import { NoteListComponent } from './note-list.component';
 import { NoteService } from './note.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MockNoteService } from 'src/testing/note.service.mock';
+
 
 const COMMON_IMPORTS: any[] = [
   FormsModule,
@@ -38,6 +40,9 @@ const COMMON_IMPORTS: any[] = [
   MatIconModule,
   BrowserAnimationsModule,
   RouterTestingModule,
+  RouterTestingModule,
+  ReactiveFormsModule,
+  FormsModule,
 ];
 
 describe('Note list', () => {
@@ -51,7 +56,7 @@ describe('Note list', () => {
       declarations: [NoteListComponent, NoteCardComponent],
       // providers:    [ NoteService ]  // NO! Don't provide the real service!
       // Provide a test-double instead
-      providers: [{ provide: NoteService, useValue: new MockNoteService() }]
+      providers: [{ provide: NoteService, useValue: new MockNoteService() }, FormBuilder, MatSnackBar ]
     });
   });
 
@@ -64,6 +69,8 @@ describe('Note list', () => {
   }));
 
   it('contains all the notes', () => {
+    console.log('Contains all the notes: \n');
+    console.log(noteList.serverFilteredNotes.length);
     expect(noteList.serverFilteredNotes.length).toBe(3);
   });
 
