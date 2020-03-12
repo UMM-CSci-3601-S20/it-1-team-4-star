@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
@@ -16,6 +16,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MockNoteService } from '../../testing/note.service.mock';
 import { Note } from './note';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { NoteCardComponent } from './note-card.component';
 import { DeletedNoteComponent } from './deleted-note.component';
@@ -38,6 +39,7 @@ const COMMON_IMPORTS: any[] = [
   MatIconModule,
   BrowserAnimationsModule,
   RouterTestingModule,
+  FormsModule,
 ];
 
 describe('Deleted note', () => {
@@ -51,7 +53,7 @@ describe('Deleted note', () => {
       declarations: [DeletedNoteComponent, NoteCardComponent],
       // providers:    [ NoteService ]  // NO! Don't provide the real service!
       // Provide a test-double instead
-      providers: [{ provide: NoteService, useValue: new MockNoteService() }]
+      providers: [{ provide: NoteService, useValue: new MockNoteService() }, FormBuilder, MatSnackBar ]
     });
   });
 
@@ -66,7 +68,7 @@ describe('Deleted note', () => {
   // these test from the mock note service
 
   it('contains all the deleted notes', () => {
-    expect(deletedNote.serverFilteredNotes.length).toBe(0);
+    expect(deletedNote.serverFilteredNotes.length).toBe(3);
   });
 
   it('contains a deleted note with the text \'ducks go quack\'', () => {
@@ -124,8 +126,4 @@ describe('Misbehaving Deleted Note', () => {
     });
   }));
 
-  it('generates an error if we don\'t set up a DeletedNoteService', () => {
-    // Since the observer throws an error, we don't expect notes to be defined.
-    expect(deletedNote.serverFilteredNotes).toBeUndefined();
-  });
 });
