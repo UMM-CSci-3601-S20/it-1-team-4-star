@@ -93,6 +93,7 @@ describe('Note list', () => {
     expect(noteList.serverFilteredNotes.some((note: Note) => note.draft === true)).toBe(true);
   });
 
+
 });
 
 describe('Misbehaving Note List', () => {
