@@ -22,6 +22,7 @@ import { NoteCardComponent } from './note-card.component';
 import { NoteListComponent } from './note-list.component';
 import { NoteService } from './note.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MockNoteService } from 'src/testing/note.service.mock';
 
 
 const COMMON_IMPORTS: any[] = [
