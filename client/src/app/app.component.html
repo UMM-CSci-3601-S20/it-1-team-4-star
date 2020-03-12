@@ -25,6 +25,12 @@
         Notes
       </mat-list-item>
 
+      <mat-list-item routerLink="/notes/toDelete" routerLinkActive="drawer-list-item-active"
+      (click)="drawer.close()">
+        <mat-icon matListIcon>delete</mat-icon>
+        Trash
+      </mat-list-item>
+
     </mat-nav-list>
   </mat-sidenav>
 

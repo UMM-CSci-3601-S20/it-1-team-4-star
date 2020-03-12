@@ -4,7 +4,7 @@ import { NoteService } from './note.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-note-list-component',
+  selector: 'app-deleted-note-list-component',
   templateUrl: 'deleted-note.component.html',
   styleUrls: ['./deleted-note.component.scss'],
   providers: []
@@ -14,14 +14,12 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
-  owner: string;
   public body: string;
   public reusable: boolean;
   public draft: boolean;
   public toDelete: boolean;
   public viewType: 'card' | 'list' = 'card';
   getDeletedNotesSub: Subscription;
-
 
   // Inject the NoteService into this component.
   // That's what happens in the following constructor.
@@ -31,10 +29,11 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
   constructor(private noteService: NoteService) {
 
   }
+
   getDeletedNotesFromServer(): void {
     this.unsub();
-    this.getDeletedNotesSub = this.noteService.getDeletedNotes({
-      owner: this.owner
+    this.getDeletedNotesSub = this.noteService.getNotes({
+      body: this.body
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
       this.updateFilter();
@@ -42,12 +41,10 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
       console.log(err);
     });
   }
-
   public updateFilter(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reusable: this.reusable, draft: this.draft, toDelete: this.toDelete });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reusable, draft: this.draft, toDelete: this.toDelete });
   }
-
   /**
    * Starts an asynchronous operation to update the notes list
    *
@@ -55,11 +52,9 @@ export class DeletedNoteComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
     this.getDeletedNotesFromServer();
   }
-
   ngOnDestroy(): void {
     this.unsub();
   }
-
   unsub(): void {
     if (this.getDeletedNotesSub) {
       this.getDeletedNotesSub.unsubscribe();
