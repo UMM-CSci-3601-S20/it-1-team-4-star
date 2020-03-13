@@ -104,29 +104,6 @@ export class NoteService {
     return notes;
   }
 
-  // filterReuse(notes: Note[], filters: {
-  //   reuse?: boolean
-  // }): Note[] {
-  //   // taking this out of filter notes
-  //   // addDate?: Date, expirationDate?: Date
-  //   let notes = notes;
-
-  //   // Filter by reuse
-  //   if (filters.reuse === true) {
-  //     notes = notes.filter(note => {
-  //       return note.reuse.valueOf() === true;
-  //     });
-  //   }
-
-  //   if (filters.reuse === false) {
-  //     return notes.filter(note => {
-  //       return note.reuse.valueOf() === false;
-  //     });
-  //   }
-  //   return notes;
-  // }
-
-
 
   addNote(newNote: Note): Observable<string> {
     // Send post request to add a new note with the note data as the body.

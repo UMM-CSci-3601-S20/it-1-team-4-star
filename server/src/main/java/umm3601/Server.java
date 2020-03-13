@@ -15,7 +15,7 @@ import umm3601.note.NoteController;
 
 public class Server {
 
-  static String appName = "DoorBoard - Your Office Door, Made Simple";
+  static String appName = "DoorBoard";
 
   private static MongoDatabase database;
 

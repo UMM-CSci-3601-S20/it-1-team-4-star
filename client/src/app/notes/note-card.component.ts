@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,23 +30,28 @@ export class NoteCardComponent implements OnInit {
 
   @Input() note: Note;
   @Input() simple ? = false;
-  @Output() deleteEvent = new EventEmitter();
 
   ngOnInit() {
   }
 
    delete() {
     this.noteService.editToDeleteField(this.note._id, true).subscribe(noteID => {
-      this.snackBar.open('Deleted Note ', null, {
+      this.snackBar.open('Removed Note ', null, {
         duration: 2000,
       });
       // This "hack" may not be good form, but it is the only thing I was able to understand and
       // apply. It is much better than location.reload(), but not as good as using an event emitter (which I tried, but failed at)
-      this.router.navigateByUrl('/notes/deleted', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/notes']);
-  });
+      if (this.note.reuse === true) {
+        this.router.navigateByUrl('/notes', { skipLocationChange: false }).then(() => {
+        this.router.navigate(['/notes/reuse']);   });
+        }
+
+      if (this.note.draft === false && this.note.reuse === true) {
+        this.router.navigateByUrl('/notes', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/notes']);     });
+      }
     }, err => {
-      this.snackBar.open('Failed to delete the note', null, {
+      this.snackBar.open('Failed to remove note', null, {
         duration: 2000,
       });
     });
@@ -59,8 +64,8 @@ export class NoteCardComponent implements OnInit {
         });
         // This "hack" may not be good form, but it is the only thing I was able to understand and
         // apply. It is much better than location.reload(), but not as good as using an event emitter (which I tried, but failed at)
-        this.router.navigateByUrl('/notes/deleted', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/notes']);
+        this.router.navigateByUrl('/notes', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/notes/deleted']);
       });
       }, err => {
         this.snackBar.open('Failed to restore note', null, {
@@ -74,11 +79,7 @@ export class NoteCardComponent implements OnInit {
         this.snackBar.open('Posted Note ', null, {
           duration: 2000,
         });
-        // This "hack" may not be good form, but it is the only thing I was able to understand and
-        // apply. It is much better than location.reload(), but not as good as using an event emitter (which I tried, but failed at)
-        this.router.navigateByUrl('/notes/deleted', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/notes']);
-      });
+        this.router.navigate(['/notes']);
       }, err => {
         this.snackBar.open('Failed to post note', null, {
           duration: 2000,
