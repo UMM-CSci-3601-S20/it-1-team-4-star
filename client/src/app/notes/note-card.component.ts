@@ -46,9 +46,14 @@ export class NoteCardComponent implements OnInit {
         this.router.navigate(['/notes/reuse']);   });
         }
 
-      if (this.note.draft === false && this.note.reuse === true) {
-        this.router.navigateByUrl('/notes', { skipLocationChange: true }).then(() => {
+      if (this.note.draft === false && this.note.reuse === false) {
+        this.router.navigateByUrl('/notes/drafts', { skipLocationChange: true }).then(() => {
         this.router.navigate(['/notes']);     });
+      }
+
+      if (this.note.draft === true && this.note.reuse === false) {
+        this.router.navigateByUrl('/notes', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/notes/drafts']);     });
       }
     }, err => {
       this.snackBar.open('Failed to remove note', null, {

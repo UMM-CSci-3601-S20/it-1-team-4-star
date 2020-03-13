@@ -15,9 +15,9 @@ export class DraftNoteComponent implements OnInit, OnDestroy  {
   public serverFilteredNotes: Note[];
   public filteredNotes: Note[];
   public body: string;
-  public reuse: boolean;
-  public draft: boolean;
-  public toDelete = true;
+  public reuse = false;
+  public draft = true;
+  public toDelete = false;
   getDraftNotesSub: Subscription;
 
 

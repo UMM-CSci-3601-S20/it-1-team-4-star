@@ -71,6 +71,10 @@ public class Server {
      // List notes, filtered using query parameters
      server.get("api/notes/reuse", noteController::getNotes);
 
+
+     // List notes, filtered using query parameters
+     server.get("api/notes/draft", noteController::getNotes);
+
     // Add new user
     server.post("api/users/new", userController::addNewUser);
 
