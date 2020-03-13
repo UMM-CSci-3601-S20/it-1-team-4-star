@@ -2,7 +2,7 @@
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
     <mat-card class="search-card">
       <mat-card-header>
-        <mat-card-title class="reusable-note-title">REUSABLE NOTES </mat-card-title>
+        <mat-card-title class="draft-note-title">DRAFTS</mat-card-title>
       </mat-card-header>
       <mat-card-content fxLayout="column" >
       </mat-card-content>
@@ -10,23 +10,18 @@
   </div>
 </div>
 
-
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else notesError" >
-    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
-    <div [ngSwitch]="viewType">
-      <!-- Card grid view -->
-      <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="reusable-note-cards-container">
-        <app-note-card simple= "true" *ngFor= "let note of filteredNotes" class="reusable-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
+      <div fxLayout="row wrap" fxLayoutGap="10px" class="draft-note-cards-container">
+        <app-note-card simple= "true" *ngFor= "let note of filteredNotes" class="draft-note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
       </div>
-    </div>
   </div>
 
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #notesError>
-    <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="reusable-note-error">
+    <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="draft-note-error">
       <mat-error>
-        There was a problem loading the reusable notes. Possibly the server is down or perhaps there are network
+        There was a problem loading the draft notes. Possibly the server is down or perhaps there are network
         issues.
       </mat-error>
       <mat-error>
@@ -36,9 +31,8 @@
   </ng-template>
 </div>
 
+
 <button mat-fab class="add-note-fab" matTooltip="Add Note" matTooltipPosition="right" routerLink="/notes/new">
   <mat-icon class="md-24" aria-label="Add Note">add</mat-icon>
 </button>
-
-
 

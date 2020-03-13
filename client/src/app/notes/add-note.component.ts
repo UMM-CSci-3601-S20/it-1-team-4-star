@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-//import { Note, body, reuse, draft, toDelete } from './note';
+import { Note } from './note';
 import { NoteService } from './note.service';
 
 @Component({
@@ -14,14 +14,14 @@ export class AddNoteComponent implements OnInit {
 
   addNoteForm: FormGroup;
 
-  // note: Note;
-  // public body: body;
-  // public reuse: reuse;
-  // public draft: draft;
-  // public toDelete: toDelete;
+  note: Note;
+  draftNoteForm: FormGroup;
+  reuseNoteForm: FormGroup;
+
 
   constructor(private fb: FormBuilder, private noteService: NoteService, private snackBar: MatSnackBar, private router: Router) {
   }
+
 
   add_note_validation_messages = {
     body: [
@@ -79,7 +79,6 @@ export class AddNoteComponent implements OnInit {
   ngOnInit() {
     this.createForms();
   }
-
 
   submitForm() {
     this.noteService.addNote(this.addNoteForm.value).subscribe(newID => {

@@ -15,7 +15,7 @@ import umm3601.note.NoteController;
 
 public class Server {
 
-  static String appName = "DoorBoard - Your Office Door, Made Simple";
+  static String appName = "DoorBoard";
 
   private static MongoDatabase database;
 
@@ -71,20 +71,24 @@ public class Server {
      // List notes, filtered using query parameters
      server.get("api/notes/reuse", noteController::getNotes);
 
+
+     // List notes, filtered using query parameters
+     server.get("api/notes/draft", noteController::getNotes);
+
     // Add new user
     server.post("api/users/new", userController::addNewUser);
 
     // Add new note
     server.post("api/notes/new", noteController::addNewNote);
 
+    server.patch("api/notes/:id/editDraftField", noteController::editDraftField);
+
     // Edit toDelete field
-    server.patch("api/notes/:id", noteController::editToDeleteField);
+    server.patch("api/notes/:id/editToDeleteField", noteController::editToDeleteField);
 
-
-    server.patch("api/notes/:id", noteController::editDraftField);
 
     // Edit reuse field
-    server.patch("api/notes/:id", noteController::editReuseField);
+    server.patch("api/notes/:id/editReuseField", noteController::editReuseField);
 
     server.exception(Exception.class, (e, ctx) -> {
       ctx.status(500);

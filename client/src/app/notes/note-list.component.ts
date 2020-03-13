@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Note } from './note';
 import { NoteService } from './note.service';
 import { Subscription } from 'rxjs';
@@ -11,14 +11,6 @@ import { Subscription } from 'rxjs';
 })
 
 export class NoteListComponent implements OnInit, OnDestroy  {
-  // These are public so that tests can reference them (.spec.ts)
-  public serverFilteredNotes: Note[];
-  public filteredNotes: Note[];
-  public body: string;
-  public reuse: boolean;
-  public draft: boolean;
-  public toDelete: boolean;
-  getNotesSub: Subscription;
 
 
 
@@ -31,27 +23,34 @@ export class NoteListComponent implements OnInit, OnDestroy  {
   constructor(private noteService: NoteService) {
 
   }
+  // These are public so that tests can reference them (.spec.ts)
+  public serverFilteredNotes: Note[];
+  public filteredNotes: Note[];
+  public body: string;
+  public reuse: boolean;
+  public draft: boolean;
+  public toDelete: boolean;
+  getNotesSub: Subscription;
+  showComponent: boolean;
+
 
   getNotesFromServer(): void {
     this.unsub();
     this.getNotesSub = this.noteService.getNotes({
-      body: this.body,
       reuse: this.reuse,
-      draft: this.draft,
       toDelete: this.toDelete
     }).subscribe(returnedNotes => {
       this.serverFilteredNotes = returnedNotes;
-      this.updateFilter();
+      this.updateFilterOnce();
     }, err => {
       console.log(err);
     });
   }
 
-  public updateFilter(): void {
+  public updateFilterOnce(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, toDelete: this.toDelete = false, draft: this.draft = false });
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft = false, toDelete: this.toDelete = false});
   }
-
 
   /**
    * Starts an asynchronous operation to update the notes list

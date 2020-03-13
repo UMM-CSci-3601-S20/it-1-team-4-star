@@ -13,16 +13,22 @@
       Home
       </mat-list-item>
 
-      <mat-list-item routerLink="/users" routerLinkActive="drawer-list-item-active"
+      <!-- <mat-list-item routerLink="/users" routerLinkActive="drawer-list-item-active"
       (click)="drawer.close()">
         <mat-icon matListIcon>people</mat-icon>
         Users
-      </mat-list-item>
+      </mat-list-item> -->
 
       <mat-list-item routerLink="/notes" routerLinkActive="drawer-list-item-active"
       (click)="drawer.close()">
         <mat-icon matListIcon>insert_comment</mat-icon>
         Notes
+      </mat-list-item>
+
+      <mat-list-item routerLink="/notes/draft" routerLinkActive="drawer-list-item-active"
+      (click)="drawer.close()">
+        <mat-icon matListIcon>archive</mat-icon>
+        Drafts
       </mat-list-item>
 
       <mat-list-item routerLink="/notes/reuse" routerLinkActive="drawer-list-item-active"
