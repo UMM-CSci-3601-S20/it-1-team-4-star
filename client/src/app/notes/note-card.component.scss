@@ -1,6 +1,6 @@
 .note-card{
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
   padding-left: 10px;
   padding-right: 10px;
   font-weight: medium;
@@ -14,12 +14,15 @@
   align-content: flex-end;
 }
 
-
 .note-card-body{
   color: black;
 }
 
+.wrapper{
+  position: bottom;
+  text-align: center;
+}
+
 .mat-actions{
   padding: 2rem;
-  text-align: center;
 }
