@@ -28,23 +28,20 @@ export class NoteCardComponent implements OnInit {
   ngOnInit() {
   }
 
-   clickEvent() {
+   delete() {
     this.noteService.editToDeleteField(this.note._id, true).subscribe(noteID => {
       this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
       });
-      //this.deleteEvent.emit(null);
       location.reload();
     }, err => {
       this.snackBar.open('Failed to delete the note', null, {
         duration: 2000,
       });
     });
-
-
     }
 
-    clickEvent2() {
+  restore() {
       this.noteService.editToDeleteField(this.note._id, false).subscribe(noteID => {
         this.snackBar.open('Restored Note ', null, {
           duration: 2000,
@@ -56,5 +53,41 @@ export class NoteCardComponent implements OnInit {
           duration: 2000,
         });
       });
+    }
+
+    post() {
+      this.noteService.editDraftField(this.note._id, false).subscribe(noteID => {
+        this.snackBar.open('Restored Note ', null, {
+          duration: 2000,
+        });
+
+        // route to home
+      }, err => {
+        this.snackBar.open('Failed to restore note', null, {
+          duration: 2000,
+        });
+      });
+    }
+
+    unpost() {
+      if (this.note.draft) {
+        delete();
+      } else {
+
+      this.noteService.editDraftField(this.note._id, delet).subscribe(noteID => {
+        this.snackBar.open('Restored Note ', null, {
+          duration: 2000,
+        });
+        if (this.note.reuse === true) {
+          // route to resuable
+        } else{
+          // route to trash
+        }
+      }, err => {
+        this.snackBar.open('Failed to restore note', null, {
+          duration: 2000,
+        });
+      });
+    }
     }
   }
