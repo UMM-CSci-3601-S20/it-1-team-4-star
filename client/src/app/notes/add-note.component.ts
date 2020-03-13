@@ -80,19 +80,12 @@ export class AddNoteComponent implements OnInit {
     this.createForms();
   }
 
-
   submitForm() {
     this.noteService.addNote(this.addNoteForm.value).subscribe(newID => {
       this.snackBar.open('Added Note ', null, {
         duration: 2000,
       });
-      if (this.note.reuse === true ) {
-      this.router.navigate(['/notes/reuse']);
-      } else if (this.note.draft === true ) {
-        this.router.navigate(['/notes/draft']);
-      } else {
-        this.router.navigate(['/notes']);
-      }
+      this.router.navigate(['/notes']);
     }, err => {
       this.snackBar.open('Failed to add the note', null, {
         duration: 2000,
