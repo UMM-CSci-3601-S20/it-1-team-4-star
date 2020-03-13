@@ -5,6 +5,7 @@
 
       <div fxLayout="row wrap" fxLayoutGap="10px" class="note-cards-container">
         <app-note-card simple="true" *ngFor="let note of filteredNotes" class="note-card" [note]="note" fxFlex="1 1 280px"></app-note-card>
+        <app-note-card *ngIf="showComponent"></app-note-card>
       </div>
   </div>  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #notesError>

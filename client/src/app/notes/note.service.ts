@@ -139,7 +139,7 @@ export class NoteService {
 
 
   editDraftField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>('api/notes/' + id + '/editToDeleteField', { 'draft': value });
+    return this.httpClient.patch<Note>('api/notes/' + id + '/editDraftField', { 'draft': value });
   }
 
 
