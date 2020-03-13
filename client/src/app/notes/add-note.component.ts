@@ -89,7 +89,7 @@ export class AddNoteComponent implements OnInit {
       if (this.note.reuse === true ) {
       this.router.navigate(['/notes/reuse']);
       } else if (this.note.draft === true ) {
-        this.router.navigate(['/notes/drafts']);
+        this.router.navigate(['/notes/draft']);
       } else {
         this.router.navigate(['/notes']);
       }

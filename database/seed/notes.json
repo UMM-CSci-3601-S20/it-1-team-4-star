@@ -3,7 +3,7 @@
     "_id": {
        "$oid": "584f3a600343927e48e87212"
     },
-    "body": "I am running late for office hours today. I expect to be on campus in 15 minutes.",
+    "body": " I am running 🏇 late for office hours today. I expect to be on campus in 15 minutes.",
     "reuse": false,
     "draft": false,
     "toDelete": false
@@ -14,7 +14,7 @@
     "_id": {
        "$oid": "586f3a600343927e48e87210"
     },
-    "body": "This note is bad. I want to delete it.",
+    "body": "This note is bad. I want to delete it. 🗑️",
     "reuse": false,
     "draft": true,
     "toDelete": true
@@ -25,7 +25,7 @@
     "_id": {
        "$oid": "588f4a600343927e48e87211"
     },
-    "body": "Good morning students! I'll be here in five minutes.",
+    "body": " 🌞 Good morning students! I'll be here in five minutes.",
     "reuse": true,
     "draft": false,
     "toDelete": false
@@ -35,7 +35,7 @@
     "_id": {
        "$oid": "588f5a600343927e48e87211"
     },
-    "body": "I am not in my office this week. Please submit homework in Professor Logan's office. I have arranged with him to organize the homework assignments so they don't pile up under my door.",
+    "body": "I am not in my office this week. Please submit homework in Professor Logan's office. 📝 I have arranged with him to organize the homework assignments so they don't pile up under my door.",
     "reuse": true,
     "draft": false,
     "toDelete": false
@@ -45,7 +45,7 @@
     "_id": {
        "$oid": "588f6a600343927e48e87211"
     },
-    "body": "My car broke down on the way here. I am going getting it towed right now and should be on campus in 20 minutes.",
+    "body": "My car broke down on the way here. 🚗 I am getting it towed right now and should be on campus in 20 minutes.",
     "reuse": true,
     "draft": false,
     "toDelete": false
@@ -55,7 +55,7 @@
     "_id": {
        "$oid": "588f7a600343927e48e87211"
     },
-    "body": "Good morning! I am in my office. Just open the door.",
+    "body": "Good morning! I am in my office. Just open the door 🚪",
     "reuse": true,
     "draft": false,
     "toDelete": false
@@ -75,7 +75,27 @@
     "_id": {
        "$oid": "588f9b600343927e48e87211"
     },
-    "body": "I am out for lunch. I'll be back in 5 minutes.",
+    "body": "مرحبا بالعالم ، هذا اختبار (Arabic)",
+    "reuse": true,
+    "draft": true,
+    "toDelete": false
+  },
+
+  {
+    "_id": {
+       "$oid": "588f9b600343927e58e87211"
+    },
+    "body": "こんにちは、これはテストです (Japanese)",
+    "reuse": true,
+    "draft": false,
+    "toDelete": false
+  },
+
+  {
+    "_id": {
+       "$oid": "588f9b660343927e58e97211"
+    },
+    "body": "👩‍🎓 👨‍🎓 👩‍🏫 👨‍🏫 (Emoji)",
     "reuse": true,
     "draft": true,
     "toDelete": false
