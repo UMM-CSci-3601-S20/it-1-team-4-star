@@ -3,5 +3,23 @@
   padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  font-weight: bold;
+  font-weight: medium;
+}
+.mat-button{
+  line-height: 1rem;
+  min-width: 0;
+  width: 6rem;
+  height: 2rem;
+  background-color: rgb(221, 216, 216);
+  align-content: flex-end;
+}
+
+
+.note-card-body{
+  color: black;
+}
+
+.mat-actions{
+  padding: 2rem;
+  text-align: center;
 }
