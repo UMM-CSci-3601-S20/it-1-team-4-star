@@ -47,7 +47,7 @@ export class NoteListComponent implements OnInit, OnDestroy  {
 
   public updateFilterOnce(): void {
     this.filteredNotes = this.noteService.filterNotes(
-      this.serverFilteredNotes, {body: this.body, reuse: this.reuse = false, draft: this.draft, toDelete: this.toDelete = false});
+      this.serverFilteredNotes, {body: this.body, reuse: this.reuse, draft: this.draft = false, toDelete: this.toDelete = false});
   }
 
 

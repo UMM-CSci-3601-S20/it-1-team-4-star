@@ -67,7 +67,7 @@
     },
     "body": "Happy Monday!",
     "reuse": true,
-    "draft": false,
+    "draft": true,
     "toDelete": false
   },
 
@@ -77,7 +77,7 @@
     },
     "body": "I am out for lunch. I'll be back in 5 minutes.",
     "reuse": true,
-    "draft": false,
+    "draft": true,
     "toDelete": false
   }
 

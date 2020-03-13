@@ -1,12 +1,4 @@
 <div fxLayout="row">
-  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">    <mat-card class="search-card">
-      <mat-card-header>
-        <mat-card-title class="note-list-title">Notes - This is displaying all notes.</mat-card-title>
-      </mat-card-header>
-      <mat-card-content fxLayout="column" >
-      </mat-card-content>
-    </mat-card>
-  </div>
 </div><div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredNotes; else notesError" >
     <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->

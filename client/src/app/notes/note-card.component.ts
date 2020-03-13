@@ -46,7 +46,7 @@ export class NoteCardComponent implements OnInit {
         this.snackBar.open('Restored Note ', null, {
           duration: 2000,
         });
-        //this.deleteEvent.emit(null);
+        // this.deleteEvent.emit(null);
         location.reload();
       }, err => {
         this.snackBar.open('Failed to restore note', null, {
@@ -57,37 +57,38 @@ export class NoteCardComponent implements OnInit {
 
     post() {
       this.noteService.editDraftField(this.note._id, false).subscribe(noteID => {
-        this.snackBar.open('Restored Note ', null, {
+        this.snackBar.open('Posted Note ', null, {
           duration: 2000,
         });
-
-        // route to home
+        this.router.navigate(['/notes']);
       }, err => {
-        this.snackBar.open('Failed to restore note', null, {
+        this.snackBar.open('Failed to post note', null, {
           duration: 2000,
         });
       });
     }
 
     unpost() {
-      if (this.note.draft) {
-        delete();
+      if (this.note.reuse === false) {
+        this.delete();
       } else {
+        this.unpostReusable();
+      }
+    }
 
-      this.noteService.editDraftField(this.note._id, delet).subscribe(noteID => {
-        this.snackBar.open('Restored Note ', null, {
+      unpostReusable() {
+      console.log('attempting to remove reusable');
+      this.noteService.editDraftField(this.note._id, true).subscribe(noteID => {
+        this.snackBar.open('Returned Note ', null, {
           duration: 2000,
         });
-        if (this.note.reuse === true) {
-          // route to resuable
-        } else{
-          // route to trash
-        }
+        location.reload();
       }, err => {
-        this.snackBar.open('Failed to restore note', null, {
+        this.snackBar.open('Failed to return note', null, {
           duration: 2000,
         });
+
       });
     }
-    }
+
   }

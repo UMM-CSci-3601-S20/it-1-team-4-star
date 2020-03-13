@@ -81,7 +81,7 @@ public class Server {
     server.patch("api/notes/:id", noteController::editToDeleteField);
 
 
-    server.patch("api/notes/:id", noteController::editDraftField);
+    server.patch("api/notes/editDraftField", noteController::editDraftField);
 
     // Edit reuse field
     server.patch("api/notes/:id", noteController::editReuseField);
