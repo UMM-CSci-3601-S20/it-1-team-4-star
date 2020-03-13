@@ -10,10 +10,6 @@ describe('Note list', () => {
     page.navigateTo();
   });
 
-  it('Should have the correct title', () => {
-    expect(page.getNoteTitle()).toEqual('Notes - This is displaying all notes.');
-  });
-
   it('Should click add note and go to the right URL', async () => {
     await page.clickAddNoteFAB();
 
