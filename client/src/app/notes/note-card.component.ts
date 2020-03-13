@@ -16,6 +16,8 @@ export class NoteCardComponent implements OnInit {
 
 
   deleteNoteForm: FormGroup;
+  draftNoteForm: FormGroup;
+  reuseNoteForm: FormGroup;
   noteForm: Note;
 
   constructor(private fb: FormBuilder, private noteService: NoteService, private snackBar: MatSnackBar, private router: Router) {
@@ -33,7 +35,7 @@ export class NoteCardComponent implements OnInit {
       this.snackBar.open('Deleted Note ', null, {
         duration: 2000,
       });
-      location.reload();
+      //location.reload();
     }, err => {
       this.snackBar.open('Failed to delete the note', null, {
         duration: 2000,
@@ -47,7 +49,7 @@ export class NoteCardComponent implements OnInit {
           duration: 2000,
         });
         // this.deleteEvent.emit(null);
-        location.reload();
+        //location.reload();
       }, err => {
         this.snackBar.open('Failed to restore note', null, {
           duration: 2000,
@@ -60,7 +62,7 @@ export class NoteCardComponent implements OnInit {
         this.snackBar.open('Posted Note ', null, {
           duration: 2000,
         });
-        this.router.navigate(['/notes']);
+        //this.router.navigate(['/notes']);
       }, err => {
         this.snackBar.open('Failed to post note', null, {
           duration: 2000,
@@ -82,7 +84,7 @@ export class NoteCardComponent implements OnInit {
         this.snackBar.open('Returned Note ', null, {
           duration: 2000,
         });
-        location.reload();
+        //location.reload();
       }, err => {
         this.snackBar.open('Failed to return note', null, {
           duration: 2000,

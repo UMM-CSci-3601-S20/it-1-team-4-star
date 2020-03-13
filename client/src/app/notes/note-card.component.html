@@ -7,16 +7,16 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-button *ngIf="!this.note.toDelete" (click)="delete()" >DELETE </button>
+    <button mat-button *ngIf="(!this.note.toDelete && this.note.draft)" (click)="delete()" >DELETE </button>
   </mat-card-actions>
   <mat-card-actions>
     <button mat-button *ngIf="this.note.toDelete" (click)="restore()" > RESTORE </button>
   </mat-card-actions>
   <mat-card-actions>
-    <button mat-button *ngIf="this.note.draft" (click)="post()" > POST </button>
+    <button mat-button *ngIf="(this.note.draft && !this.note.toDelete)" (click)="post()" > POST </button>
   </mat-card-actions>
   <mat-card-actions>
-    <button mat-button *ngIf="!this.note.draft && !this.note.toDelete" (click)="unpost()" > UNPOST </button>
+    <button mat-button *ngIf="(!this.note.draft && !this.note.toDelete)" (click)="unpost()" > UNPOST </button>
   </mat-card-actions>
 </mat-card>
 

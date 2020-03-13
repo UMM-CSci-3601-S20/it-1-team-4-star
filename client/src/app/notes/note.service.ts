@@ -137,16 +137,19 @@ export class NoteService {
     return this.httpClient.delete<Note>(this.noteUrl + '/' + id);
   }
 
-  editToDeleteField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, { 'toDelete': value });
-  }
-
-  editDraftReuseField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, { 'reuse': value });
-  }
 
   editDraftField(id: string, value: boolean): Observable<Note> {
-    return this.httpClient.patch<Note>(this.noteUrl + '/' + id, { 'draft': value });
+    return this.httpClient.patch<Note>('api/notes/' + id + '/editToDeleteField', { 'draft': value });
   }
+
+
+  editToDeleteField(id: string, value: boolean): Observable<Note> {
+    return this.httpClient.patch<Note>('api/notes/' + id + '/editToDeleteField', { 'toDelete': value });
+  }
+
+  editReuseField(id: string, value: boolean): Observable<Note> {
+    return this.httpClient.patch<Note>('api/notes/' + id + '/editReuseField', { 'reuse': value });
+  }
+
 
 }
