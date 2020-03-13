@@ -75,6 +75,8 @@ export class NoteCardComponent implements OnInit {
       });
 
     });
+
+
     this.noteService.editToDeleteField(this.note._id, false).subscribe(noteID => {
         this.snackBar.open('Restored Note ', null, {
           duration: 2000,
@@ -82,9 +84,13 @@ export class NoteCardComponent implements OnInit {
         console.log('Edit toDelete to false in restore process');
         // This "hack" may not be good form, but it is the only thing I was able to understand and
         // apply. It is much better than location.reload(), but not as good as using an event emitter (which I tried, but failed at)
+        if (this.note.reuse === true) {
+        this.router.navigateByUrl('/notes', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/notes/reuse']);
+      });   } else {
         this.router.navigateByUrl('/notes', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/notes/draft']);
-      });
+      });   }
       }, err => {
         this.snackBar.open('Failed to restore note', null, {
           duration: 2000,
